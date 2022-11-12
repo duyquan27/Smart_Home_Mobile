@@ -107,8 +107,7 @@
                 android:layout_below="@id/remmberCheck"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/btn_signin"
-                />
+                android:background="@drawable/btn_signin" />
         </RelativeLayout>
     </RelativeLayout>
 
@@ -123,11 +122,10 @@
             android:id="@+id/txtSignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:text="Don't have an account?"
             android:textColor="@color/black"
-            android:textSize="14sp"
-            android:layout_marginTop="2dp"
-            />
+            android:textSize="14sp" />
 
         <com.example.afinal.custom_textView.RobotoBoldTextView
             android:id="@+id/btnSignUp"
