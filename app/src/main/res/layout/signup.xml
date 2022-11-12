@@ -3,7 +3,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/teal_200"
+    android:background="@color/bgColor"
     tools:context=".SignUpActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="580dp"
+        android:id="@+id/frmTop"
+        android:background="@drawable/backg">
+
+        <RelativeLayout
+            android:id="@+id/Bot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
+
+            <ImageView
+                android:id="@+id/homeLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/logo_welcome"/>
+
+            <EditText
+                android:id="@+id/txtUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/homeLogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/txt_username"
+                android:hint="Your name"
+                android:paddingLeft="55dp"
+                android:paddingBottom="10dp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
