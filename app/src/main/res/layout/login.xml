@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgColor">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/bgColor"
+    tools:context=".SignInActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -102,18 +104,17 @@
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
-            <Button
-                android:id="@+id/btnForgotPass"
+            <com.example.afinal.custom_textView.RobotoMediumTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/btnForgotpw"
                 android:layout_below="@id/Password"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/transparent"
                 android:text="Forgot Password?"
-                android:textAllCaps="false"
+                android:layout_marginTop="15dp"
+                android:textSize="14sp"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:layout_marginRight="13dp"/>
 
             <ImageButton
                 android:id="@+id/btnLogin"
@@ -122,7 +123,8 @@
                 android:layout_below="@id/remmberCheck"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/btn_signin" />
+                android:background="@drawable/btn_signin"
+                />
         </RelativeLayout>
     </RelativeLayout>
 
@@ -140,20 +142,18 @@
             android:text="Don't have an account?"
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="2dp"
+            />
 
-        <Button
+        <com.example.afinal.custom_textView.RobotoBoldTextView
+            android:id="@+id/btnSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
             android:layout_toRightOf="@id/txtSignup"
-            android:background="@android:color/transparent"
             android:text="Sign Up"
-            android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:paddingLeft="2dp"
-            />
+            android:textSize="16sp" />
     </RelativeLayout>
 
 </RelativeLayout>
