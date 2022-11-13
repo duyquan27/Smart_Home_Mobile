@@ -6,7 +6,10 @@
         <entry key="..\:/Android/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Android/app/src/main/res/layout/asd.xml" value="0.17074275362318841" />
         <entry key="..\:/Android/app/src/main/res/layout/custom_text_normal.xml" value="0.11577868852459017" />
-        <entry key="..\:/Android/app/src/main/res/layout/forgot_password.xml" value="0.15353260869565216" />
+        <entry key="..\:/Android/app/src/main/res/layout/forgot_password.xml" value="0.25" />
+        <entry key="..\:/Android/app/src/main/res/layout/fragment_forgotpw.xml" value="0.2" />
+        <entry key="..\:/Android/app/src/main/res/layout/fragment_otp.xml" value="0.22" />
+        <entry key="..\:/Android/app/src/main/res/layout/fragment_resetpw.xml" value="0.25" />
         <entry key="..\:/Android/app/src/main/res/layout/login.xml" value="0.33" />
         <entry key="..\:/Android/app/src/main/res/layout/signup.xml" value="0.22" />
       </map>

@@ -21,6 +21,11 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.login);
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World!");
+
         btnSignIn = (ImageButton) findViewById(R.id.btnLogin);
         btnForgotpw = (TextView) findViewById(R.id.btnForgotpw);
         btnSignUp = (TextView) findViewById(R.id.btnSignUp);
@@ -38,6 +43,14 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SignInActivity.this,SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnForgotpw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignInActivity.this, Forgotpw.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

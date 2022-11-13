@@ -74,22 +74,6 @@
                 android:textColorHint="@color/white"
                 android:textSize="14sp" />
 
-            <!--            <EditText-->
-            <!--                android:id="@+id/txtPassword"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_below="@id/txtPhone"-->
-            <!--                android:layout_centerHorizontal="true"-->
-            <!--                android:layout_marginTop="10dp"-->
-            <!--                android:background="@drawable/pass"-->
-            <!--                android:hint="Your Password"-->
-            <!--                android:inputType="text"-->
-            <!--                android:paddingLeft="55dp"-->
-            <!--                android:paddingBottom="10dp"-->
-            <!--                android:textColor="@color/white"-->
-            <!--                android:textColorHint="@color/white"-->
-            <!--                android:textSize="14sp" />-->
-
             <FrameLayout
                 android:id="@+id/Password"
                 android:layout_width="wrap_content"
@@ -123,7 +107,7 @@
             </FrameLayout>
 
             <ImageButton
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Password"
@@ -150,7 +134,7 @@
             android:textSize="14sp" />
 
         <com.example.afinal.custom_textView.RobotoBoldTextView
-            android:id="@+id/btnSignUp"
+            android:id="@+id/btnSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
