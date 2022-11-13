@@ -7,19 +7,17 @@
     tools:context=".SignInActivity">
 
     <RelativeLayout
+        android:id="@+id/frmTop"
         android:layout_width="match_parent"
         android:layout_height="580dp"
-        android:id="@+id/frmTop"
         android:background="@drawable/backg">
-
 
 
         <RelativeLayout
             android:id="@+id/Bot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            >
+            android:layout_marginTop="50dp">
 
             <ImageView
                 android:id="@+id/homeLogo"
@@ -89,16 +87,16 @@
                 android:textSize="14sp" />
 
             <com.example.afinal.custom_textView.RobotoMediumTextView
+                android:id="@+id/btnForgotpw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnForgotpw"
                 android:layout_below="@id/Password"
                 android:layout_alignParentRight="true"
-                android:text="Forgot Password?"
                 android:layout_marginTop="15dp"
-                android:textSize="14sp"
+                android:layout_marginRight="13dp"
+                android:text="Forgot Password?"
                 android:textColor="@color/white"
-                android:layout_marginRight="13dp"/>
+                android:textSize="14sp" />
 
             <ImageButton
                 android:id="@+id/btnLogin"
