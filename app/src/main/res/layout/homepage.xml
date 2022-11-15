@@ -7,14 +7,15 @@
 
     <FrameLayout
         android:id="@+id/container"
-        android:layout_above="@+id/bottom_menubar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_menubar" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"
-        app:menu="@menu/bottom_menu"
         android:id="@+id/bottom_menubar"
-        app:itemIconSize="20dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemIconSize="20dp"
+        app:menu="@menu/bottom_menu" />
 </RelativeLayout>
