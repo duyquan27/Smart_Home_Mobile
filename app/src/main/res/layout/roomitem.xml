@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+    <ImageButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/item_off"
+        android:background="@drawable/bg_roomitem_off" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="16dp"
+        android:layout_alignLeft="@+id/item_off"
+        android:layout_alignTop="@+id/item_off"
+        android:background="@drawable/custom_itemroom" />
+
+    <Switch
+        android:id="@+id/switchoff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:thumbTint="#FFFFFF"
+        android:track="@drawable/custom_switch"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="20dp"
+        android:layout_alignTop="@+id/item_off"
+        android:layout_alignRight="@+id/item_off"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/name_device"
+        android:text="LG AC"
+        android:textColor="#666666"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_alignStart="@+id/item_off"
+        android:layout_above="@+id/device"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/device"
+        android:text="1 device"
+        android:textColor="#666666"
+        android:textSize="13sp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_alignStart="@+id/item_off"
+        android:layout_alignBottom="@+id/item_off"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/on_off"
+        android:text="OFF"
+        android:textColor="#666666"
+        android:textSize="13sp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_alignEnd="@+id/item_off"
+        android:layout_alignBottom="@+id/item_off"/>
+
+
+</RelativeLayout>
