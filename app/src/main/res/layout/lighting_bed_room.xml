@@ -7,55 +7,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="409dp"
-        android:layout_height="480dp"
+        android:layout_height="450dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Brightness"
-            android:textColor="#9B8FA1"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-        <me.tankery.lib.circularseekbar.CircularSeekBar
-            android:id="@+id/circularSeekBar2"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_marginTop="50dp"
-            app:cs_circle_color="#EFCAFC"
-            app:cs_circle_fill="#FFFFFF"
-            app:cs_circle_progress_color="#8F00FF"
-            app:cs_circle_stroke_width="15dp"
-            app:cs_circle_style="round"
-            app:cs_circle_x_radius="0dp"
-            app:cs_circle_y_radius="0dp"
-            app:cs_disable_pointer="false"
-            app:cs_disable_progress_glow="true"
-            app:cs_end_angle="180"
-            app:cs_hide_progress_when_empty="true"
-            app:cs_lock_enabled="true"
-            app:cs_maintain_equal_circle="true"
-            app:cs_max="100"
-            app:cs_move_outside_circle="true"
-            app:cs_negative_enabled="false"
-            app:cs_pointer_alpha_ontouch="5"
-            app:cs_pointer_angle="0"
-            app:cs_pointer_color="#8F00FF"
-            app:cs_pointer_stroke_width="25dp"
-            app:cs_progress="40"
-            app:cs_start_angle="0"
-            app:cs_use_custom_radii="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
-            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView5"
@@ -74,33 +29,86 @@
             android:id="@+id/imageView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView13"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
             app:srcCompat="@drawable/icon_btn_on" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="40 %"
-            android:textColor="#232F99"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+        <Button
+            android:id="@+id/button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/custom_button01"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/circularSeekBar2" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_button03"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_button05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_button02"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_button04"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button3" />
 
         <ImageView
-            android:id="@+id/imageView13"
+            android:id="@+id/imageView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="118dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icon_lighting_bath" />
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toEndOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/imageView7"
+            app:srcCompat="@drawable/icon_lighting_bed" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="323dp"
+            android:layout_height="164dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="165dp"
+            android:progress="30"
+            android:progressDrawable="@drawable/bg_custom_seekbar"
+            android:progressTint="#8F00FF"
+            android:rotation="270"
+            android:thumb="@color/material_dynamic_neutral40"
+            app:layout_constraintStart_toEndOf="@+id/imageView7"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -132,8 +140,9 @@
             android:layout_marginStart="48dp"
             android:layout_marginTop="14dp"
             android:text="Bed Room"
-            android:textColor="#898F94"
+            android:textColor="#000000"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/textView2"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -144,9 +153,8 @@
             android:layout_marginStart="48dp"
             android:layout_marginTop="14dp"
             android:text="Bath Room"
-            android:textColor="#000000"
+            android:textColor="#898F94"
             android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/textView3"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -176,7 +184,7 @@
             android:layout_marginStart="27dp"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icon_airc_hidden" />
+            app:srcCompat="@drawable/icon_air_condition" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -185,7 +193,7 @@
             android:layout_marginStart="27dp"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icon_tv_hidden" />
+            app:srcCompat="@drawable/icon_tv" />
 
         <ImageView
             android:id="@+id/imageView5"
@@ -194,7 +202,7 @@
             android:layout_marginStart="27dp"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icon_wm" />
+            app:srcCompat="@drawable/icon_wm_hidden" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
