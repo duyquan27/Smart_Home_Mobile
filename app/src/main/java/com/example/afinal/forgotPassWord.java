@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class Forgotpw extends AppCompatActivity {
+public class forgotPassWord extends AppCompatActivity {
 
     TextView btnSignIn;
     ImageButton btnBack;
@@ -26,7 +26,7 @@ public class Forgotpw extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragment_forgotpw myFragment = new fragment_forgotpw();
+        fragmentForgotPassWord myFragment = new fragmentForgotPassWord();
         fragmentTransaction.replace(R.id.fragment,myFragment, "FG_FRAGMENT");
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -35,7 +35,7 @@ public class Forgotpw extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Forgotpw.this,SignInActivity.class);
+                Intent intent = new Intent(forgotPassWord.this,SignInActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -44,10 +44,10 @@ public class Forgotpw extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragment_forgotpw test = (fragment_forgotpw) getSupportFragmentManager().findFragmentByTag("FG_FRAGMENT");
+                fragmentForgotPassWord test = (fragmentForgotPassWord) getSupportFragmentManager().findFragmentByTag("FG_FRAGMENT");
                 if (test != null && test.isVisible())
                 {
-                    Intent intent = new Intent(Forgotpw.this,SignInActivity.class);
+                    Intent intent = new Intent(forgotPassWord.this,SignInActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }

@@ -19,7 +19,7 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.log_in);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
@@ -50,7 +50,7 @@ public class SignInActivity extends AppCompatActivity {
         btnForgotpw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignInActivity.this, Forgotpw.class);
+                Intent intent = new Intent(SignInActivity.this, forgotPassWord.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

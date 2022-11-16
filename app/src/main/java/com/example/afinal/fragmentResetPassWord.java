@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-public class fragment_resetpw extends Fragment {
+public class fragmentResetPassWord extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
-        return inflater.inflate(R.layout.fragment_resetpw,container,false);
+        return inflater.inflate(R.layout.fragment_reset_password,container,false);
     }
 }

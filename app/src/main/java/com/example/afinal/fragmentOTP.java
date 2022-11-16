@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-public class fragment_forgotpw extends Fragment {
+public class fragmentOTP extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
-        return inflater.inflate(R.layout.fragment_forgotpw,container,false);
+        return inflater.inflate(R.layout.fragment_otp,container,false);
     }
 }

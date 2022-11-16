@@ -1,13 +1,13 @@
 package com.example.afinal;
 
-public class User {
+public class USER_INFOR {
     public String userName, userPhone, userEmail, userPassword;
 
-    public User(){
+    public USER_INFOR(){
 
     }
 
-    public User(String userName, String userEmail, String userPhone, String userPassword){
+    public USER_INFOR(String userName, String userEmail, String userPhone, String userPassword){
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPhone = userPhone;

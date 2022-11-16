@@ -1,7 +1,5 @@
 package com.example.afinal;
 
-import android.icu.text.CaseMap;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,13 +16,13 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new LivingRoomFragment();
+                return new fragmentLivingRoom();
             case 1:
-                return new BedRoomFragment();
+                return new fragmentBedRoom();
             case 2:
-                return new BathRoomFragment();
+                return new fragmentBathRoom();
             default:
-                return new LivingRoomFragment();
+                return new fragmentLivingRoom();
         }
     }
 
