@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragmentSetting">
+    tools:context=".fragment_home.fragmentSetting">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.example.afinal.custom_textView.RobotoBoldTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30dp"
         android:layout_centerInParent="true"
-        android:text="Setting Fragment" />
+        android:text="Setting" />
 
 </RelativeLayout>
