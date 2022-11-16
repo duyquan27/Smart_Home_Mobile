@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".SignUpActivity"></activity>
         <activity
-            android:name=".SignInActivity"
+            android:name=".HomeActivity"
             android:exported="true"
             >
             <intent-filter>

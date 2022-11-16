@@ -36,7 +36,6 @@
 
         <me.tankery.lib.circularseekbar.CircularSeekBar
             android:id="@+id/circularSeekBar4"
-            tools:ignore="MissingConstraints"
             android:layout_width="230dp"
             android:layout_height="230dp"
             android:layout_marginStart="90dp"
