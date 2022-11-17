@@ -21,14 +21,15 @@
             android:layout_marginTop="16dp"
             android:layout_alignLeft="@+id/lamp_off"
             android:layout_alignTop="@+id/lamp_off"
-            android:background="@drawable/custom_itemroom" />
+            android:background="@drawable/icon_bed_lamp" />
 
         <Switch
             android:id="@+id/switch_lamp_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:thumbTint="#FFFFFF"
-            android:track="@drawable/custom_switch"
+            android:layout_centerVertical="true"
+            android:thumb="@drawable/thumb_selector"
+            android:track="@drawable/track_selector"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
             android:layout_alignTop="@+id/lamp_off"
@@ -84,14 +85,15 @@
             android:layout_marginTop="16dp"
             android:layout_alignLeft="@+id/ac_bed_off"
             android:layout_alignTop="@+id/ac_bed_off"
-            android:background="@drawable/custom_itemroom" />
+            android:background="@drawable/icon_bed_ac" />
 
         <Switch
             android:id="@+id/switch_ac_bed_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:thumbTint="#FFFFFF"
-            android:track="@drawable/custom_switch"
+            android:layout_centerVertical="true"
+            android:thumb="@drawable/thumb_selector"
+            android:track="@drawable/track_selector"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
             android:layout_alignTop="@+id/ac_bed_off"
@@ -147,14 +149,15 @@
             android:layout_marginTop="16dp"
             android:layout_alignLeft="@+id/tv_bed_off"
             android:layout_alignTop="@+id/tv_bed_off"
-            android:background="@drawable/custom_itemroom" />
+            android:background="@drawable/icon_bed_tv" />
 
         <Switch
             android:id="@+id/switch_tv_bed_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:thumbTint="#FFFFFF"
-            android:track="@drawable/custom_switch"
+            android:layout_centerVertical="true"
+            android:thumb="@drawable/thumb_selector"
+            android:track="@drawable/track_selector"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
             android:layout_alignTop="@+id/tv_bed_off"
@@ -212,14 +215,15 @@
             android:layout_marginTop="16dp"
             android:layout_alignLeft="@+id/ss_off"
             android:layout_alignTop="@+id/ss_off"
-            android:background="@drawable/custom_itemroom" />
+            android:background="@drawable/icon_bed_rem" />
 
         <Switch
             android:id="@+id/switch_ss_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:thumbTint="#FFFFFF"
-            android:track="@drawable/custom_switch"
+            android:layout_centerVertical="true"
+            android:thumb="@drawable/thumb_selector"
+            android:track="@drawable/track_selector"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
             android:layout_alignTop="@+id/ss_off"
@@ -241,7 +245,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/ss_device"
-            android:text="1 device"
+            android:text="2 devices"
             android:textColor="#666666"
             android:textSize="13sp"
             android:layout_marginBottom="25dp"

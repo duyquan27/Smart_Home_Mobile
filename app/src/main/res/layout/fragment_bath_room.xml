@@ -23,14 +23,15 @@
             android:layout_marginTop="16dp"
             android:layout_alignLeft="@+id/light_bath_off"
             android:layout_alignTop="@+id/light_bath_off"
-            android:background="@drawable/custom_itemroom" />
+            android:background="@drawable/icon_bath_light" />
 
         <Switch
             android:id="@+id/switch_light_bath_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:thumbTint="#FFFFFF"
-            android:track="@drawable/custom_switch"
+            android:layout_centerVertical="true"
+            android:thumb="@drawable/thumb_selector"
+            android:track="@drawable/track_selector"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
             android:layout_alignTop="@+id/light_bath_off"
@@ -86,14 +87,15 @@
             android:layout_marginTop="16dp"
             android:layout_alignLeft="@+id/pana_off"
             android:layout_alignTop="@+id/pana_off"
-            android:background="@drawable/custom_itemroom" />
+            android:background="@drawable/icon_bath_shower" />
 
         <Switch
             android:id="@+id/switch_pana_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:thumbTint="#FFFFFF"
-            android:track="@drawable/custom_switch"
+            android:layout_centerVertical="true"
+            android:thumb="@drawable/thumb_selector"
+            android:track="@drawable/track_selector"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
             android:layout_alignTop="@+id/pana_off"
@@ -149,14 +151,15 @@
             android:layout_marginTop="16dp"
             android:layout_alignLeft="@+id/dryer_off"
             android:layout_alignTop="@+id/dryer_off"
-            android:background="@drawable/custom_itemroom" />
+            android:background="@drawable/icon_bath_dryer" />
 
         <Switch
             android:id="@+id/switch_dryer_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:thumbTint="#FFFFFF"
-            android:track="@drawable/custom_switch"
+            android:layout_centerVertical="true"
+            android:thumb="@drawable/thumb_selector"
+            android:track="@drawable/track_selector"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
             android:layout_alignTop="@+id/dryer_off"
@@ -214,14 +217,15 @@
             android:layout_marginTop="16dp"
             android:layout_alignLeft="@+id/wash_off"
             android:layout_alignTop="@+id/wash_off"
-            android:background="@drawable/custom_itemroom" />
+            android:background="@drawable/icon_bath_wash" />
 
         <Switch
             android:id="@+id/switch_wash_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:thumbTint="#FFFFFF"
-            android:track="@drawable/custom_switch"
+            android:layout_centerVertical="true"
+            android:thumb="@drawable/thumb_selector"
+            android:track="@drawable/track_selector"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
             android:layout_alignTop="@+id/wash_off"

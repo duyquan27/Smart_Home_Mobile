@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="25dp">
+
         <ImageButton
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -21,16 +22,18 @@
             android:layout_marginTop="16dp"
             android:layout_alignLeft="@+id/light_off"
             android:layout_alignTop="@+id/light_off"
-            android:background="@drawable/custom_itemroom" />
+            android:background="@drawable/icon_lv_light" />
 
         <Switch
             android:id="@+id/switch_light_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:thumbTint="#FFFFFF"
-            android:track="@drawable/custom_switch"
+            android:checked="false"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
+            android:layout_centerVertical="true"
+            android:thumb="@drawable/thumb_selector"
+            android:track="@drawable/track_selector"
             android:layout_alignTop="@+id/light_off"
             android:layout_alignRight="@+id/light_off"/>
 
@@ -84,16 +87,17 @@
             android:layout_marginTop="16dp"
             android:layout_alignLeft="@+id/ac_off"
             android:layout_alignTop="@+id/ac_off"
-            android:background="@drawable/custom_itemroom" />
+            android:background="@drawable/icon_lv_ac" />
 
         <Switch
             android:id="@+id/switch_ac_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:thumbTint="#FFFFFF"
-            android:track="@drawable/custom_switch"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
+            android:layout_centerVertical="true"
+            android:thumb="@drawable/thumb_selector"
+            android:track="@drawable/track_selector"
             android:layout_alignTop="@+id/ac_off"
             android:layout_alignRight="@+id/ac_off"/>
 
@@ -113,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/ac_device"
-            android:text="1 device"
+            android:text="2 devices"
             android:textColor="#666666"
             android:textSize="13sp"
             android:layout_marginBottom="25dp"
@@ -147,16 +151,17 @@
             android:layout_marginTop="16dp"
             android:layout_alignLeft="@+id/tv_off"
             android:layout_alignTop="@+id/tv_off"
-            android:background="@drawable/custom_itemroom" />
+            android:background="@drawable/icon_lv_tv" />
 
         <Switch
             android:id="@+id/switch_tv_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:thumbTint="#FFFFFF"
-            android:track="@drawable/custom_switch"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
+            android:layout_centerVertical="true"
+            android:thumb="@drawable/thumb_selector"
+            android:track="@drawable/track_selector"
             android:layout_alignTop="@+id/tv_off"
             android:layout_alignRight="@+id/tv_off"/>
 
@@ -212,16 +217,17 @@
             android:layout_marginTop="16dp"
             android:layout_alignLeft="@+id/ms_off"
             android:layout_alignTop="@+id/ms_off"
-            android:background="@drawable/custom_itemroom" />
+            android:background="@drawable/icon_lv_audio" />
 
         <Switch
             android:id="@+id/switch_ms_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:thumbTint="#FFFFFF"
-            android:track="@drawable/custom_switch"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
+            android:layout_centerVertical="true"
+            android:thumb="@drawable/thumb_selector"
+            android:track="@drawable/track_selector"
             android:layout_alignTop="@+id/ms_off"
             android:layout_alignRight="@+id/ms_off"/>
 
@@ -241,7 +247,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/ms_device"
-            android:text="1 device"
+            android:text="4 devices"
             android:textColor="#666666"
             android:textSize="13sp"
             android:layout_marginBottom="25dp"
