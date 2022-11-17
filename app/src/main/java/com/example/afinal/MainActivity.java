@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.example.afinal.custom_textView.RobotoBoldTextView;
 import com.example.afinal.fragment_home.ViewPagerMainAdapter;
 import com.example.afinal.fragment_home.fragmentHome;
 import com.example.afinal.fragment_home.fragmentSensor;
@@ -20,6 +23,9 @@ import com.google.android.material.tabs.TabLayout;
 public class MainActivity extends AppCompatActivity {
     CustomViewPager viewPager;
     BottomNavigationView bottomNavigationView;
+    private RobotoBoldTextView username;
+    private View mView;
+    public String userID = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         fragmentSensor sensorFragment = new fragmentSensor();
         fragmentHome homeFragment = new fragmentHome();
 
+        Intent myIntent = getIntent();
+        Bundle myBundle = myIntent.getBundleExtra("USER_INFO");
+        userID = myBundle.getString("userID");
 
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

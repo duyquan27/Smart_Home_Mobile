@@ -36,6 +36,7 @@ public class fragmentHome extends Fragment {
 
         //test
         username = mView.findViewById(R.id.welcome_username);
+        username.setText("ads");
 
 
         ViewPagerHomeAdapter adapter = new ViewPagerHomeAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

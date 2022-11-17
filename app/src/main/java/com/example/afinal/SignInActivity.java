@@ -46,6 +46,7 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.log_in);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -112,7 +113,7 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
-    private void Login(){
+    private void Login() {
 
         //reset error
         txtEmail.setError(null);
@@ -121,26 +122,25 @@ public class SignInActivity extends AppCompatActivity {
         String email = txtEmail.getText().toString().trim();
         String password = txtPassword.getText().toString().trim();
 
-
         boolean cancel = true;
 
         //check valid email
-        if (!email.matches(EMAIL_PATTERN)){
-            txtEmail.setError(getString(R.string.error_invalid_email));
+        if (email.matches("")) {
+            txtEmail.setError(getString(R.string.error_field_email_empty));
             cancel = false;
         }
-        else if(email.isEmpty()) {
+        else if (!email.matches(EMAIL_PATTERN)) {
             txtEmail.setError(getString(R.string.error_field_email_required));
             cancel = false;
         }
 
         //check valid password
         if (password.isEmpty()) {
-            txtPassword.setError(getString(R.string.error_field_password_required));
+            txtPassword.setError(getString(R.string.error_field_password_empty));
             cancel = false;
         }
 
-        //check correct email and password
+        //check email and password with database
         if (cancel) {
             progressDialog.setMessage("Please Wait While Login...");
             progressDialog.setTitle("Login");

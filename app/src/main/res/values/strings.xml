@@ -7,8 +7,12 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="washing_machine_equipment_fragment">Equipment</string>
     <string name="washing_machine_work_fragment">Work</string>
-    <string name="error_invalid_email">Email is Invalid</string>
-    <string name="error_invalid_passoword">Password is Invalid</string>
-    <string name="error_field_password_required">Email is Empty</string>
-    <string name="error_field_email_required">Email is Empty</string>
+    <string name="error_field_password_required">Password is invalid</string>
+    <string name="error_field_email_required">Email is invalid</string>
+    <string name="error_field_username_required">Username is invalid</string>
+    <string name="error_field_phone_required">Phone is invalid</string>
+    <string name="error_field_password_empty">Password cannot be empty</string>
+    <string name="error_field_email_empty">Email cannot be empty</string>
+    <string name="error_field_username_empty">Username cannot be empty</string>
+    <string name="error_field_phone_empty">Phone cannot be empty</string>
 </resources>
