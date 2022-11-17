@@ -1,4 +1,4 @@
-package com.example.afinal;
+package com.example.afinal.login;
 
 public class USER_INFOR {
     public String userName, userPhone, userEmail, userPassword;

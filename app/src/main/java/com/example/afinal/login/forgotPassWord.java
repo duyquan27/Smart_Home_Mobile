@@ -1,4 +1,4 @@
-package com.example.afinal;
+package com.example.afinal.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.afinal.R;
 
 public class forgotPassWord extends AppCompatActivity {
 

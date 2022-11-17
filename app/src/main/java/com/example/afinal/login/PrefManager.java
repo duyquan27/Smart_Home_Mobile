@@ -1,4 +1,4 @@
-package com.example.afinal;
+package com.example.afinal.login;
 
 import android.content.Context;
 import android.content.SharedPreferences;

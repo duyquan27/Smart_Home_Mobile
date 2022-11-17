@@ -1,11 +1,9 @@
-package com.example.afinal;
+package com.example.afinal.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
-import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -18,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.afinal.MainActivity;
+import com.example.afinal.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -168,7 +168,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void sendUsertoNewActivity(String userID) {
-        Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
         Bundle myBundle = new Bundle();
         myBundle.putString("userID",userID);
         intent.putExtra("USER_INFO", myBundle);
