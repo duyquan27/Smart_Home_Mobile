@@ -12,8 +12,10 @@ import com.example.afinal.fragment_home.ViewPagerMainAdapter;
 import com.example.afinal.fragment_home.fragmentHome;
 import com.example.afinal.fragment_home.fragmentSensor;
 import com.example.afinal.fragment_home.fragmentSetting;
+import com.example.afinal.fragment_room.ViewPagerWashingMachineAdapter;
 import com.example.afinal.widget.CustomViewPager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
     CustomViewPager viewPager;
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentSetting settingFragment = new fragmentSetting();
         fragmentSensor sensorFragment = new fragmentSensor();
         fragmentHome homeFragment = new fragmentHome();
+
+
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

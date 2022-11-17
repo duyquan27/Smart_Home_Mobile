@@ -108,9 +108,10 @@
         app:tabMode="fixed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
     <androidx.viewpager.widget.ViewPager
-        android:layout_below="@+id/tab_layout"
         android:id="@+id/room_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tab_layout" />
 </RelativeLayout>
