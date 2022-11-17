@@ -9,22 +9,24 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <com.example.afinal.custom_textView.RobotoBoldTextView
+            android:id="@+id/welcome_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/welcome"
-            android:text="Hello The Hiep!"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="40dp"
             android:textSize="24sp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="40dp" />
+            android:textColor="@color/black"/>
+
         <com.example.afinal.custom_textView.RobotoLightTextView
+            android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/time"
-            android:text="7 November 2022"
-            android:textSize="14sp"
+            android:layout_below="@+id/welcome"
             android:layout_marginLeft="25dp"
-            android:layout_below="@+id/welcome" />
+            android:text="7 November 2022"
+            android:textSize="14sp" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
