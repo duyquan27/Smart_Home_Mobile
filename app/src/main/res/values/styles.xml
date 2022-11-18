@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Apptheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="MyMaterialTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
 
     </style>
     <style name="CustomTabStyle" parent="TextAppearance.Design.Tab">

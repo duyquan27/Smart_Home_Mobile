@@ -17,4 +17,9 @@
     <string name="error_field_phone_empty">Phone cannot be empty</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="rangeSlider">
+        <item>10</item>
+        <item>50</item>
+    </string-array>
 </resources>

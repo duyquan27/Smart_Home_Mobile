@@ -1,5 +1,6 @@
 package com.example.afinal.fragment_room;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.afinal.DeviceActivity;
 import com.example.afinal.R;
 
 public class fragmentLivingRoom extends Fragment {
@@ -129,6 +131,12 @@ public class fragmentLivingRoom extends Fragment {
                     lv_audio_tvonoff.setText("OFF");
                     lv_audio_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
                 }
+            }
+        });
+        imglight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), DeviceActivity.class));
             }
         });
         return view;
