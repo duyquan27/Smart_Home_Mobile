@@ -80,10 +80,11 @@
 
             <com.google.android.material.slider.RangeSlider
                 android:id="@+id/slider1"
-                style="@style/tooltip"
+                app:labelStyle="@style/tooltip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:theme="@style/MyMaterialTheme"
+                android:stepSize="1"
                 android:valueFrom="0"
                 android:valueTo="100"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -126,12 +127,13 @@
 
             <com.google.android.material.slider.RangeSlider
                 android:id="@+id/slider2"
-                style="@style/tooltip"
+                app:labelStyle="@style/tooltip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:theme="@style/MyMaterialTheme"
                 android:valueFrom="0"
                 android:valueTo="100"
+                android:stepSize="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -193,12 +195,13 @@
 
             <com.google.android.material.slider.RangeSlider
                 android:id="@+id/slider3"
-                style="@style/tooltip"
+                app:labelStyle="@style/tooltip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:theme="@style/MyMaterialTheme"
                 android:valueFrom="0"
                 android:valueTo="100"
+                android:stepSize="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -261,12 +264,13 @@
 
             <com.google.android.material.slider.RangeSlider
                 android:id="@+id/slider4"
-                style="@style/tooltip"
+                app:labelStyle="@style/tooltip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:theme="@style/MyMaterialTheme"
                 android:valueFrom="0"
                 android:valueTo="100"
+                android:stepSize="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
