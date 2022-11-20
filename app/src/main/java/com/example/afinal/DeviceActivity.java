@@ -4,15 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+import java.util.ArrayList; // import the ArrayList class
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import com.example.afinal.fragment_device.ViewPagerDeviceAdapter;
 import com.example.afinal.fragment_device.fragmentLight;
@@ -25,17 +29,18 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class DeviceActivity extends AppCompatActivity {
-    CustomViewPager viewPager;
+    ViewPager2 viewPager;
     TabLayout tabLayout;
+    ImageButton btnBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device);
+        btnBack = findViewById(R.id.btnBack);
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
-        ViewPagerDeviceAdapter adapter = new ViewPagerDeviceAdapter(getSupportFragmentManager(),FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        ViewPagerDeviceAdapter adapter = new ViewPagerDeviceAdapter(this);
         viewPager.setAdapter(adapter);
-        viewPager.setPagingEnable(false);
         fragmentLight fragmentLight = new fragmentLight();
         fragmentAircon fragmentAircon = new fragmentAircon();
         fragmentTV fragmentTV = new fragmentTV();
@@ -52,26 +57,29 @@ public class DeviceActivity extends AppCompatActivity {
         view5.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_tv_on);
         View view6 = getLayoutInflater().inflate(R.layout.customtab, null);
         view6.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_tv);
-
-        tabLayout.addTab(tabLayout.newTab().setCustomView(view1));
-        tabLayout.addTab(tabLayout.newTab().setCustomView(view4));
-        tabLayout.addTab(tabLayout.newTab().setCustomView(view6));
-
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
+            public void onClick(View view) {
+                startActivity(new Intent(DeviceActivity.this,MainActivity.class));
             }
         });
+        new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                switch (position)
+                {
+                    case 0:
+                        tab.setCustomView(view2);
+                        break;
+                    case 1:
+                        tab.setCustomView(view4);
+                        break;
+                    case 2:
+                        tab.setCustomView(view6);
+                        break;
+                }
+            }
+        }).attach();
+
     }
 }

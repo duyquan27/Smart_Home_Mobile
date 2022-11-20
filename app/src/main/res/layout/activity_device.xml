@@ -5,26 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DeviceActivity">
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
-        android:layout_marginTop="30dp"
+        android:paddingTop="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:tabIndicatorHeight="0dp"
+        app:tabBackground="@drawable/tab_selector"
         app:tabGravity="fill"
-        app:tabMode="fixed"
-        app:tabInlineLabel="true">
-    </com.google.android.material.tabs.TabLayout>
-
-    <com.example.afinal.widget.CustomViewPager
+        app:tabInlineLabel="true"
+        app:tabMode="fixed" />
+    <ImageButton
+        android:layout_below="@+id/tab_layout"
+        android:id="@+id/btnBack"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="10dp"
+        android:background="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_back_arrow"/>
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tab_layout">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/ic_launcher" />
-
-    </com.example.afinal.widget.CustomViewPager>
+        android:layout_below="@+id/btnBack">
+    </androidx.viewpager2.widget.ViewPager2>
 </RelativeLayout>

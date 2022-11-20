@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,21 +17,27 @@ import android.widget.TextView;
 
 import com.example.afinal.DeviceActivity;
 import com.example.afinal.R;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 public class fragmentLivingRoom extends Fragment {
+    public interface onClick {
 
+    }
     Switch swlight, swac, swtv, swaudio;
     ImageButton imgac, imgtv, imgaudio, imglight;
     TextView lv_light_tvname, lv_light_tvdevice, lv_light_tvonoff;
     TextView lv_ac_tvname, lv_ac_tvdevice, lv_ac_tvonoff;
     TextView lv_tv_tvname, lv_tv_tvdevice, lv_tv_tvonoff;
     TextView lv_audio_tvname, lv_audio_tvdevice, lv_audio_tvonoff;
+    private DeviceActivity mDeviceActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_living_room, container, false);
+        mDeviceActivity = (DeviceActivity) getActivity();
         //Light_Living
         lv_light_tvname = (TextView) view.findViewById(R.id.name_light);
         lv_light_tvdevice = (TextView) view.findViewById(R.id.light_device);
@@ -136,7 +144,8 @@ public class fragmentLivingRoom extends Fragment {
         imglight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), DeviceActivity.class));
+                Intent i = new Intent(getActivity(), DeviceActivity.class);
+                startActivity(i);
             }
         });
         return view;
