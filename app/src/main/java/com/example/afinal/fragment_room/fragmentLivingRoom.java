@@ -30,14 +30,12 @@ public class fragmentLivingRoom extends Fragment {
     TextView lv_ac_tvname, lv_ac_tvdevice, lv_ac_tvonoff;
     TextView lv_tv_tvname, lv_tv_tvdevice, lv_tv_tvonoff;
     TextView lv_audio_tvname, lv_audio_tvdevice, lv_audio_tvonoff;
-    private DeviceActivity mDeviceActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_living_room, container, false);
-        mDeviceActivity = (DeviceActivity) getActivity();
         //Light_Living
         lv_light_tvname = (TextView) view.findViewById(R.id.name_light);
         lv_light_tvdevice = (TextView) view.findViewById(R.id.light_device);
