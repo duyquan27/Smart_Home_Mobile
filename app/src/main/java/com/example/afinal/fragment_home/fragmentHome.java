@@ -29,6 +29,8 @@ public class fragmentHome extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         mView =  inflater.inflate(R.layout.fragment_home, container, false);
         tabLayout = mView.findViewById(R.id.tab_layout);
@@ -36,7 +38,7 @@ public class fragmentHome extends Fragment {
 
         //test
         username = mView.findViewById(R.id.welcome_username);
-        username.setText("ads");
+        username.setText("Hoang Duy");
 
 
         ViewPagerHomeAdapter adapter = new ViewPagerHomeAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

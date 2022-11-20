@@ -23,8 +23,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -35,12 +38,20 @@ public class SignInActivity extends AppCompatActivity {
     private CheckBox checkboxRememberMe;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mRef;
+
+    private USER_INFOR user_infor;
 
     private ProgressDialog progressDialog;
 
     private boolean checkEye = true;
+    private boolean checkLogin = true;
 
     private String EMAIL_PATTERN = "[a-zA-Z0-9.-_]+@[a-z]+\\.+[a-z]+";
+    private String PHONE_PATTERN = "^[0-9]{10}$";
+
+    private String userName, userEmail, userPhone, userPassword;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -52,7 +63,7 @@ public class SignInActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
 
-        myRef.setValue("Hello, World!!!!!!!!");
+        myRef.setValue("Hello, World!");
 
         btnSignIn = (ImageButton) findViewById(R.id.btnLogin);
         btnForgotpw = (TextView) findViewById(R.id.btnForgotpw);
@@ -65,7 +76,9 @@ public class SignInActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance();
 
+        user_infor = new USER_INFOR();
 //        if (!new PrefManager(this).isUserLogedOut()) {
 //            sendUsertoNewActivity();
 //        }
@@ -129,10 +142,6 @@ public class SignInActivity extends AppCompatActivity {
             txtEmail.setError(getString(R.string.error_field_email_empty));
             cancel = false;
         }
-        else if (!email.matches(EMAIL_PATTERN)) {
-            txtEmail.setError(getString(R.string.error_field_email_required));
-            cancel = false;
-        }
 
         //check valid password
         if (password.isEmpty()) {
@@ -147,31 +156,64 @@ public class SignInActivity extends AppCompatActivity {
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
-            mAuth.signInWithEmailAndPassword(email,password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                String userID = mUser.getUid();
-                                progressDialog.dismiss();
-                                rememberMe(email,password);
-                                sendUsertoNewActivity(userID);
-                                Toast.makeText(SignInActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
+            if (email.matches(PHONE_PATTERN)) {
+                mRef = mDatabase.getReference("USER/PHONE");
+                mRef.child(email).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            if (task.getResult().exists()) {
+
+                                DataSnapshot dataSnapshot = task.getResult();
+                                userEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
+                                userName = String.valueOf(dataSnapshot.child("userName").getValue());
+                                userPassword = String.valueOf(dataSnapshot.child("userPassword").getValue());
+                                userPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
+
+                                if (password.equals(userPassword)) {
+                                    progressDialog.dismiss();
+                                    sendUserToMainActivity();
+                                    Toast.makeText(SignInActivity.this,userName,Toast.LENGTH_LONG).show();
+                                }
+                                else {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(SignInActivity.this,"Incorrect Password",Toast.LENGTH_LONG).show();
+                                }
+
                             }
                             else {
                                 progressDialog.dismiss();
-                                Toast.makeText(SignInActivity.this,"Email or Password is Incorrect",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignInActivity.this,"Incorrect Phone Number",Toast.LENGTH_LONG).show();
                             }
                         }
-                    });
+                    }
+                });
+
+            }
+
+            else if (!email.matches(PHONE_PATTERN)){
+                mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            progressDialog.dismiss();
+                            getUserData(email,password);
+                            sendUserToMainActivity();
+                            Toast.makeText(SignInActivity.this,"Login Successful",Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            progressDialog.dismiss();
+                            Toast.makeText(SignInActivity.this,"Email or Password is Incorrect",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+            }
         }
     }
 
-    private void sendUsertoNewActivity(String userID) {
+    private void sendUserToMainActivity() {
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-        Bundle myBundle = new Bundle();
-        myBundle.putString("userID",userID);
-        intent.putExtra("USER_INFO", myBundle);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
@@ -198,5 +240,30 @@ public class SignInActivity extends AppCompatActivity {
         if (checkboxRememberMe.isChecked()) {
             saveLoginDetails(email,password);
         }
+    }
+
+    private String FindUserID(String email)
+    {
+        String replaceStr = email.replace(".","1");
+        return replaceStr;
+    }
+
+    private void getUserData(String email, String password) {
+        mRef = mDatabase.getReference("USER/UID");
+        mRef.child(FindUserID(email)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().exists()) {
+                        DataSnapshot dataSnapshot = task.getResult();
+                        userEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
+                        userName = String.valueOf(dataSnapshot.child("userName").getValue());
+                        userPassword = String.valueOf(dataSnapshot.child("userPassword").getValue());
+                        userPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
+                        Toast.makeText(SignInActivity.this, userName, Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
     }
 }

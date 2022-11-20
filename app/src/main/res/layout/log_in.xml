@@ -17,7 +17,9 @@
             android:id="@+id/Bot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp">
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="12dp">
 
             <ImageView
                 android:id="@+id/homeLogo"
@@ -81,10 +83,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Password"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:button="@drawable/custom_checkbox"
+                android:paddingLeft="6dp"
                 android:text="Remmber me"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textStyle="normal"
+                android:layout_marginLeft="5dp"/>
 
             <com.example.afinal.custom_textView.RobotoMediumTextView
                 android:id="@+id/btnForgotpw"
@@ -92,11 +98,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Password"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="13dp"
+                android:layout_marginTop="6dp"
                 android:text="Forgot Password?"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:layout_marginRight="5dp"/>
 
             <ImageButton
                 android:id="@+id/btnLogin"
