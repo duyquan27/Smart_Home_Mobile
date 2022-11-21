@@ -8,28 +8,29 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
-        android:paddingTop="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        app:tabIndicatorHeight="0dp"
+        android:paddingTop="3dp"
         app:tabBackground="@drawable/tab_selector"
         app:tabGravity="fill"
+        app:tabIndicatorHeight="0dp"
         app:tabInlineLabel="true"
         app:tabMode="fixed" />
+
     <ImageButton
-        android:layout_below="@+id/tab_layout"
         android:id="@+id/btnBack"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="10dp"
-        android:background="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_back_arrow"/>
+        android:layout_below="@+id/tab_layout"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/white"
+        android:src="@drawable/icon_back_arrow" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/btnBack">
-    </androidx.viewpager2.widget.ViewPager2>
+        android:layout_below="@+id/btnBack"></androidx.viewpager2.widget.ViewPager2>
 </RelativeLayout>
