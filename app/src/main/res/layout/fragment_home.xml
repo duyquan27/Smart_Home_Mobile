@@ -99,7 +99,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:layout_below="@+id/header"
-        android:id="@+id/tab_layout"
+        android:id="@+id/tab_layout_device_living"
         app:tabSelectedTextColor="@color/black"
         app:tabTextColor="#898F94"
         app:tabIndicatorColor="#FF6F50B0"
@@ -114,5 +114,5 @@
         android:id="@+id/room_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tab_layout" />
+        android:layout_below="@+id/tab_layout_device_living" />
 </RelativeLayout>

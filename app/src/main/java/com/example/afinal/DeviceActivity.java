@@ -2,29 +2,19 @@ package com.example.afinal;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
-import java.util.ArrayList; // import the ArrayList class
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.widget.ImageButton;
-import android.widget.TextView;
-import com.example.afinal.fragment_device.ViewPagerDeviceAdapter;
-import com.example.afinal.fragment_device.fragmentLight;
-import com.example.afinal.fragment_device.fragmentAircon;
-import com.example.afinal.fragment_device.fragmentTV;
-import com.example.afinal.R;
-import com.example.afinal.fragment_home.ViewPagerMainAdapter;
-import com.example.afinal.widget.CustomViewPager;
+
+import com.example.afinal.fragment_device.bed_room.ViewPagerBedRoomDeviceAdapter;
+import com.example.afinal.fragment_device.bed_room.fragment_bed_room_light;
+import com.example.afinal.fragment_device.bed_room.fragment_bed_room_air_conditioner;
+import com.example.afinal.fragment_device.bed_room.fragment_bed_room_tv;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -35,15 +25,18 @@ public class DeviceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_device);
+        setContentView(R.layout.activity_device_bed_room);
         btnBack = findViewById(R.id.btnBack);
-        tabLayout = findViewById(R.id.tab_layout);
+        tabLayout = findViewById(R.id.tab_layout_device_living);
         viewPager = findViewById(R.id.view_pager);
-        ViewPagerDeviceAdapter adapter = new ViewPagerDeviceAdapter(this);
+        ViewPagerBedRoomDeviceAdapter adapter = new ViewPagerBedRoomDeviceAdapter(this);
         viewPager.setAdapter(adapter);
-        fragmentLight fragmentLight = new fragmentLight();
-        fragmentAircon fragmentAircon = new fragmentAircon();
-        fragmentTV fragmentTV = new fragmentTV();
+        fragment_bed_room_light fragmentBedRoomLight = new fragment_bed_room_light();
+        fragment_bed_room_air_conditioner fragmentBedRoomAirConditioner = new fragment_bed_room_air_conditioner();
+        fragment_bed_room_tv fragmentBedRoomTv = new fragment_bed_room_tv();
+//        fragment_living_room_light fragmentLivingRoomLight = new fragment_living_room_light();
+//        fragment_living_room_air_conditioner fragmentLivingRoomAirConditioner = new fragment_living_room_air_conditioner();
+//        fragment_living_room_tv fragmentLivingRoomTv = new fragment_living_room_tv();
 
         View view1 = getLayoutInflater().inflate(R.layout.customtab, null);
         view1.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_light_select);

@@ -79,9 +79,9 @@ public class SignInActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
 
         user_infor = new USER_INFOR();
-//        if (!new PrefManager(this).isUserLogedOut()) {
-//            sendUsertoNewActivity();
-//        }
+        if (!new PrefManager(this).isUserLogedOut()) {
+            sendUserToMainActivity();
+        }
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override

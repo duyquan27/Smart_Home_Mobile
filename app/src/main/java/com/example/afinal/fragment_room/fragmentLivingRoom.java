@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +13,7 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.example.afinal.DeviceActivity;
 import com.example.afinal.R;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 
 public class fragmentLivingRoom extends Fragment {
     public interface onClick {
@@ -139,13 +134,7 @@ public class fragmentLivingRoom extends Fragment {
                 }
             }
         });
-        imglight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(), DeviceActivity.class);
-                startActivity(i);
-            }
-        });
+
         return view;
     }
 

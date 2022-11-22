@@ -96,7 +96,7 @@
             android:layout_below="@+id/background"
             />
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
+            android:id="@+id/tab_layout_device_living"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabSelectedTextColor="@color/black"
@@ -115,7 +115,7 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="56dp"
             android:layout_marginTop="10dp"
-            android:layout_below="@+id/tab_layout" />
+            android:layout_below="@+id/tab_layout_device_living" />
     </RelativeLayout>
 
 </RelativeLayout>
