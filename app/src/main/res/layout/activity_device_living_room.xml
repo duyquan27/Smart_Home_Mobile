@@ -32,5 +32,5 @@
         android:id="@+id/view_pager_device_living"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/btnBack"></androidx.viewpager2.widget.ViewPager2>
+        android:layout_below="@+id/btnBack" />
 </RelativeLayout>

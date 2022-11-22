@@ -30,7 +30,7 @@ public class DeviceLivingRoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_device_living_room);
         btnBack = findViewById(R.id.btnBack);
         tabLayout = findViewById(R.id.tab_layout_device_living);
-        viewPager = findViewById(R.id.view_pager);
+        viewPager = findViewById(R.id.view_pager_device_living);
         ViewPagerLingRoomDeviceAdapter adapter = new ViewPagerLingRoomDeviceAdapter(this);
         viewPager.setAdapter(adapter);
 
