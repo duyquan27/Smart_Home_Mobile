@@ -9,10 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.afinal.fragment_device.bed_room.ViewPagerBedRoomDeviceAdapter;
-import com.example.afinal.fragment_device.bed_room.fragment_bed_room_air_conditioner;
-import com.example.afinal.fragment_device.bed_room.fragment_bed_room_light;
-import com.example.afinal.fragment_device.bed_room.fragment_bed_room_tv;
 import com.example.afinal.fragment_device.living_room.ViewPagerLingRoomDeviceAdapter;
 import com.example.afinal.fragment_device.living_room.fragment_living_room_air_conditioner;
 import com.example.afinal.fragment_device.living_room.fragment_living_room_light;
@@ -29,8 +25,8 @@ public class DeviceLivingRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_living_room);
         btnBack = findViewById(R.id.btnBack);
-        tabLayout = findViewById(R.id.tab_layout_device_living);
-        viewPager = findViewById(R.id.view_pager_device_living);
+        tabLayout = findViewById(R.id.tab_layout_device_living_room);
+        viewPager = findViewById(R.id.view_pager_device_living_room);
         ViewPagerLingRoomDeviceAdapter adapter = new ViewPagerLingRoomDeviceAdapter(this);
         viewPager.setAdapter(adapter);
 

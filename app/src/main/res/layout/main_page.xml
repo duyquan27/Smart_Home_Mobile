@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_menubar"
-        android:id="@+id/view_pager"/>
+        android:id="@+id/view_pager_device_bed_room"/>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

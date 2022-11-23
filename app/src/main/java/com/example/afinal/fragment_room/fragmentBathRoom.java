@@ -1,5 +1,6 @@
 package com.example.afinal.fragment_room;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.afinal.DeviceBathRoomActivity;
+import com.example.afinal.DeviceBedRoomActivity;
 import com.example.afinal.R;
 
 public class fragmentBathRoom extends Fragment {
@@ -129,7 +132,13 @@ public class fragmentBathRoom extends Fragment {
                 }
             }
         });
-
+        imglight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), DeviceBathRoomActivity.class);
+                startActivity(i);
+            }
+        });
         return view;
     }
 }

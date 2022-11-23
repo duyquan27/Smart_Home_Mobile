@@ -13,7 +13,6 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.example.afinal.DeviceActivity;
 import com.example.afinal.DeviceLivingRoomActivity;
 import com.example.afinal.R;
 
