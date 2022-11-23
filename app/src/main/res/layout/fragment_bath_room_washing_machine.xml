@@ -106,7 +106,7 @@
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView35"
-            app:srcCompat="@drawable/bg_clock_washing_machine" />
+            app:srcCompat="@drawable/bg_clock_wm" />
 
         <TextView
             android:id="@+id/textView26"

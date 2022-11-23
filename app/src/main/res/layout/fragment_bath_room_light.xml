@@ -28,7 +28,7 @@
             android:id="@+id/circularSeekBar2"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="48dp"
             app:cs_circle_color="#EFCAFC"
             app:cs_circle_fill="#00FFFFFF"
             app:cs_circle_progress_color="#8F00FF"
@@ -53,6 +53,7 @@
             app:cs_start_angle="0"
             app:cs_use_custom_radii="false"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
             tools:ignore="MissingConstraints" />
