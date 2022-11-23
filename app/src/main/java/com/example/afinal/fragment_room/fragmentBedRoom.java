@@ -14,6 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.afinal.DeviceBedRoomActivity;
+import com.example.afinal.DeviceLivingRoomActivity;
 import com.example.afinal.R;
 
 public class fragmentBedRoom extends Fragment {
@@ -130,7 +131,6 @@ public class fragmentBedRoom extends Fragment {
                 }
             }
         });
-
         imglamp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -138,7 +138,6 @@ public class fragmentBedRoom extends Fragment {
                 startActivity(i);
             }
         });
-
         return view;
     }
 }
