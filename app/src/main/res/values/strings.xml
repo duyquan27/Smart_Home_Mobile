@@ -20,6 +20,19 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- NOTIFICATION  -->
+    <string name="noti_no_internet">No Internet Access</string>
+    <string name="noti_incorrect_password">Incorrect Password</string>
+    <string name="noti_incorrect_email">Email or Password is Incorrect</string>
+    <string name="noti_incorrect_phone">Incorrect Phone Number</string>
+    <string name="noti_signup_success">Sign Up Successful</string>
+    <string name="noti_email_exist">Email is Registered</string>
+
+    <!-- TITLE PROGRESS -->
+    <string name="progress_message_login">Please Wait While Login...</string>
+    <string name="progress_message_signup">Please Wait While Registration...</string>
+    <string name="progress_message_check_internet">Pleas Wait While Check Internet</string>
+
     <string-array name="rangeSlider">
         <item>10</item>
         <item>50</item>

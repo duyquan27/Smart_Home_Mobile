@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.MainActivity;
 import com.example.afinal.R;
+import com.example.afinal.option.CheckInternet;
+import com.example.afinal.option.ProgressDialogNotify;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -44,7 +46,6 @@ public class SignUpActivity extends AppCompatActivity {
     private ImageButton btnSignUp;
     private TextView btnSignIn;
     private Button openEye;
-    private ProgressDialog progressDialog;
 
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
@@ -54,10 +55,13 @@ public class SignUpActivity extends AppCompatActivity {
 
     private boolean checkEye = true;
 
-    private String EMAIL_PATTERN = "[a-zA-Z0-9._]+@[a-z]+\\.+[a-z]+";
-    private String USERNAME_PATTERN = "^[a-z A-Z]{0,50}$";
-    private String PHONE_PATTERN = "^[0-9]{10}$";
-    private String PASSWORD_PATTERN = "^[a-zA-z0-9]{6,20}$";
+    static final private String EMAIL_PATTERN = "[a-zA-Z0-9._]+@[a-z]+\\.+[a-z]+";
+    static final private String USERNAME_PATTERN = "^[a-z A-Z]{0,50}$";
+    static final private String PHONE_PATTERN = "^[0-9]{10}$";
+    static final private String PASSWORD_PATTERN = "^[a-zA-z0-9]{6,20}$";
+
+    private CheckInternet checkInternet;
+    private ProgressDialogNotify progress;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -73,11 +77,13 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignUp = (ImageButton) findViewById(R.id.btnSignUp);
         btnSignIn = (TextView) findViewById(R.id.btnSignIn);
         openEye = (Button) findViewById(R.id.openEye);
-        progressDialog = new ProgressDialog(this);
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance();
+
+        checkInternet = new CheckInternet();
+        progress = ProgressDialogNotify.getInstance();
 
         user_infor = new USER_INFOR();
 
@@ -174,28 +180,30 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (cancel) {
 
-            progressDialog.setMessage("Please Wait While Registration...");
-            progressDialog.setTitle("Registration");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
+            progress.showProgressDialog(this,getString(R.string.progress_message_signup),false);
 
-            mAuth.createUserWithEmailAndPassword(email,password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                addUserByEmail(name, email, phone, password);
-                                addUserByPhone(name, email, phone, password);
-                                progressDialog.dismiss();
-                                sendUserToSignIn();
-                                Toast.makeText(SignUpActivity.this,"Sign Up Successful",Toast.LENGTH_LONG).show();
+            if (!checkInternet.isConnected(this)) {
+                Toast.makeText(this,getString(R.string.noti_no_internet),Toast.LENGTH_LONG).show();
+            }
+            else {
+                mAuth.createUserWithEmailAndPassword(email,password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(task.isSuccessful()){
+                                    addUserByEmail(name, email, phone, password);
+                                    addUserByPhone(name, email, phone, password);
+                                    progress.stopProgressDialog();
+                                    sendUserToSignIn();
+                                    Toast.makeText(SignUpActivity.this,getString(R.string.noti_signup_success),Toast.LENGTH_LONG).show();
+                                }
+                                else {
+                                    progress.stopProgressDialog();
+                                    Toast.makeText(SignUpActivity.this,getString(R.string.noti_email_exist),Toast.LENGTH_LONG).show();
+                                }
                             }
-                            else {
-                                progressDialog.dismiss();
-                                Toast.makeText(SignUpActivity.this,"Email is Registered!",Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
+                        });
+            }
         }
     }
 
@@ -215,8 +223,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private String customUserID(String email)
     {
-        String replaceStr = email.replace(".","1");
-        return replaceStr;
+        return email.replace(".","1");
     }
 
     private void addUserByEmail(String username, String email, String phone, String password)

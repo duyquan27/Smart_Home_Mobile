@@ -99,10 +99,10 @@
                 android:layout_below="@id/Password"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="6dp"
+                android:layout_marginRight="5dp"
                 android:text="Forgot Password?"
                 android:textColor="@color/white"
-                android:textSize="14sp"
-                android:layout_marginRight="5dp"/>
+                android:textSize="14sp" />
 
             <ImageButton
                 android:id="@+id/btnLogin"
