@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <me.tankery.lib.circularseekbar.CircularSeekBar
-            android:id="@+id/circularSeekBar"
+            android:id="@+id/circularSeekBarLightLiving"
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_marginTop="40dp"
@@ -64,7 +64,7 @@
             app:cs_start_angle="270"
             app:cs_use_custom_radii="false"
             app:layout_constraintEnd_toStartOf="@+id/imageView6"
-            app:layout_constraintTop_toBottomOf="@+id/imageView7"
+            app:layout_constraintTop_toBottomOf="@+id/imgBtn_on_off_living"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -89,27 +89,28 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5"
             app:srcCompat="@drawable/light_living" />
 
-        <ImageView
-            android:id="@+id/imageView7"
+        <ImageButton
+            android:id="@+id/imgBtn_on_off_living"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="50dp"
+            android:background="@null"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/icon_btn_on" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/txLightLiving"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="50dp"
             android:text="49 %"
             android:textColor="#232F99"
             android:textSize="40sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imageView6"
+            app:layout_constraintStart_toStartOf="@+id/imageView6"
             app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
         <TextView
@@ -122,7 +123,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+            app:layout_constraintTop_toBottomOf="@+id/txLightLiving" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,17 +38,17 @@ public class fragment_living_room_air_conditioner extends Fragment {
         tx_mode = (TextView) view.findViewById(R.id.tx_name_mode);
 
         circularSeekBar.setEnabled(false);
-        circularSeekBar.setProgress(20);
-        txview.setText("20°C");
         imgbtn_cool.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (check_mode == 1){
-                    tx_mode.setText("cooling");
+                    tx_mode.setText("Cooling");
                     circularSeekBar.setProgress(20);
                     txview.setText("20°C");
                     circularSeekBar.setCircleProgressColor(getResources().getColor(R.color.cool));
-                    Toast.makeText(getActivity(),"Mode: Cool",Toast.LENGTH_SHORT).show();
+                    imgbtn_cool.setImageResource(R.drawable.icon_cool_air_on);
+                    imgbtn_fan.setImageResource(R.drawable.icon_fan_air);
+                    imgbtn_dry.setImageResource(R.drawable.icon_dry_air);
                 }
             }
         });
@@ -56,11 +56,13 @@ public class fragment_living_room_air_conditioner extends Fragment {
             @Override
             public void onClick(View view) {
                 if (check_mode == 1){
-                    tx_mode.setText("drying");
+                    tx_mode.setText("Drying");
                     circularSeekBar.setProgress(30);
                     txview.setText("30°C");
                     circularSeekBar.setCircleProgressColor(getResources().getColor(R.color.dry));
-                    Toast.makeText(getActivity(),"Mode: Dry",Toast.LENGTH_SHORT).show();
+                    imgbtn_dry.setImageResource(R.drawable.icon_dry_air_on);
+                    imgbtn_cool.setImageResource(R.drawable.icon_cool_air);
+                    imgbtn_fan.setImageResource(R.drawable.icon_fan_air);
                 }
             }
         });
@@ -68,11 +70,13 @@ public class fragment_living_room_air_conditioner extends Fragment {
             @Override
             public void onClick(View view) {
                 if (check_mode == 1){
-                    tx_mode.setText("faning");
+                    tx_mode.setText("Fan");
                     circularSeekBar.setProgress(25);
                     txview.setText("25°C");
                     circularSeekBar.setCircleProgressColor(getResources().getColor(R.color.fan));
-                    Toast.makeText(getActivity(),"Mode: Fan",Toast.LENGTH_SHORT).show();
+                    imgbtn_fan.setImageResource(R.drawable.icon_fan_air_on);
+                    imgbtn_cool.setImageResource(R.drawable.icon_cool_air);
+                    imgbtn_dry.setImageResource(R.drawable.icon_dry_air);
                 }
             }
         });

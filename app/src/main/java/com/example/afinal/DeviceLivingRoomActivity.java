@@ -40,12 +40,14 @@ public class DeviceLivingRoomActivity extends AppCompatActivity {
         view4.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_air_condition);
         View view6 = getLayoutInflater().inflate(R.layout.customtab, null);
         view6.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_tv);
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DeviceLivingRoomActivity.this,MainActivity.class));
             }
         });
+
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
@@ -63,6 +65,5 @@ public class DeviceLivingRoomActivity extends AppCompatActivity {
                 }
             }
         }).attach();
-
     }
 }

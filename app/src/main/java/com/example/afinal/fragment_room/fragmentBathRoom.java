@@ -137,6 +137,7 @@ public class fragmentBathRoom extends Fragment {
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), DeviceBathRoomActivity.class);
                 startActivity(i);
+
             }
         });
         return view;

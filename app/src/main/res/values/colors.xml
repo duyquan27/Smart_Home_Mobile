@@ -15,7 +15,7 @@
     <color name="tvdeviceon">#DBD4D4</color>
     <color name="swoff">#FFFFFF</color>
     <color name="cool">#D700C1</color>
-    <color name="dry">#F25656</color>
-    <color name="fan">#35BBEF</color>
+    <color name="dry">#EE1F14</color>
+    <color name="fan">#018AC3</color>
 
 </resources>

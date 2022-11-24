@@ -71,12 +71,12 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="61dp"
             android:layout_marginTop="65dp"
             android:text="18°C"
             android:textColor="#8F8F8F"
             android:textSize="50sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/circularSeekBar4"
             app:layout_constraintStart_toStartOf="@+id/circularSeekBar4"
             app:layout_constraintTop_toTopOf="@+id/circularSeekBar4" />
 
@@ -84,12 +84,12 @@
             android:id="@+id/tx_name_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
             android:layout_marginTop="12dp"
             android:text="Cooling"
             android:textColor="#9B8FA1"
             android:textSize="22sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/circularSeekBar4"
             app:layout_constraintStart_toStartOf="@+id/circularSeekBar4"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -108,10 +108,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
+            android:background="@null"
             app:layout_constraintStart_toEndOf="@+id/btn_onoff"
             app:layout_constraintTop_toBottomOf="@+id/imageView9"
-            app:srcCompat="@drawable/icon_cool_air"
-            android:background="@null"/>
+            app:srcCompat="@drawable/icon_cool_air_on" />
 
         <ImageButton
             android:id="@+id/btn_dry"
@@ -137,36 +137,36 @@
             android:id="@+id/tx_fan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
+            android:layout_marginEnd="41dp"
             android:text="Fan"
             android:textColor="#232F99"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/tx_dry"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_fan" />
 
         <TextView
             android:id="@+id/tx_cool"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="57dp"
+            android:layout_marginEnd="54dp"
             android:text="Cool"
             android:textColor="#232F99"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/tx_onoff"
+            app:layout_constraintEnd_toStartOf="@+id/tx_dry"
             app:layout_constraintTop_toBottomOf="@+id/btn_cool" />
 
         <TextView
             android:id="@+id/tx_dry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="54dp"
+            android:layout_marginEnd="60dp"
             android:text="Dry"
             android:textColor="#232F99"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/tx_cool"
+            app:layout_constraintEnd_toStartOf="@+id/tx_fan"
             app:layout_constraintTop_toBottomOf="@+id/btn_dry" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -189,6 +189,7 @@
             android:textSize="35sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
