@@ -78,6 +78,12 @@ public class SignInActivity extends AppCompatActivity {
 //            sendUsertoNewActivity();
 //        }
 
+        user_infor = new USER_INFOR();
+        if (!new PrefManager(this).isUserLogedOut()) {
+            sendUserToMainActivity();
+        }
+
+
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -15,7 +15,8 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.example.afinal.DeviceActivity;
+import com.example.afinal.DeviceLivingRoomActivity;
+import com.example.afinal.DeviceLivingRoomActivity;
 import com.example.afinal.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -142,7 +143,7 @@ public class fragmentLivingRoom extends Fragment {
         imglight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), DeviceActivity.class);
+                Intent i = new Intent(getActivity(), DeviceLivingRoomActivity.class);
                 startActivity(i);
             }
         });

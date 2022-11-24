@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/imgBtn_on_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -43,7 +43,7 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/custom_button01"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+            app:layout_constraintTop_toBottomOf="@+id/imgBtn_on_off" />
 
         <Button
             android:id="@+id/button3"
@@ -92,7 +92,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="30dp"
             app:layout_constraintStart_toEndOf="@+id/button"
-            app:layout_constraintTop_toBottomOf="@+id/imageView7"
+            app:layout_constraintTop_toBottomOf="@+id/imgBtn_on_off"
             app:srcCompat="@drawable/icon_lighting_bed" />
 
         <SeekBar
@@ -106,7 +106,7 @@
             android:progressTint="#8F00FF"
             android:rotation="270"
             android:thumb="@color/material_dynamic_neutral40"
-            app:layout_constraintStart_toEndOf="@+id/imageView7"
+            app:layout_constraintStart_toEndOf="@+id/imgBtn_on_off"
             app:layout_constraintTop_toTopOf="parent" />
 
 

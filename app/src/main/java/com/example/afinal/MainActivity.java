@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,14 +15,15 @@ import com.example.afinal.fragment_home.ViewPagerMainAdapter;
 import com.example.afinal.fragment_home.fragmentHome;
 import com.example.afinal.fragment_home.fragmentSensor;
 import com.example.afinal.fragment_home.fragmentSetting;
-import com.example.afinal.fragment_room.ViewPagerWashingMachineAdapter;
 import com.example.afinal.widget.CustomViewPager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     CustomViewPager viewPager;
     BottomNavigationView bottomNavigationView;
+    DatabaseReference mData;
     private RobotoBoldTextView username;
     private View mView;
     public String userID = "";
@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
-        viewPager = (CustomViewPager) findViewById(R.id.view_pager);
+        mData = FirebaseDatabase.getInstance().getReference();
+        viewPager = (CustomViewPager) findViewById(R.id.view_pager_device_bed_room);
         bottomNavigationView = findViewById(R.id.bottom_menubar);
         ViewPagerMainAdapter adapter = new ViewPagerMainAdapter(getSupportFragmentManager(),FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
 
 }

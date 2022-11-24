@@ -82,30 +82,32 @@
                 android:layout_marginBottom="10dp"
                 android:layout_toRightOf="@+id/weather"
                 android:layout_alignBottom="@+id/background" />
+
             <TextView
+                android:id="@+id/temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/temperature"
-                android:text="27°C"
-                android:textSize="40sp"
-                android:textColor="#FFFFFF"
-                android:layout_marginRight="60dp"
-                android:layout_marginTop="25dp"
+                android:layout_alignTop="@+id/background"
                 android:layout_alignRight="@+id/background"
-                android:layout_alignTop="@+id/background" />
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="60dp"
+                android:text="27°C"
+                android:textColor="#FFFFFF"
+                android:textSize="40sp" />
         </RelativeLayout>
     </FrameLayout>
+
     <FrameLayout
+        android:id="@+id/rooms"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rooms"
-        android:layout_below="@+id/container"
-        android:layout_above="@+id/bottom_menubar">
+        android:layout_above="@+id/bottom_menubar"
+        android:layout_below="@+id/container">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="25dp">
-        </RelativeLayout>
+            android:padding="25dp"></RelativeLayout>
 
 
     </FrameLayout>

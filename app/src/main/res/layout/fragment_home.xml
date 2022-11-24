@@ -98,21 +98,21 @@
     </RelativeLayout>
 
     <com.google.android.material.tabs.TabLayout
-        android:layout_below="@+id/header"
-        android:id="@+id/tab_layout"
-        app:tabSelectedTextColor="@color/black"
-        app:tabTextColor="#898F94"
-        app:tabIndicatorColor="#FF6F50B0"
-        app:tabIndicatorHeight="5dp"
-        app:tabIndicatorFullWidth="false"
-        app:tabIndicatorAnimationDuration="@integer/material_motion_duration_medium_1"
-        app:tabMode="fixed"
+        android:id="@+id/tab_layout_device_living"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        app:tabIndicatorAnimationDuration="@integer/material_motion_duration_medium_1"
+        app:tabIndicatorColor="#FF6F50B0"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight="5dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextColor="#898F94" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/room_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tab_layout" />
+        android:layout_below="@+id/tab_layout_device_living" />
 </RelativeLayout>

@@ -2,65 +2,49 @@ package com.example.afinal;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
-import java.util.ArrayList; // import the ArrayList class
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.widget.ImageButton;
-import android.widget.TextView;
-import com.example.afinal.fragment_device.ViewPagerDeviceAdapter;
-import com.example.afinal.fragment_device.fragmentLight;
-import com.example.afinal.fragment_device.fragmentAircon;
-import com.example.afinal.fragment_device.fragmentTV;
-import com.example.afinal.R;
-import com.example.afinal.fragment_home.ViewPagerMainAdapter;
-import com.example.afinal.widget.CustomViewPager;
+
+import com.example.afinal.fragment_device.bed_room.ViewPagerBedRoomDeviceAdapter;
+import com.example.afinal.fragment_device.bed_room.fragment_bed_room_light;
+import com.example.afinal.fragment_device.bed_room.fragment_bed_room_air_conditioner;
+import com.example.afinal.fragment_device.bed_room.fragment_bed_room_tv;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-public class DeviceActivity extends AppCompatActivity {
+public class DeviceBedRoomActivity extends AppCompatActivity {
     ViewPager2 viewPager;
     TabLayout tabLayout;
     ImageButton btnBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_device);
+        setContentView(R.layout.activity_device_bed_room);
         btnBack = findViewById(R.id.btnBack);
-        tabLayout = findViewById(R.id.tab_layout);
-        viewPager = findViewById(R.id.view_pager);
-        ViewPagerDeviceAdapter adapter = new ViewPagerDeviceAdapter(this);
+        tabLayout = findViewById(R.id.tab_layout_device_bed_room);
+        viewPager = findViewById(R.id.view_pager_device_bed_room);
+        ViewPagerBedRoomDeviceAdapter adapter = new ViewPagerBedRoomDeviceAdapter(this);
         viewPager.setAdapter(adapter);
-        fragmentLight fragmentLight = new fragmentLight();
-        fragmentAircon fragmentAircon = new fragmentAircon();
-        fragmentTV fragmentTV = new fragmentTV();
+        fragment_bed_room_light fragmentBedRoomLight = new fragment_bed_room_light();
+        fragment_bed_room_air_conditioner fragmentBedRoomAirConditioner = new fragment_bed_room_air_conditioner();
+        fragment_bed_room_tv fragmentBedRoomTv = new fragment_bed_room_tv();
 
-        View view1 = getLayoutInflater().inflate(R.layout.customtab, null);
-        view1.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_light_select);
         View view2 = getLayoutInflater().inflate(R.layout.customtab, null);
         view2.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_light);
-        View view3 = getLayoutInflater().inflate(R.layout.customtab, null);
-        view3.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_aic_on);
         View view4 = getLayoutInflater().inflate(R.layout.customtab, null);
         view4.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_air_condition);
-        View view5 = getLayoutInflater().inflate(R.layout.customtab, null);
-        view5.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_tv_on);
         View view6 = getLayoutInflater().inflate(R.layout.customtab, null);
         view6.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_tv);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DeviceActivity.this,MainActivity.class));
+                startActivity(new Intent(DeviceBedRoomActivity.this,MainActivity.class));
             }
         });
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {

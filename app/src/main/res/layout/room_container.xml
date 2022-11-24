@@ -95,27 +95,28 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/background"
             />
+
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
+            android:id="@+id/tab_layout_device_living"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabSelectedTextColor="@color/black"
-            app:tabTextColor="#898F94"
-            app:tabIndicatorColor="#FF6F50B0"
-            app:tabIndicatorHeight="5dp"
-            app:tabIndicatorFullWidth="false"
-            app:tabIndicatorAnimationDuration="@integer/material_motion_duration_medium_1"
-            app:tabMode="fixed"
+            android:layout_below="@+id/background"
             android:layout_marginTop="15dp"
-            android:layout_below="@+id/background" />
+            app:tabIndicatorAnimationDuration="@integer/material_motion_duration_medium_1"
+            app:tabIndicatorColor="#FF6F50B0"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="5dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/black"
+            app:tabTextColor="#898F94" />
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/view_pager"
+            android:id="@+id/view_pager_device"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="56dp"
+            android:layout_below="@+id/tab_layout_device_living"
             android:layout_marginTop="10dp"
-            android:layout_below="@+id/tab_layout" />
+            android:layout_marginBottom="56dp" />
     </RelativeLayout>
 
 </RelativeLayout>

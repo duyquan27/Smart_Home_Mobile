@@ -1,6 +1,5 @@
 package com.example.afinal.fragment_home;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,15 +9,11 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.afinal.R;
 import com.example.afinal.custom_textView.RobotoBoldTextView;
-import com.example.afinal.custom_textView.RobotoMediumTextView;
 import com.example.afinal.fragment_room.ViewPagerHomeAdapter;
 import com.google.android.material.tabs.TabLayout;
-
-import android.content.Intent;
 
 public class fragmentHome extends Fragment {
     private TabLayout tabLayout;
@@ -33,7 +28,7 @@ public class fragmentHome extends Fragment {
 
         // Inflate the layout for this fragment
         mView =  inflater.inflate(R.layout.fragment_home, container, false);
-        tabLayout = mView.findViewById(R.id.tab_layout);
+        tabLayout = mView.findViewById(R.id.tab_layout_device_living);
         viewPager = mView.findViewById(R.id.room_viewpager);
 
         //test
