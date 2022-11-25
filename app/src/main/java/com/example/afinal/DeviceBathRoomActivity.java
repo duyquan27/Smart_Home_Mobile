@@ -25,7 +25,7 @@ public class DeviceBathRoomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_bath_room);
-        btnBack = findViewById(R.id.btnBackBathRoom);
+        btnBack = findViewById(R.id.btnBack);
         tabLayout = findViewById(R.id.tab_layout_device_bath_room);
         viewPager = findViewById(R.id.view_pager_device_bath_room);
         ViewPagerBathRoomDeviceAdapter adapter = new ViewPagerBathRoomDeviceAdapter(this);
@@ -33,10 +33,6 @@ public class DeviceBathRoomActivity extends AppCompatActivity {
         fragment_bath_room_light fragmentBathRoomLight = new fragment_bath_room_light();
         fragment_bath_room_washing_machine fragmentWashingMachine = new fragment_bath_room_washing_machine();
 
-        View view2 = getLayoutInflater().inflate(R.layout.customtab, null);
-        view2.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_light);
-        View view4 = getLayoutInflater().inflate(R.layout.customtab, null);
-        view4.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_wm);
         select = getIntent().getStringExtra("selector");
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -53,10 +49,10 @@ public class DeviceBathRoomActivity extends AppCompatActivity {
                 switch (position)
                 {
                     case 0:
-                        tab.setCustomView(view2);
+                        tab.setIcon(R.drawable.icon_lamp);
                         break;
                     case 1:
-                        tab.setCustomView(view4);
+                        tab.setIcon(R.drawable.icon_washer);
                         break;
                 }
             }

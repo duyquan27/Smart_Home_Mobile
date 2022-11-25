@@ -35,14 +35,7 @@ public class DeviceBedRoomActivity extends AppCompatActivity {
         fragment_bed_room_air_conditioner fragmentBedRoomAirConditioner = new fragment_bed_room_air_conditioner();
         fragment_bed_room_tv fragmentBedRoomTv = new fragment_bed_room_tv();
 
-        View view2 = getLayoutInflater().inflate(R.layout.customtab, null);
-        view2.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_light);
-        View view4 = getLayoutInflater().inflate(R.layout.customtab, null);
-        view4.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_air_condition);
-        View view6 = getLayoutInflater().inflate(R.layout.customtab, null);
-        view6.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_tv);
         select = getIntent().getStringExtra("selector");
-
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,13 +50,13 @@ public class DeviceBedRoomActivity extends AppCompatActivity {
                 switch (position)
                 {
                     case 0:
-                        tab.setCustomView(view2);
+                        tab.setIcon(R.drawable.icon_lamp);
                         break;
                     case 1:
-                        tab.setCustomView(view4);
+                        tab.setIcon(R.drawable.icon_ac);
                         break;
                     case 2:
-                        tab.setCustomView(view6);
+                        tab.setIcon(R.drawable.icon_tv);
                         break;
                 }
             }
