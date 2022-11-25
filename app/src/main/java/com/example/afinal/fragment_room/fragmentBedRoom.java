@@ -135,6 +135,23 @@ public class fragmentBedRoom extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), DeviceBedRoomActivity.class);
+                i.putExtra("selector","0");
+                startActivity(i);
+            }
+        });
+        imgac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), DeviceBedRoomActivity.class);
+                i.putExtra("selector","1");
+                startActivity(i);
+            }
+        });
+        imgtv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), DeviceBedRoomActivity.class);
+                i.putExtra("selector","2");
                 startActivity(i);
             }
         });

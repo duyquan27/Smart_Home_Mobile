@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.MainActivity;
 import com.example.afinal.R;
+import com.example.afinal.fragment_home.fragmentHome;
 import com.example.afinal.option.CheckInternet;
 import com.example.afinal.option.ProgressDialogNotify;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,7 +47,7 @@ public class SignInActivity extends AppCompatActivity {
     static final private String EMAIL_PATTERN = "[a-zA-Z0-9.-_]+@[a-z]+\\.+[a-z]+";
     static final private String PHONE_PATTERN = "^[0-9]{10}$";
 
-    private String userName, userEmail, userPhone, userPassword;
+    public String userName, userEmail, userPhone, userPassword;
 
     private CheckInternet checkInternet;
     private ProgressDialogNotify progress;
@@ -239,6 +240,7 @@ public class SignInActivity extends AppCompatActivity {
     private void sendUserToMainActivity()
     {
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+        intent.putExtra("key_username",userName);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
@@ -293,8 +295,11 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
     }
+    public void sendDataToFragmentHome(String data)
+    {
 
-    public String getUsername() {
-        return temp;
+    }
+    public String getUserName() {
+        return userName;
     }
 }

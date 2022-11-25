@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.afinal.DeviceBathRoomActivity;
 import com.example.afinal.DeviceBedRoomActivity;
+import com.example.afinal.DeviceLivingRoomActivity;
 import com.example.afinal.R;
 
 public class fragmentBathRoom extends Fragment {
@@ -136,8 +137,16 @@ public class fragmentBathRoom extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), DeviceBathRoomActivity.class);
+                i.putExtra("selector","0");
                 startActivity(i);
-
+            }
+        });
+        imgwash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), DeviceBathRoomActivity.class);
+                i.putExtra("selector","1");
+                startActivity(i);
             }
         });
         return view;

@@ -22,9 +22,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class fragmentLivingRoom extends Fragment {
-    public interface onClick {
-
-    }
     Switch swlight, swac, swtv, swaudio;
     ImageButton imgac, imgtv, imgaudio, imglight;
     TextView lv_light_tvname, lv_light_tvdevice, lv_light_tvonoff;
@@ -144,6 +141,23 @@ public class fragmentLivingRoom extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), DeviceLivingRoomActivity.class);
+                i.putExtra("selector","0");
+                startActivity(i);
+            }
+        });
+        imgac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), DeviceLivingRoomActivity.class);
+                i.putExtra("selector","1");
+                startActivity(i);
+            }
+        });
+        imgtv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), DeviceLivingRoomActivity.class);
+                i.putExtra("selector","2");
                 startActivity(i);
             }
         });

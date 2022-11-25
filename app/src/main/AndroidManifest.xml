@@ -23,9 +23,9 @@
         </activity>
         <activity android:name=".login.forgotPassWord" />
         <activity android:name=".login.SignUpActivity" />
-        <activity android:name=".login.SignInActivity" />
+        <activity android:name=".MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".login.SignInActivity"
             android:exported="true">
         <!--            android:name=".login.SignInActivity"-->
             <intent-filter>
