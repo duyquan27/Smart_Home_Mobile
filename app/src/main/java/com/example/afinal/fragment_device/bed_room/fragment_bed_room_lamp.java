@@ -7,13 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.afinal.R;
 
-import me.tankery.lib.circularseekbar.CircularSeekBar;
-
-public class fragment_bed_room_light extends Fragment {
+public class fragment_bed_room_lamp extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

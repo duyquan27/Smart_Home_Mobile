@@ -1,6 +1,7 @@
 package com.example.afinal.fragment_home;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.afinal.R;
+import com.example.afinal.login.SignInActivity;
 
 public class fragmentSetting extends Fragment {
 
@@ -33,6 +35,12 @@ public class fragmentSetting extends Fragment {
             @Override
             public void onClick(View view) {
                 openAccountDialog(Gravity.CENTER);
+            }
+        });
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),SignInActivity.class));
             }
         });
         return mview;

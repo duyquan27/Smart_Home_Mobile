@@ -3,7 +3,6 @@ package com.example.afinal;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,7 +11,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.widget.ImageButton;
 
 import com.example.afinal.fragment_device.bed_room.ViewPagerBedRoomDeviceAdapter;
-import com.example.afinal.fragment_device.bed_room.fragment_bed_room_light;
+import com.example.afinal.fragment_device.bed_room.fragment_bed_room_lamp;
 import com.example.afinal.fragment_device.bed_room.fragment_bed_room_air_conditioner;
 import com.example.afinal.fragment_device.bed_room.fragment_bed_room_tv;
 import com.google.android.material.tabs.TabLayout;
@@ -32,7 +31,7 @@ public class DeviceBedRoomActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager_device_bed_room);
         ViewPagerBedRoomDeviceAdapter adapter = new ViewPagerBedRoomDeviceAdapter(this);
         viewPager.setAdapter(adapter);
-        fragment_bed_room_light fragmentBedRoomLight = new fragment_bed_room_light();
+        fragment_bed_room_lamp fragmentBedRoomLight = new fragment_bed_room_lamp();
         fragment_bed_room_air_conditioner fragmentBedRoomAirConditioner = new fragment_bed_room_air_conditioner();
         fragment_bed_room_tv fragmentBedRoomTv = new fragment_bed_room_tv();
 
