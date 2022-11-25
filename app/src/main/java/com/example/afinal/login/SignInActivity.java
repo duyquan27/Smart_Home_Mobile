@@ -210,7 +210,6 @@ public class SignInActivity extends AppCompatActivity {
                                     if (password.equals(userPassword)) {
                                         progress.stopProgressDialog();
                                         sendUserToMainActivity();
-                                        Toast.makeText(SignInActivity.this,userName,Toast.LENGTH_LONG).show();
                                     }
                                     else {
                                         progress.stopProgressDialog();
@@ -301,7 +300,6 @@ public class SignInActivity extends AppCompatActivity {
                         userName = String.valueOf(dataSnapshot.child("userName").getValue());
                         userPassword = String.valueOf(dataSnapshot.child("userPassword").getValue());
                         userPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
-                        Toast.makeText(SignInActivity.this, userName, Toast.LENGTH_LONG).show();
                     }
                 }
             }

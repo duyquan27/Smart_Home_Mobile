@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.example.afinal.custom_textView.RobotoBoldTextView;
 import com.example.afinal.fragment_home.ViewPagerMainAdapter;
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_page);
+        setContentView(R.layout.activity_main);
         mData = FirebaseDatabase.getInstance().getReference();
         viewPager = (CustomViewPager) findViewById(R.id.view_pager_device_bed_room);
         bottomNavigationView = findViewById(R.id.bottom_menubar);
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentSensor sensorFragment = new fragmentSensor();
         fragmentHome homeFragment = new fragmentHome();
 
-//        strUser = getIntent().getStringExtra("key_username");
+        strUser = getIntent().getStringExtra("key_username");
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

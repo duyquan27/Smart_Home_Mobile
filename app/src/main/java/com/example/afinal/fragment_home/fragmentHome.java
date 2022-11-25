@@ -47,7 +47,7 @@ public class fragmentHome extends Fragment {
         //test
         RobotoLightTextView tvDate =  mView.findViewById(R.id.time);
         tvDate.setText(currentDate);
-//        username.setText(mMainActivity.getStrUser().toString());
+        username.setText(mMainActivity.getStrUser().toString());
 
         ViewPagerHomeAdapter adapter = new ViewPagerHomeAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
