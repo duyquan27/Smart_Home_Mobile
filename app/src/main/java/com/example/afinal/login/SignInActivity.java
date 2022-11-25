@@ -39,9 +39,8 @@ public class SignInActivity extends AppCompatActivity {
     private FirebaseUser mUser;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
-
     private USER_INFOR user_infor;
-
+    public String temp;
     private boolean checkEye = true;
 
     static final private String EMAIL_PATTERN = "[a-zA-Z0-9.-_]+@[a-z]+\\.+[a-z]+";
@@ -191,6 +190,7 @@ public class SignInActivity extends AppCompatActivity {
                                     userName = String.valueOf(dataSnapshot.child("userName").getValue());
                                     userPassword = String.valueOf(dataSnapshot.child("userPassword").getValue());
                                     userPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
+                                    temp = userName;
 
                                     if (password.equals(userPassword)) {
                                         progress.stopProgressDialog();
@@ -231,6 +231,9 @@ public class SignInActivity extends AppCompatActivity {
                 }
             }
         }
+
+
+
     }
 
     private void sendUserToMainActivity()
@@ -289,5 +292,9 @@ public class SignInActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public String getUsername() {
+        return temp;
     }
 }

@@ -18,6 +18,7 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="40dp"
             android:textSize="24sp"
+            android:text="text user"
             android:textColor="@color/black"/>
 
         <com.example.afinal.custom_textView.RobotoLightTextView

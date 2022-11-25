@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.afinal.R;
 import com.example.afinal.custom_textView.RobotoBoldTextView;
 import com.example.afinal.fragment_room.ViewPagerHomeAdapter;
+import com.example.afinal.login.SignInActivity;
 import com.google.android.material.tabs.TabLayout;
 
 public class fragmentHome extends Fragment {
@@ -30,11 +31,9 @@ public class fragmentHome extends Fragment {
         mView =  inflater.inflate(R.layout.fragment_home, container, false);
         tabLayout = mView.findViewById(R.id.tab_layout_device_living);
         viewPager = mView.findViewById(R.id.room_viewpager);
+        username = mView.findViewById(R.id.welcome_username);
 
         //test
-        username = mView.findViewById(R.id.welcome_username);
-        username.setText("Hoang Duy");
-
 
         ViewPagerHomeAdapter adapter = new ViewPagerHomeAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
