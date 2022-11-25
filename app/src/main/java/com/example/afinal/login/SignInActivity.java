@@ -20,6 +20,7 @@ import com.example.afinal.R;
 import com.example.afinal.fragment_home.fragmentHome;
 import com.example.afinal.option.CheckInternet;
 import com.example.afinal.option.ProgressDialogNotify;
+import com.example.afinal.option.SessionManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -28,6 +29,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -59,13 +62,15 @@ public class SignInActivity extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        btnSignIn = (ImageButton) findViewById(R.id.btnLogin);
-        btnForgotpw = (TextView) findViewById(R.id.btnForgotpw);
-        btnSignUp = (TextView) findViewById(R.id.btnSignUp);
-        txtEmail = (EditText) findViewById(R.id.txtEmail);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
-        openEye = (Button) findViewById(R.id.openEye);
-        checkboxRememberMe = (CheckBox) findViewById(R.id.remmberCheck);
+        Init();
+
+        //check weather email or phone and password is already saved in Shared Preferences or not
+        SessionManager sessionManager = new SessionManager(SignInActivity.this, SessionManager.SESSION_REMEMBERME);
+        if (sessionManager.checkRememberMe()) {
+            HashMap<String, String> rememberDetails = sessionManager.getRememberMeDetailFromSession();
+            txtEmail.setText(rememberDetails.get(SessionManager.KEY_SESSIONPHONENUMBER));
+            txtPassword.setText(rememberDetails.get(SessionManager.KEY_SESSIONPASSWORD));
+        }
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
@@ -74,15 +79,7 @@ public class SignInActivity extends AppCompatActivity {
         checkInternet = new CheckInternet();
         progress = ProgressDialogNotify.getInstance();
 
-//        if (!new PrefManager(this).isUserLogedOut()) {
-//            sendUsertoNewActivity();
-//        }
-
         user_infor = new USER_INFOR();
-        if (!new PrefManager(this).isUserLogedOut()) {
-            sendUserToMainActivity();
-        }
-
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +140,17 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
+    public void Init()
+    {
+        btnSignIn = (ImageButton) findViewById(R.id.btnLogin);
+        btnForgotpw = (TextView) findViewById(R.id.btnForgotpw);
+        btnSignUp = (TextView) findViewById(R.id.btnSignUp);
+        txtEmail = (EditText) findViewById(R.id.txtEmail);
+        txtPassword = (EditText) findViewById(R.id.txtPassword);
+        openEye = (Button) findViewById(R.id.openEye);
+        checkboxRememberMe = (CheckBox) findViewById(R.id.remmberCheck);
+    }
+
     private void Login()
     {
 
@@ -165,6 +173,11 @@ public class SignInActivity extends AppCompatActivity {
         if (password.isEmpty()) {
             txtPassword.setError(getString(R.string.error_field_password_empty));
             cancel = false;
+        }
+
+        if (checkboxRememberMe.isChecked()) {
+            SessionManager sessionManager = new SessionManager(SignInActivity.this, SessionManager.SESSION_REMEMBERME);
+            sessionManager.createRememberSession(email,password);
         }
 
         //check email and password with database
@@ -268,18 +281,6 @@ public class SignInActivity extends AppCompatActivity {
         openEye.setBackgroundResource(R.drawable.eye_close);
         txtPassword.setInputType( InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
         txtPassword.setSelection(txtPassword.getText().length());
-    }
-
-    private void saveLoginDetails(String email, String password)
-    {
-        new PrefManager(this).saveLoginDetails(email,password);
-    }
-
-    private void rememberMe(String email, String password)
-    {
-        if (checkboxRememberMe.isChecked()) {
-            saveLoginDetails(email,password);
-        }
     }
 
     private String FindUserID(String email)
