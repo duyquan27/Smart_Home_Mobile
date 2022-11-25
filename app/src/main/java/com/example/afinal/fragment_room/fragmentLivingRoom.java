@@ -119,6 +119,17 @@ public class fragmentLivingRoom extends Fragment {
 
             }
         });
+        mHome.child("HOME").child("Living room").child("Lighting").child("Intensity").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                lv_light_tvdevice.setText(snapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         // Air conditioner
         swac.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
