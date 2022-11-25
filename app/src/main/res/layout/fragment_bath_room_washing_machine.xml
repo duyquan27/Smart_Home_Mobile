@@ -86,14 +86,15 @@
             app:layout_constraintStart_toEndOf="@+id/textView23"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView25"
+        <ImageButton
+            android:id="@+id/btn_run"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="53dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="21dp"
+            android:background="@null"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView35"
+            app:layout_constraintTop_toBottomOf="@+id/btn_onoff_wash"
             app:srcCompat="@drawable/icon_start_wm" />
 
         <ImageView
@@ -104,15 +105,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView35"
+            app:layout_constraintTop_toBottomOf="@+id/btn_onoff_wash"
             app:srcCompat="@drawable/bg_clock_wm" />
 
         <TextView
-            android:id="@+id/textView26"
+            android:id="@+id/tx_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
-            android:text="01 : 18"
+            android:text="02 : 10"
             android:textColor="#6D18A1"
             android:textSize="60sp"
             android:textStyle="bold"
@@ -121,7 +122,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView26" />
 
         <TextView
-            android:id="@+id/textView27"
+            android:id="@+id/tx_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -131,43 +132,47 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/imageView26"
             app:layout_constraintStart_toStartOf="@+id/imageView26"
-            app:layout_constraintTop_toBottomOf="@+id/textView26" />
+            app:layout_constraintTop_toBottomOf="@+id/tx_time" />
 
-        <ImageView
-            android:id="@+id/imageView27"
+        <ImageButton
+            android:id="@+id/btn_babycare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView26"
-            app:srcCompat="@drawable/icon_baby_care" />
+            app:srcCompat="@drawable/icon_baby_care"
+            android:background="@null"/>
 
-        <ImageView
-            android:id="@+id/imageView28"
+        <ImageButton
+            android:id="@+id/btn_sportwear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="35dp"
-            app:layout_constraintStart_toEndOf="@+id/imageView27"
+            app:layout_constraintStart_toEndOf="@+id/btn_babycare"
             app:layout_constraintTop_toBottomOf="@+id/imageView26"
-            app:srcCompat="@drawable/icon_sport_wear" />
+            app:srcCompat="@drawable/icon_sport_wear"
+            android:background="@null"/>
 
-        <ImageView
-            android:id="@+id/imageView30"
+        <ImageButton
+            android:id="@+id/btn_Mix"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView26"
-            app:srcCompat="@drawable/icon_mix" />
+            app:srcCompat="@drawable/icon_mix"
+            android:background="@null"/>
 
-        <ImageView
-            android:id="@+id/imageView31"
+        <ImageButton
+            android:id="@+id/btn_cotton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="35dp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView30"
+            app:layout_constraintEnd_toStartOf="@+id/btn_Mix"
             app:layout_constraintTop_toBottomOf="@+id/imageView26"
-            app:srcCompat="@drawable/icon_cotton_on" />
+            app:srcCompat="@drawable/icon_cotton_on"
+            android:background="@null"/>
 
         <TextView
             android:id="@+id/textView28"
@@ -179,7 +184,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/textView30"
-            app:layout_constraintTop_toBottomOf="@+id/imageView30" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_Mix" />
 
         <TextView
             android:id="@+id/textView29"
@@ -191,7 +196,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/textView31"
-            app:layout_constraintTop_toBottomOf="@+id/imageView28" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_sportwear" />
 
         <TextView
             android:id="@+id/textView30"
@@ -203,7 +208,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/textView29"
-            app:layout_constraintTop_toBottomOf="@+id/imageView31" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_cotton" />
 
         <TextView
             android:id="@+id/textView31"
@@ -215,17 +220,18 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView27" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_babycare" />
 
-        <ImageView
-            android:id="@+id/imageView35"
+        <ImageButton
+            android:id="@+id/btn_onoff_wash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/icon_btn_on"
+            android:src="@drawable/icon_btn_off"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@null"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
