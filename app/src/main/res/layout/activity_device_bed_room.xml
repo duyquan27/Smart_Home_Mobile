@@ -28,9 +28,13 @@
         android:background="#00FFFFFF"
         android:src="@drawable/icon_back_arrow" />
 
+
+
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager_device_bed_room"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/btnBack"></androidx.viewpager2.widget.ViewPager2>
+
 </RelativeLayout>

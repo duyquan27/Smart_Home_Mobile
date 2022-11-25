@@ -173,6 +173,7 @@ public class SignInActivity extends AppCompatActivity {
             progress.showProgressDialog(this,getString(R.string.progress_message_login),false);
 
             if (!checkInternet.isConnected(this)) {
+                progress.stopProgressDialog();
                 Toast.makeText(this,getString(R.string.noti_no_internet),Toast.LENGTH_LONG).show();
             }
             else {
@@ -230,6 +231,16 @@ public class SignInActivity extends AppCompatActivity {
                         }
                     });
                 }
+
+                // Send user data to Home Fragment
+
+                Bundle bundle = new Bundle();
+                bundle.putString("user_name",userName);
+                bundle.putString("user_email",userEmail);
+                bundle.putString("user_phone",userPhone);
+                bundle.putString("user_password",userPassword);
+                fragmentHome myFrag = new fragmentHome();
+                myFrag.setArguments(bundle);
             }
         }
 
