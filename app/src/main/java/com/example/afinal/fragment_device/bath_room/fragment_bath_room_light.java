@@ -48,14 +48,14 @@ public class fragment_bath_room_light extends Fragment {
                     checkOn = true;
                     circularSeekBar.setEnabled(true);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_on);
-                    txIntensity.setText("65 %");
+                    txIntensity.setText("65");
                     circularSeekBar.setProgress(65);
                 }
                 else {
                     checkOn = false;
                     circularSeekBar.setEnabled(false);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_off);
-                    txIntensity.setText("0 %");
+                    txIntensity.setText("0");
                     circularSeekBar.setProgress(0);
                 }
             }
@@ -73,7 +73,7 @@ public class fragment_bath_room_light extends Fragment {
                     circularSeekBar.setEnabled(true);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_on);
                     circularSeekBar.setProgress(65);
-                    txIntensity.setText("65 %");
+                    txIntensity.setText("65");
                     // push to firebase
                     mRoom.child("HOME").child("Bath room").child("Lighting").child("Status").setValue("OFF");
                 }
@@ -81,7 +81,7 @@ public class fragment_bath_room_light extends Fragment {
                     circularSeekBar.setEnabled(false);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_off);
                     circularSeekBar.setProgress(0);
-                    txIntensity.setText("0 %");
+                    txIntensity.setText("0");
                     mRoom.child("HOME").child("Bath room").child("Lighting").child("Status").setValue("ON");
                 }
             }
@@ -91,8 +91,8 @@ public class fragment_bath_room_light extends Fragment {
             @Override
             public void onProgressChanged(CircularSeekBar circularSeekBar, float progress, boolean fromUser) {
                 int intensity = (int)progress;
-                txIntensity.setText(intensity + " %");
-                mRoom.child("HOME").child("Bath room").child("Lighting").child("Intensity").setValue(intensity + " %");
+                txIntensity.setText(intensity + "");
+                mRoom.child("HOME").child("Bath room").child("Lighting").child("Intensity").setValue(intensity);
             }
 
             @Override

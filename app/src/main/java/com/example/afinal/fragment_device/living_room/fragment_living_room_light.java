@@ -47,14 +47,27 @@ public class fragment_living_room_light extends Fragment{
                     checkOn = true;
                     circularSeekBar.setEnabled(true);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_on);
-                    txIntensity.setText("75 %");
-                    circularSeekBar.setProgress(75);
+                    mRoom.child("HOME").child("Living room").child("Lighting").child("Intensity").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            txIntensity.setText(snapshot.getValue().toString());
+                            float f= new Float(snapshot.getValue().toString());
+                            circularSeekBar.setProgress(f);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+//                    circularSeekBar.setProgress(75);
+//                    txIntensity.setText("75");
                 }
                 else {
                     checkOn = false;
                     circularSeekBar.setEnabled(false);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_off);
-                    txIntensity.setText("0 %");
+                    txIntensity.setText("0");
                     circularSeekBar.setProgress(0);
                 }
             }
@@ -72,7 +85,7 @@ public class fragment_living_room_light extends Fragment{
                     circularSeekBar.setEnabled(true);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_on);
                     circularSeekBar.setProgress(75);
-                    txIntensity.setText("75 %");
+                    txIntensity.setText("75");
                     // push to firebase
                     mRoom.child("HOME").child("Living room").child("Lighting").child("Status").setValue("OFF");
                 }
@@ -80,7 +93,7 @@ public class fragment_living_room_light extends Fragment{
                     circularSeekBar.setEnabled(false);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_off);
                     circularSeekBar.setProgress(0);
-                    txIntensity.setText("0 %");
+                    txIntensity.setText("0");
                     // push to firebase
                     mRoom.child("HOME").child("Living room").child("Lighting").child("Status").setValue("ON");
                 }
@@ -91,8 +104,8 @@ public class fragment_living_room_light extends Fragment{
             @Override
             public void onProgressChanged(CircularSeekBar circularSeekBar, float progress, boolean fromUser) {
                 int intensity = (int)progress;
-                txIntensity.setText(intensity + " %");
-                mRoom.child("HOME").child("Living room").child("Lighting").child("Intensity").setValue(intensity + " %");
+                txIntensity.setText(intensity + "");
+                mRoom.child("HOME").child("Living room").child("Lighting").child("Intensity").setValue(intensity);
             }
 
             @Override
