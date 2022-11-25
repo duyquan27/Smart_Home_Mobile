@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.example.afinal.custom_textView.RobotoBoldTextView;
 import com.example.afinal.fragment_home.ViewPagerMainAdapter;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private RobotoBoldTextView username;
     private View mView;
     public String userID = "";
+    public String strUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,10 +46,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentSensor sensorFragment = new fragmentSensor();
         fragmentHome homeFragment = new fragmentHome();
 
-//        Intent myIntent = getIntent();
-//        Bundle myBundle = myIntent.getBundleExtra("USER_INFO");
-//        userID = myBundle.getString("userID");
-
+        strUser = getIntent().getStringExtra("key_username");
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -97,4 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public String getStrUser() {
+        return strUser;
+    }
 }

@@ -40,15 +40,14 @@ public class SignInActivity extends AppCompatActivity {
     private FirebaseUser mUser;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
-
     private USER_INFOR user_infor;
-
+    public String temp;
     private boolean checkEye = true;
 
     static final private String EMAIL_PATTERN = "[a-zA-Z0-9.-_]+@[a-z]+\\.+[a-z]+";
     static final private String PHONE_PATTERN = "^[0-9]{10}$";
 
-    private String userName, userEmail, userPhone, userPassword;
+    public String userName, userEmail, userPhone, userPassword;
 
     private CheckInternet checkInternet;
     private ProgressDialogNotify progress;
@@ -193,6 +192,7 @@ public class SignInActivity extends AppCompatActivity {
                                     userName = String.valueOf(dataSnapshot.child("userName").getValue());
                                     userPassword = String.valueOf(dataSnapshot.child("userPassword").getValue());
                                     userPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
+                                    temp = userName;
 
                                     if (password.equals(userPassword)) {
                                         progress.stopProgressDialog();
@@ -243,11 +243,15 @@ public class SignInActivity extends AppCompatActivity {
                 myFrag.setArguments(bundle);
             }
         }
+
+
+
     }
 
     private void sendUserToMainActivity()
     {
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+        intent.putExtra("key_username",userName);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
@@ -301,5 +305,12 @@ public class SignInActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void sendDataToFragmentHome(String data)
+    {
+
+    }
+    public String getUserName() {
+        return userName;
     }
 }
