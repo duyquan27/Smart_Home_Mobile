@@ -28,6 +28,8 @@
         android:background="#00FFFFFF"
         android:src="@drawable/icon_back_arrow" />
 
+
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager_device_living_room"
         android:layout_width="match_parent"

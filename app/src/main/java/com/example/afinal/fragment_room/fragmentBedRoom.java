@@ -3,6 +3,7 @@ package com.example.afinal.fragment_room;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -16,9 +17,15 @@ import android.widget.TextView;
 import com.example.afinal.DeviceBedRoomActivity;
 import com.example.afinal.DeviceLivingRoomActivity;
 import com.example.afinal.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class fragmentBedRoom extends Fragment {
 
+    DatabaseReference mHome;
     Switch swlamp, swac, swtv, swss;
     ImageButton imgac, imgtv, imgss, imglamp;
     TextView bed_light_tvname, bed_light_tvdevice, bed_light_tvonoff;
@@ -54,7 +61,10 @@ public class fragmentBedRoom extends Fragment {
         bed_ss_tvonoff = (TextView) view.findViewById(R.id.on_off_ss);
         swss = (Switch) view.findViewById(R.id.switch_ss_off);
         imgss = (ImageButton) view.findViewById(R.id.ss_off);
+        // Firebase
+        mHome = FirebaseDatabase.getInstance().getReference();
 
+        // Lamp
         swlamp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -64,6 +74,8 @@ public class fragmentBedRoom extends Fragment {
                     bed_light_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
                     bed_light_tvonoff.setText("ON");
                     bed_light_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    // push to firebase
+                    mHome.child("HOME").child("Bed room").child("Lamp").child("Status").setValue("ON");
                 }
                 else {
                     imglamp.setBackgroundResource(R.drawable.bg_roomitem_off);
@@ -71,9 +83,39 @@ public class fragmentBedRoom extends Fragment {
                     bed_light_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
                     bed_light_tvonoff.setText("OFF");
                     bed_light_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                    // push to firebase
+                    mHome.child("HOME").child("Bed room").child("Lamp").child("Status").setValue("OFF");
                 }
             }
         });
+        mHome.child("HOME").child("Bed room").child("Lamp").child("Status").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue().toString().equals("ON")) {
+                    swlamp.setChecked(true);
+                    imglamp.setBackgroundResource(R.drawable.bg_roomitem_on);
+                    bed_light_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
+                    bed_light_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    bed_light_tvonoff.setText("ON");
+                    bed_light_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                }
+                else {
+                    swlamp.setChecked(false);
+                    imglamp.setBackgroundResource(R.drawable.bg_roomitem_off);
+                    bed_light_tvname.setTextColor(getResources().getColor(R.color.tvoff));
+                    bed_light_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
+                    bed_light_tvonoff.setText("OFF");
+                    bed_light_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        // Air conditioner
         swac.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -83,6 +125,8 @@ public class fragmentBedRoom extends Fragment {
                     bed_ac_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
                     bed_ac_tvonoff.setText("ON");
                     bed_ac_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    // push to firebase
+                    mHome.child("HOME").child("Bed room").child("AC").child("Status").setValue("ON");
                 }
                 else {
                     imgac.setBackgroundResource(R.drawable.bg_roomitem_off);
@@ -90,9 +134,39 @@ public class fragmentBedRoom extends Fragment {
                     bed_ac_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
                     bed_ac_tvonoff.setText("OFF");
                     bed_ac_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                    // push to firebase
+                    mHome.child("HOME").child("Bed room").child("AC").child("Status").setValue("OFF");
                 }
             }
         });
+        mHome.child("HOME").child("Bed room").child("AC").child("Status").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue().toString().equals("ON")) {
+                    swac.setChecked(true);
+                    imgac.setBackgroundResource(R.drawable.bg_roomitem_on);
+                    bed_ac_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
+                    bed_ac_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    bed_ac_tvonoff.setText("ON");
+                    bed_ac_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                }
+                else {
+                    swac.setChecked(false);
+                    imgac.setBackgroundResource(R.drawable.bg_roomitem_off);
+                    bed_ac_tvname.setTextColor(getResources().getColor(R.color.tvoff));
+                    bed_ac_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
+                    bed_ac_tvonoff.setText("OFF");
+                    bed_ac_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        // TV
         swtv.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -102,6 +176,8 @@ public class fragmentBedRoom extends Fragment {
                     bed_tv_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
                     bed_tv_tvonoff.setText("ON");
                     bed_tv_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    // push to firebase
+                    mHome.child("HOME").child("Bed room").child("TV").child("Status").setValue("ON");
                 }
                 else {
                     imgtv.setBackgroundResource(R.drawable.bg_roomitem_off);
@@ -109,9 +185,39 @@ public class fragmentBedRoom extends Fragment {
                     bed_tv_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
                     bed_tv_tvonoff.setText("OFF");
                     bed_tv_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                    // push to firebase
+                    mHome.child("HOME").child("Bed room").child("TV").child("Status").setValue("OFF");
                 }
             }
         });
+        mHome.child("HOME").child("Bed room").child("TV").child("Status").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue().toString().equals("ON")) {
+                    swtv.setChecked(true);
+                    imgtv.setBackgroundResource(R.drawable.bg_roomitem_on);
+                    bed_tv_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
+                    bed_tv_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    bed_tv_tvonoff.setText("ON");
+                    bed_tv_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                }
+                else {
+                    swtv.setChecked(false);
+                    imgtv.setBackgroundResource(R.drawable.bg_roomitem_off);
+                    bed_tv_tvname.setTextColor(getResources().getColor(R.color.tvoff));
+                    bed_tv_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
+                    bed_tv_tvonoff.setText("OFF");
+                    bed_tv_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        // Windows
         swss.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -121,6 +227,8 @@ public class fragmentBedRoom extends Fragment {
                     bed_ss_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
                     bed_ss_tvonoff.setText("ON");
                     bed_ss_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    // push to firebase
+                    mHome.child("HOME").child("Bed room").child("Windows").child("Status").setValue("ON");
                 }
                 else {
                     imgss.setBackgroundResource(R.drawable.bg_roomitem_off);
@@ -128,9 +236,39 @@ public class fragmentBedRoom extends Fragment {
                     bed_ss_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
                     bed_ss_tvonoff.setText("OFF");
                     bed_ss_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                    // push to firebase
+                    mHome.child("HOME").child("Bed room").child("Windows").child("Status").setValue("OFF");
                 }
             }
         });
+        mHome.child("HOME").child("Bed room").child("Windows").child("Status").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue().toString().equals("ON")) {
+                    swss.setChecked(true);
+                    imgss.setBackgroundResource(R.drawable.bg_roomitem_on);
+                    bed_ss_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
+                    bed_ss_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    bed_ss_tvonoff.setText("ON");
+                    bed_ss_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                }
+                else {
+                    swss.setChecked(false);
+                    imgss.setBackgroundResource(R.drawable.bg_roomitem_off);
+                    bed_ss_tvname.setTextColor(getResources().getColor(R.color.tvoff));
+                    bed_ss_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
+                    bed_ss_tvonoff.setText("OFF");
+                    bed_ss_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
         imglamp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

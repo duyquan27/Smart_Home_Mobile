@@ -108,7 +108,8 @@
         app:tabIndicatorHeight="5dp"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/black"
-        app:tabTextColor="#898F94" />
+        app:tabTextColor="#898F94"
+        android:layout_marginTop="30dp"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/room_viewpager"

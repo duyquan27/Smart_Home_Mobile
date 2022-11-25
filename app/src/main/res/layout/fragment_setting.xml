@@ -183,14 +183,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/icon_about"/>
+
             <com.example.afinal.custom_textView.RobotoBlackTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="About"
-                android:textColor="@color/black"
+                android:layout_gravity="center|left"
                 android:layout_marginStart="80dp"
-                android:layout_gravity="center|left"/>
+                android:text="Log out"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
             <ImageButton
                 android:layout_width="wrap_content"

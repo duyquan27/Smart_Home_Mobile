@@ -32,8 +32,11 @@ public class fragmentHome extends Fragment {
         viewPager = mView.findViewById(R.id.room_viewpager);
 
         //test
+
+        //String user_name = getArguments().getString("user_name", "");
+
         username = mView.findViewById(R.id.welcome_username);
-        username.setText("Hoang Duy");
+        username.setText("user_name");
 
 
         ViewPagerHomeAdapter adapter = new ViewPagerHomeAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

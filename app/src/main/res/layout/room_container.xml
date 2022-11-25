@@ -101,7 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/background"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             app:tabIndicatorAnimationDuration="@integer/material_motion_duration_medium_1"
             app:tabIndicatorColor="#FF6F50B0"
             app:tabIndicatorFullWidth="false"
