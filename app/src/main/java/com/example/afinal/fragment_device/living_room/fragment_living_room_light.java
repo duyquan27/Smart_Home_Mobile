@@ -84,8 +84,9 @@ public class fragment_living_room_light extends Fragment{
                 if (checkOn) {
                     circularSeekBar.setEnabled(true);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_on);
-                    circularSeekBar.setProgress(75);
-                    txIntensity.setText("75");
+//                    circularSeekBar.setProgress(75);
+//                    txIntensity.setText("75");
+
                     // push to firebase
                     mRoom.child("HOME").child("Living room").child("Lighting").child("Status").setValue("OFF");
                 }

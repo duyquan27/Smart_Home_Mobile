@@ -81,6 +81,7 @@ public class fragmentLivingRoom extends Fragment {
                     lv_light_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
                     // push to firebase
                     mHome.child("HOME").child("Living room").child("Lighting").child("Status").setValue("ON");
+                    mHome.child("HOME").child("Living room").child("Lighting").child("Intensity").setValue("75");
                 }
                 else {
                     imglight.setBackgroundResource(R.drawable.bg_roomitem_off);
@@ -90,6 +91,7 @@ public class fragmentLivingRoom extends Fragment {
                     lv_light_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
                     // push to firebase
                     mHome.child("HOME").child("Living room").child("Lighting").child("Status").setValue("OFF");
+                    mHome.child("HOME").child("Living room").child("Lighting").child("Intensity").setValue("0");
                 }
             }
         });
