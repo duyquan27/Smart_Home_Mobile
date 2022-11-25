@@ -17,5 +17,6 @@
     <color name="cool">#D700C1</color>
     <color name="dry">#EE1F14</color>
     <color name="fan">#018AC3</color>
+    <color name="background">#EAEAEA</color>
 
 </resources>

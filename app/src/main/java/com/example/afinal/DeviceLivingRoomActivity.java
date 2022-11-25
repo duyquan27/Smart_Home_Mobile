@@ -1,12 +1,15 @@
 package com.example.afinal;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.afinal.fragment_device.living_room.ViewPagerLingRoomDeviceAdapter;
@@ -35,12 +38,6 @@ public class DeviceLivingRoomActivity extends AppCompatActivity {
         fragment_living_room_air_conditioner fragmentLivingRoomAirConditioner = new fragment_living_room_air_conditioner();
         fragment_living_room_tv fragmentLivingRoomTv = new fragment_living_room_tv();
 
-        View view2 = getLayoutInflater().inflate(R.layout.customtab, null);
-        view2.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_light);
-        View view4 = getLayoutInflater().inflate(R.layout.customtab, null);
-        view4.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_air_condition);
-        View view6 = getLayoutInflater().inflate(R.layout.customtab, null);
-        view6.findViewById(R.id.icon).setBackgroundResource(R.drawable.icon_tv);
         select = getIntent().getStringExtra("selector");
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,13 +52,13 @@ public class DeviceLivingRoomActivity extends AppCompatActivity {
                 switch (position)
                 {
                     case 0:
-                        tab.setCustomView(view2);
+                        tab.setIcon(R.drawable.icon_lamp);
                         break;
                     case 1:
-                        tab.setCustomView(view4);
+                        tab.setIcon(R.drawable.icon_ac);
                         break;
                     case 2:
-                        tab.setCustomView(view6);
+                        tab.setIcon(R.drawable.icon_tv);
                         break;
                 }
             }
