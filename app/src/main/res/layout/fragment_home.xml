@@ -112,7 +112,6 @@
     </RelativeLayout>
 
     <com.google.android.material.tabs.TabLayout
-        android:layout_marginTop="10dp"
         android:id="@+id/tab_layout_device_living"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
