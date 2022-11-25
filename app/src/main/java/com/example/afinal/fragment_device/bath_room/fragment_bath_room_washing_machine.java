@@ -93,7 +93,7 @@ public class fragment_bath_room_washing_machine extends Fragment {
                     check = 0;
                     switch (check_mode){
                         case 1:{
-                            countDownTimer = new CountDownTimer(10 * 1000 + 100, 1000) {
+                            countDownTimer = new CountDownTimer(60 * 1000 + 100, 1000) {
                                 @Override
                                 public void onTick(long l) {
                                     updateTimer((int) l/1000);
