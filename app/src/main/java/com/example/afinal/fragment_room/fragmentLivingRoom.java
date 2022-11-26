@@ -34,7 +34,6 @@ public class fragmentLivingRoom extends Fragment {
     TextView lv_light_tvname, lv_light_tvdevice, lv_light_tvonoff;
     TextView lv_ac_tvname, lv_ac_tvdevice, lv_ac_tvonoff;
     TextView lv_tv_tvname, lv_tv_tvdevice, lv_tv_tvonoff;
-    TextView lv_audio_tvname, lv_audio_tvdevice, lv_audio_tvonoff;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,12 +59,6 @@ public class fragmentLivingRoom extends Fragment {
         lv_tv_tvonoff = (TextView) view.findViewById(R.id.on_off_tv);
         swtv = (Switch) view.findViewById(R.id.switch_tv_off);
         imgtv = (ImageButton) view.findViewById(R.id.tv_off);
-        //Audio_living
-        lv_audio_tvname = (TextView) view.findViewById(R.id.name_ms);
-        lv_audio_tvdevice = (TextView) view.findViewById(R.id.ms_device);
-        lv_audio_tvonoff = (TextView) view.findViewById(R.id.on_off_ms);
-        swaudio = (Switch) view.findViewById(R.id.switch_ms_off);
-        imgaudio = (ImageButton) view.findViewById(R.id.ms_off);
         // Firebase
         mHome = FirebaseDatabase.getInstance().getReference();
 
@@ -205,46 +198,6 @@ public class fragmentLivingRoom extends Fragment {
             }
         });
 
-        // Sony Studio
-        swaudio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    // push to firebase
-                    mHome.child("HOME").child("Living room").child("Sony Studio").child("Status").setValue("ON");
-                }
-                else {
-                    // push to firebase
-                    mHome.child("HOME").child("Living room").child("Sony Studio").child("Status").setValue("OFF");
-                }
-            }
-        });
-        mHome.child("HOME").child("Living room").child("Sony Studio").child("Status").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.getValue().toString().equals("ON")) {
-                    swaudio.setChecked(true);
-                    imgaudio.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    lv_audio_tvname.setTextColor(view.getResources().getColor(R.color.tvnameon));
-                    lv_audio_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
-                    lv_audio_tvonoff.setText("ON");
-                    lv_audio_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
-                }
-                else {
-                    swaudio.setChecked(false);
-                    imgaudio.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    lv_audio_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
-                    lv_audio_tvdevice.setTextColor(view.getResources().getColor(R.color.tvoff));
-                    lv_audio_tvonoff.setText("OFF");
-                    lv_audio_tvonoff.setTextColor(view.getResources().getColor(R.color.tvoff));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
         imglight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

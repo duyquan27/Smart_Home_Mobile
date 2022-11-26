@@ -45,18 +45,6 @@ public class fragmentBathRoom extends Fragment {
         bath_light_tvonoff = (TextView) view.findViewById(R.id.on_off_light_bath);
         swlight = (Switch) view.findViewById(R.id.switch_light_bath_off);
         imglight = (ImageButton) view.findViewById(R.id.light_bath_off);
-        //pana_bath
-        bath_pana_tvname = (TextView) view.findViewById(R.id.name_pana);
-        bath_pana_tvdevice = (TextView) view.findViewById(R.id.pana_device);
-        bath_pana_tvonoff = (TextView) view.findViewById(R.id.on_off_pana);
-        swpana = (Switch) view.findViewById(R.id.switch_pana_off);
-        imgpana = (ImageButton) view.findViewById(R.id.pana_off);
-        //dryer_bath
-        bath_dryer_tvname = (TextView) view.findViewById(R.id.name_dryer);
-        bath_dryer_tvdevice = (TextView) view.findViewById(R.id.dryer_device);
-        bath_dryer_tvonoff = (TextView) view.findViewById(R.id.on_off_dryer);
-        swdryer = (Switch) view.findViewById(R.id.switch_dryer_off);
-        imgdryer = (ImageButton) view.findViewById(R.id.dryer_off);
         //Wash_bath
         bath_wash_tvname = (TextView) view.findViewById(R.id.name_wash);
         bath_wash_tvdevice = (TextView) view.findViewById(R.id.wash_device);
@@ -121,86 +109,6 @@ public class fragmentBathRoom extends Fragment {
             }
         });
 
-        // Shower
-        swpana.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    // push to firebase
-                    mHome.child("HOME").child("Bath room").child("Shower").child("Status").setValue("ON");
-                }
-                else {
-                    // push to firebase
-                    mHome.child("HOME").child("Bath room").child("Shower").child("Status").setValue("OFF");
-                }
-            }
-        });
-        mHome.child("HOME").child("Bath room").child("Shower").child("Status").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.getValue().toString().equals("ON")) {
-                    swpana.setChecked(true);
-                    imgpana.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    bath_pana_tvname.setTextColor(view.getResources().getColor(R.color.tvnameon));
-                    bath_pana_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
-                    bath_pana_tvonoff.setText("ON");
-                    bath_pana_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
-                }
-                else {
-                    swpana.setChecked(false);
-                    imgpana.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    bath_pana_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
-                    bath_pana_tvdevice.setTextColor(view.getResources().getColor(R.color.tvoff));
-                    bath_pana_tvonoff.setText("OFF");
-                    bath_pana_tvonoff.setTextColor(view.getResources().getColor(R.color.tvoff));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        // Dryer
-        swdryer.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    // push to firebase
-                    mHome.child("HOME").child("Bath room").child("Dryer").child("Status").setValue("ON");
-                }
-                else {
-                    // push to firebase
-                    mHome.child("HOME").child("Bath room").child("Dryer").child("Status").setValue("OFF");
-                }
-            }
-        });
-        mHome.child("HOME").child("Bath room").child("Dryer").child("Status").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.getValue().toString().equals("ON")) {
-                    swdryer.setChecked(true);
-                    imgdryer.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    bath_dryer_tvname.setTextColor(view.getResources().getColor(R.color.tvnameon));
-                    bath_dryer_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
-                    bath_dryer_tvonoff.setText("ON");
-                    bath_dryer_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
-                }
-                else {
-                    swdryer.setChecked(false);
-                    imgdryer.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    bath_dryer_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
-                    bath_dryer_tvdevice.setTextColor(view.getResources().getColor(R.color.tvoff));
-                    bath_dryer_tvonoff.setText("OFF");
-                    bath_dryer_tvonoff.setTextColor(view.getResources().getColor(R.color.tvoff));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         // Washing machine
         swwash.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -29,6 +29,8 @@ public class fragmentHome extends Fragment {
     private View mView;
     private MainActivity mMainActivity;
     private RobotoBoldTextView username;
+
+
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

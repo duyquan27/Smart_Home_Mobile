@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentSetting settingFragment = new fragmentSetting();
         fragmentSensor sensorFragment = new fragmentSensor();
         fragmentHome homeFragment = new fragmentHome();
-
         strUser = getIntent().getStringExtra("key_username");
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
