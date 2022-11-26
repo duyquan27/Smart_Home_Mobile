@@ -106,7 +106,7 @@
             android:progressDrawable="@drawable/bg_custom_seekbar"
             android:progressTint="#8F00FF"
             android:rotation="270"
-            android:thumb="@color/material_dynamic_neutral40"
+            android:thumb="@color/dynamic"
             app:layout_constraintStart_toEndOf="@+id/imgBtn_on_off"
             app:layout_constraintTop_toTopOf="parent" />
 
