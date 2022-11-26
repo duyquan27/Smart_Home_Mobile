@@ -44,7 +44,7 @@ public class fragment_bed_room_air_conditioner extends Fragment {
         mRoom = FirebaseDatabase.getInstance().getReference();
 
         // Init from firebase
-        mRoom.child("HOME").child("Bath room").child("AC").child("Status").addValueEventListener(new ValueEventListener() {
+        mRoom.child("HOME").child("Bed room").child("AC").child("Status").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.getValue().toString().equals("ON")) {
@@ -68,7 +68,7 @@ public class fragment_bed_room_air_conditioner extends Fragment {
 
             }
         });
-        mRoom.child("HOME").child("Bath room").child("AC").child("Temp").addValueEventListener(new ValueEventListener() {
+        mRoom.child("HOME").child("Bed room").child("AC").child("Temp").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 txview.setText(snapshot.getValue().toString() + "°C");
@@ -81,7 +81,7 @@ public class fragment_bed_room_air_conditioner extends Fragment {
 
             }
         });
-        mRoom.child("HOME").child("Bath room").child("AC").child("Regime").addValueEventListener(new ValueEventListener() {
+        mRoom.child("HOME").child("Bed room").child("AC").child("Regime").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.getValue().toString().equals("COOL")) {
@@ -119,7 +119,7 @@ public class fragment_bed_room_air_conditioner extends Fragment {
                 if (check_mode == 1){
                     circularSeekBar.setProgress(20);
                     txview.setText("20°C");
-                    mRoom.child("HOME").child("Bath room").child("AC").child("Regime").setValue("COOL");
+                    mRoom.child("HOME").child("Bed room").child("AC").child("Regime").setValue("COOL");
                 }
             }
         });
@@ -129,7 +129,7 @@ public class fragment_bed_room_air_conditioner extends Fragment {
                 if (check_mode == 1){
                     circularSeekBar.setProgress(30);
                     txview.setText("30°C");
-                    mRoom.child("HOME").child("Bath room").child("AC").child("Regime").setValue("DRY");
+                    mRoom.child("HOME").child("Bed room").child("AC").child("Regime").setValue("DRY");
                 }
             }
         });
@@ -139,7 +139,7 @@ public class fragment_bed_room_air_conditioner extends Fragment {
                 if (check_mode == 1){
                     circularSeekBar.setProgress(25);
                     txview.setText("25°C");
-                    mRoom.child("HOME").child("Bath room").child("AC").child("Regime").setValue("FAN");
+                    mRoom.child("HOME").child("Bed room").child("AC").child("Regime").setValue("FAN");
                 }
             }
         });
@@ -147,10 +147,10 @@ public class fragment_bed_room_air_conditioner extends Fragment {
             @Override
             public void onClick(View view) {
                 if (check_on){
-                    mRoom.child("HOME").child("Bath room").child("AC").child("Status").setValue("OFF");
+                    mRoom.child("HOME").child("Bed room").child("AC").child("Status").setValue("OFF");
                 }
                 else {
-                    mRoom.child("HOME").child("Bath room").child("AC").child("Status").setValue("ON");
+                    mRoom.child("HOME").child("Bed room").child("AC").child("Status").setValue("ON");
                 }
             }
         });
@@ -159,7 +159,7 @@ public class fragment_bed_room_air_conditioner extends Fragment {
             public void onProgressChanged(CircularSeekBar circularSeekBar, float progress, boolean fromUser) {
                 int tmp = (int)progress;
                 txview.setText(tmp + "°C");
-                mRoom.child("HOME").child("Bath room").child("AC").child("Temp").setValue(tmp);
+                mRoom.child("HOME").child("Bed room").child("AC").child("Temp").setValue(tmp);
             }
 
             @Override
