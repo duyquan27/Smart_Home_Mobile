@@ -24,7 +24,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_onoff" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_onOffBath" />
 
         <ImageView
             android:id="@+id/imageView9"
@@ -69,7 +69,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/textTempBed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="65dp"
@@ -92,10 +92,10 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/circularSeekBar4"
             app:layout_constraintStart_toStartOf="@+id/circularSeekBar4"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintTop_toBottomOf="@+id/textTempBed" />
 
         <ImageButton
-            android:id="@+id/btn_onoff"
+            android:id="@+id/btn_onOffBath"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
             android:background="@null"
-            app:layout_constraintStart_toEndOf="@+id/btn_onoff"
+            app:layout_constraintStart_toEndOf="@+id/btn_onOffBath"
             app:layout_constraintTop_toBottomOf="@+id/imageView9"
             app:srcCompat="@drawable/icon_cool_air_on" />
 
@@ -125,7 +125,7 @@
             android:background="@null"/>
 
         <ImageButton
-            android:id="@+id/btn_fan"
+            android:id="@+id/btn_fan_Bath"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -144,7 +144,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_fan" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_fan_Bath" />
 
         <TextView
             android:id="@+id/tx_cool"

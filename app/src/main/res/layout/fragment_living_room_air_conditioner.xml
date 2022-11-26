@@ -36,7 +36,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/tx_onoff"
+            android:id="@+id/tx_onoff_living"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -103,7 +103,7 @@
             app:layout_constraintTop_toTopOf="@+id/circularSeekBar4" />
 
         <TextView
-            android:id="@+id/tx_name_mode"
+            android:id="@+id/tx_name_mode_living"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -126,7 +126,7 @@
             android:background="@null"/>
 
         <ImageButton
-            android:id="@+id/btn_cool"
+            android:id="@+id/btn_cool_living"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
@@ -136,11 +136,11 @@
             app:srcCompat="@drawable/icon_cool_air_on" />
 
         <ImageButton
-            android:id="@+id/btn_dry"
+            android:id="@+id/btn_dry_living"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
-            app:layout_constraintStart_toEndOf="@+id/btn_cool"
+            app:layout_constraintStart_toEndOf="@+id/btn_cool_living"
             app:layout_constraintTop_toBottomOf="@+id/imageView9"
             app:srcCompat="@drawable/icon_dry_air"
             android:background="@null"/>
@@ -150,7 +150,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
-            app:layout_constraintStart_toEndOf="@+id/btn_dry"
+            app:layout_constraintStart_toEndOf="@+id/btn_dry_living"
             app:layout_constraintTop_toBottomOf="@+id/imageView9"
             app:srcCompat="@drawable/icon_fan_air"
             android:background="@null"/>
@@ -177,7 +177,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/tx_dry"
-            app:layout_constraintTop_toBottomOf="@+id/btn_cool" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_cool_living" />
 
         <TextView
             android:id="@+id/tx_dry"
@@ -189,7 +189,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/tx_fan"
-            app:layout_constraintTop_toBottomOf="@+id/btn_dry" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_dry_living" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
