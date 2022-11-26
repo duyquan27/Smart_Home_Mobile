@@ -3,6 +3,7 @@ package com.example.afinal.fragment_device.living_room;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,15 +14,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.afinal.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import me.tankery.lib.circularseekbar.CircularSeekBar;
 
 public class fragment_living_room_air_conditioner extends Fragment {
+    private DatabaseReference mRoom;
     private CircularSeekBar circularSeekBar;
     private TextView txview,tx_onoff, tx_mode;
     private ImageButton imgbtn_onoff,imgbtn_dry,imgbtn_fan, imgbtn_cool;
-    private boolean check_onoff = true;
-    private int check_mode = 0;
+    private boolean check_on;
+    private int check_mode;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,24 +38,91 @@ public class fragment_living_room_air_conditioner extends Fragment {
         circularSeekBar = (CircularSeekBar) view.findViewById(R.id.circularSeekBar4);
         txview = (TextView) view.findViewById(R.id.textView8);
         imgbtn_onoff = (ImageButton) view.findViewById(R.id.btn_onoff);
-        imgbtn_cool = (ImageButton) view.findViewById(R.id.btn_cool);
-        imgbtn_dry = (ImageButton) view.findViewById(R.id.btn_dry);
+        imgbtn_cool = (ImageButton) view.findViewById(R.id.btn_cool_living);
+        imgbtn_dry = (ImageButton) view.findViewById(R.id.btn_dry_living);
         imgbtn_fan = (ImageButton) view.findViewById(R.id.btn_fan);
-        tx_onoff = (TextView) view.findViewById(R.id.tx_onoff);
-        tx_mode = (TextView) view.findViewById(R.id.tx_name_mode);
+        tx_onoff = (TextView) view.findViewById(R.id.tx_onoff_living);
+        tx_mode = (TextView) view.findViewById(R.id.tx_name_mode_living);
+        // firebase
+        mRoom = FirebaseDatabase.getInstance().getReference();
 
-        circularSeekBar.setEnabled(false);
+        // Init from firebase
+        mRoom.child("HOME").child("Living room").child("AC").child("Status").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue().toString().equals("ON")) {
+                    check_mode = 1;
+                    circularSeekBar.setEnabled(true);
+                    check_on = true;
+                    imgbtn_onoff.setImageResource(R.drawable.icon_on_air);
+                    tx_onoff.setText("On");
+                }
+                else {
+                    check_mode = 0;
+                    circularSeekBar.setEnabled(false);
+                    check_on = false;
+                    imgbtn_onoff.setImageResource(R.drawable.icon_air_btn_off);
+                    tx_onoff.setText("Off");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        mRoom.child("HOME").child("Living room").child("AC").child("Temp").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                txview.setText(snapshot.getValue().toString() + "°C");
+                float f= new Float(snapshot.getValue().toString());
+                circularSeekBar.setProgress(f);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        mRoom.child("HOME").child("Living room").child("AC").child("Regime").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue().toString().equals("COOL")) {
+                    tx_mode.setText("Cooling");
+                    circularSeekBar.setCircleProgressColor(view.getResources().getColor(R.color.cool));
+                    imgbtn_cool.setImageResource(R.drawable.icon_cool_air_on);
+                    imgbtn_fan.setImageResource(R.drawable.icon_fan_air);
+                    imgbtn_dry.setImageResource(R.drawable.icon_dry_air);
+                }
+                else if (snapshot.getValue().toString().equals("DRY")) {
+                    tx_mode.setText("Drying");
+                    circularSeekBar.setCircleProgressColor(view.getResources().getColor(R.color.dry));
+                    imgbtn_dry.setImageResource(R.drawable.icon_dry_air_on);
+                    imgbtn_cool.setImageResource(R.drawable.icon_cool_air);
+                    imgbtn_fan.setImageResource(R.drawable.icon_fan_air);
+                }
+                else {
+                    tx_mode.setText("Fan");
+                    circularSeekBar.setCircleProgressColor(view.getResources().getColor(R.color.fan));
+                    imgbtn_fan.setImageResource(R.drawable.icon_fan_air_on);
+                    imgbtn_cool.setImageResource(R.drawable.icon_cool_air);
+                    imgbtn_dry.setImageResource(R.drawable.icon_dry_air);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         imgbtn_cool.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (check_mode == 1){
-                    tx_mode.setText("Cooling");
                     circularSeekBar.setProgress(20);
                     txview.setText("20°C");
-                    circularSeekBar.setCircleProgressColor(getResources().getColor(R.color.cool));
-                    imgbtn_cool.setImageResource(R.drawable.icon_cool_air_on);
-                    imgbtn_fan.setImageResource(R.drawable.icon_fan_air);
-                    imgbtn_dry.setImageResource(R.drawable.icon_dry_air);
+                    mRoom.child("HOME").child("Living room").child("AC").child("Regime").setValue("COOL");
                 }
             }
         });
@@ -56,13 +130,9 @@ public class fragment_living_room_air_conditioner extends Fragment {
             @Override
             public void onClick(View view) {
                 if (check_mode == 1){
-                    tx_mode.setText("Drying");
                     circularSeekBar.setProgress(30);
                     txview.setText("30°C");
-                    circularSeekBar.setCircleProgressColor(getResources().getColor(R.color.dry));
-                    imgbtn_dry.setImageResource(R.drawable.icon_dry_air_on);
-                    imgbtn_cool.setImageResource(R.drawable.icon_cool_air);
-                    imgbtn_fan.setImageResource(R.drawable.icon_fan_air);
+                    mRoom.child("HOME").child("Living room").child("AC").child("Regime").setValue("DRY");
                 }
             }
         });
@@ -70,32 +140,20 @@ public class fragment_living_room_air_conditioner extends Fragment {
             @Override
             public void onClick(View view) {
                 if (check_mode == 1){
-                    tx_mode.setText("Fan");
                     circularSeekBar.setProgress(25);
                     txview.setText("25°C");
-                    circularSeekBar.setCircleProgressColor(getResources().getColor(R.color.fan));
-                    imgbtn_fan.setImageResource(R.drawable.icon_fan_air_on);
-                    imgbtn_cool.setImageResource(R.drawable.icon_cool_air);
-                    imgbtn_dry.setImageResource(R.drawable.icon_dry_air);
+                    mRoom.child("HOME").child("Living room").child("AC").child("Regime").setValue("FAN");
                 }
             }
         });
         imgbtn_onoff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check_onoff){
-                    circularSeekBar.setEnabled(true);
-                    imgbtn_onoff.setImageResource(R.drawable.icon_on_air);
-                    tx_onoff.setText("On");
-                    check_mode = 1;
-                    check_onoff = false;
+                if (check_on){
+                    mRoom.child("HOME").child("Living room").child("AC").child("Status").setValue("OFF");
                 }
                 else {
-                    circularSeekBar.setEnabled(false);
-                    imgbtn_onoff.setImageResource(R.drawable.icon_air_btn_off);
-                    tx_onoff.setText("Off");
-                    check_mode = 0;
-                    check_onoff = true;
+                    mRoom.child("HOME").child("Living room").child("AC").child("Status").setValue("ON");
                 }
             }
         });
@@ -104,6 +162,7 @@ public class fragment_living_room_air_conditioner extends Fragment {
             public void onProgressChanged(CircularSeekBar circularSeekBar, float progress, boolean fromUser) {
                 int tmp = (int)progress;
                 txview.setText(tmp + "°C");
+                mRoom.child("HOME").child("Living room").child("AC").child("Temp").setValue(tmp);
             }
 
             @Override

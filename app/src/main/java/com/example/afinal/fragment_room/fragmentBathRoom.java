@@ -100,7 +100,7 @@ public class fragmentBathRoom extends Fragment {
         mHome.child("HOME").child("Bath room").child("Lighting").child("Intensity").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                bath_light_tvdevice.setText(snapshot.getValue().toString());
+                bath_light_tvdevice.setText(snapshot.getValue().toString() + " %");
             }
 
             @Override

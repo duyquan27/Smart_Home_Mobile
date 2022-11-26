@@ -51,7 +51,7 @@ public class fragment_bath_room_light extends Fragment {
                     mRoom.child("HOME").child("Bath room").child("Lighting").child("Intensity").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            txIntensity.setText(snapshot.getValue().toString());
+                            txIntensity.setText(snapshot.getValue().toString() + "%");
                             float f= new Float(snapshot.getValue().toString());
                             circularSeekBar.setProgress(f);
                         }
@@ -66,7 +66,7 @@ public class fragment_bath_room_light extends Fragment {
                     checkOn = false;
                     circularSeekBar.setEnabled(false);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_off);
-                    txIntensity.setText("0");
+                    txIntensity.setText("0 %");
                     circularSeekBar.setProgress(0);
                 }
             }
@@ -81,18 +81,10 @@ public class fragment_bath_room_light extends Fragment {
             @Override
             public void onClick(View view) {
                 if (checkOn) {
-                    circularSeekBar.setEnabled(true);
-                    imgBtnOnOff.setImageResource(R.drawable.icon_btn_on);
-                    circularSeekBar.setProgress(65);
-                    txIntensity.setText("65");
                     // push to firebase
                     mRoom.child("HOME").child("Bath room").child("Lighting").child("Status").setValue("OFF");
                 }
                 else {
-                    circularSeekBar.setEnabled(false);
-                    imgBtnOnOff.setImageResource(R.drawable.icon_btn_off);
-                    circularSeekBar.setProgress(0);
-                    txIntensity.setText("0");
                     mRoom.child("HOME").child("Bath room").child("Lighting").child("Status").setValue("ON");
                 }
             }
@@ -102,7 +94,7 @@ public class fragment_bath_room_light extends Fragment {
             @Override
             public void onProgressChanged(CircularSeekBar circularSeekBar, float progress, boolean fromUser) {
                 int intensity = (int)progress;
-                txIntensity.setText(intensity + "");
+                txIntensity.setText(intensity + " %");
                 mRoom.child("HOME").child("Bath room").child("Lighting").child("Intensity").setValue(intensity);
             }
 
