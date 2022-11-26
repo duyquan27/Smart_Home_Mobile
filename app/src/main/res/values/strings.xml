@@ -32,7 +32,16 @@
     <string name="progress_message_login">Please Wait While Login...</string>
     <string name="progress_message_signup">Please Wait While Registration...</string>
     <string name="progress_message_check_internet">Pleas Wait While Check Internet</string>
-
+    <string name="channel_temp">channel temp</string>
+    <string name="channel_temp_description">this is channel temp</string>
+    <string name="channel_humi">channel humi</string>
+    <string name="channel_humi_description">this is channel humi</string>
+    <string name="channel_noise">channel noise</string>
+    <string name="channel_noise_description">this is channel noise</string>
+    <string name="channel_air">channel air</string>
+    <string name="channel_air_description">this is channel air</string>
+    <string name="notification_title">Over Threshold</string>
+    <string name="notification_info">temp sensor was over threshold</string>
     <string-array name="rangeSlider">
         <item>10</item>
         <item>50</item>

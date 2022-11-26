@@ -1,14 +1,24 @@
 package com.example.afinal;
 
+import static com.example.afinal.R.id.slider4;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Notification;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.RemoteViews;
 
 import com.example.afinal.custom_textView.RobotoBoldTextView;
 import com.example.afinal.fragment_home.ViewPagerMainAdapter;
@@ -17,22 +27,28 @@ import com.example.afinal.fragment_home.fragmentSensor;
 import com.example.afinal.fragment_home.fragmentSetting;
 import com.example.afinal.widget.CustomViewPager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     CustomViewPager viewPager;
     BottomNavigationView bottomNavigationView;
     DatabaseReference mData;
+    fragmentSensor mfragmentSensor;
     private RobotoBoldTextView username;
     private View mView;
     public String userID = "";
     public String strUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mData = FirebaseDatabase.getInstance().getReference();
@@ -97,4 +113,5 @@ public class MainActivity extends AppCompatActivity {
     public String getStrUser() {
         return strUser;
     }
+
 }
