@@ -52,7 +52,7 @@
                 android:layout_marginStart="80dp"
                 android:layout_gravity="center|left"/>
             <Switch
-                android:id="@+id/switch_light_off"
+                android:id="@+id/switch_noty_off"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"

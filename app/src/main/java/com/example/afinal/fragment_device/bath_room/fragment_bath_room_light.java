@@ -48,8 +48,19 @@ public class fragment_bath_room_light extends Fragment {
                     checkOn = true;
                     circularSeekBar.setEnabled(true);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_on);
-                    txIntensity.setText("65");
-                    circularSeekBar.setProgress(65);
+                    mRoom.child("HOME").child("Bath room").child("Lighting").child("Intensity").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            txIntensity.setText(snapshot.getValue().toString());
+                            float f= new Float(snapshot.getValue().toString());
+                            circularSeekBar.setProgress(f);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
                 else {
                     checkOn = false;

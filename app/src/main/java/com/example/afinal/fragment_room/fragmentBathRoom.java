@@ -71,22 +71,14 @@ public class fragmentBathRoom extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    bath_light_tvonoff.setText("ON");
-                    imglight.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    bath_light_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    bath_light_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
-                    bath_light_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
                     // push to firebase
                     mHome.child("HOME").child("Bath room").child("Lighting").child("Status").setValue("ON");
+                    mHome.child("HOME").child("Bath room").child("Lighting").child("Intensity").setValue("65");
                 }
                 else {
-                    imglight.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    bath_light_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    bath_light_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
-                    bath_light_tvonoff.setText("OFF");
-                    bath_light_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
                     // push to firebase
                     mHome.child("HOME").child("Bath room").child("Lighting").child("Status").setValue("OFF");
+                    mHome.child("HOME").child("Bath room").child("Lighting").child("Intensity").setValue("0");
                 }
             }
         });
@@ -98,18 +90,29 @@ public class fragmentBathRoom extends Fragment {
                     swlight.setChecked(true);
                     bath_light_tvonoff.setText("ON");
                     imglight.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    bath_light_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    bath_light_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
-                    bath_light_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    bath_light_tvname.setTextColor(view.getResources().getColor(R.color.tvnameon));
+                    bath_light_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
+                    bath_light_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                 }
                 else {
                     swlight.setChecked(false);
                     imglight.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    bath_light_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    bath_light_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
+                    bath_light_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
+                    bath_light_tvdevice.setTextColor(view.getResources().getColor(R.color.tvoff));
                     bath_light_tvonoff.setText("OFF");
-                    bath_light_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                    bath_light_tvonoff.setTextColor(view.getResources().getColor(R.color.tvoff));
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        mHome.child("HOME").child("Bath room").child("Lighting").child("Intensity").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                bath_light_tvdevice.setText(snapshot.getValue().toString());
             }
 
             @Override
@@ -123,20 +126,10 @@ public class fragmentBathRoom extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    imgpana.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    bath_pana_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    bath_pana_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
-                    bath_pana_tvonoff.setText("ON");
-                    bath_pana_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
                     // push to firebase
                     mHome.child("HOME").child("Bath room").child("Shower").child("Status").setValue("ON");
                 }
                 else {
-                    imgpana.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    bath_pana_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    bath_pana_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
-                    bath_pana_tvonoff.setText("OFF");
-                    bath_pana_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
                     // push to firebase
                     mHome.child("HOME").child("Bath room").child("Shower").child("Status").setValue("OFF");
                 }
@@ -148,18 +141,18 @@ public class fragmentBathRoom extends Fragment {
                 if (snapshot.getValue().toString().equals("ON")) {
                     swpana.setChecked(true);
                     imgpana.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    bath_pana_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    bath_pana_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    bath_pana_tvname.setTextColor(view.getResources().getColor(R.color.tvnameon));
+                    bath_pana_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                     bath_pana_tvonoff.setText("ON");
-                    bath_pana_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    bath_pana_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                 }
                 else {
                     swpana.setChecked(false);
                     imgpana.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    bath_pana_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    bath_pana_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
+                    bath_pana_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
+                    bath_pana_tvdevice.setTextColor(view.getResources().getColor(R.color.tvoff));
                     bath_pana_tvonoff.setText("OFF");
-                    bath_pana_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                    bath_pana_tvonoff.setTextColor(view.getResources().getColor(R.color.tvoff));
                 }
             }
 
@@ -173,20 +166,10 @@ public class fragmentBathRoom extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
-                    imgdryer.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    bath_dryer_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    bath_dryer_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
-                    bath_dryer_tvonoff.setText("ON");
-                    bath_dryer_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
                     // push to firebase
                     mHome.child("HOME").child("Bath room").child("Dryer").child("Status").setValue("ON");
                 }
                 else {
-                    imgdryer.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    bath_dryer_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    bath_dryer_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
-                    bath_dryer_tvonoff.setText("OFF");
-                    bath_dryer_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
                     // push to firebase
                     mHome.child("HOME").child("Bath room").child("Dryer").child("Status").setValue("OFF");
                 }
@@ -198,18 +181,18 @@ public class fragmentBathRoom extends Fragment {
                 if (snapshot.getValue().toString().equals("ON")) {
                     swdryer.setChecked(true);
                     imgdryer.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    bath_dryer_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    bath_dryer_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    bath_dryer_tvname.setTextColor(view.getResources().getColor(R.color.tvnameon));
+                    bath_dryer_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                     bath_dryer_tvonoff.setText("ON");
-                    bath_dryer_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    bath_dryer_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                 }
                 else {
                     swdryer.setChecked(false);
                     imgdryer.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    bath_dryer_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    bath_dryer_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
+                    bath_dryer_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
+                    bath_dryer_tvdevice.setTextColor(view.getResources().getColor(R.color.tvoff));
                     bath_dryer_tvonoff.setText("OFF");
-                    bath_dryer_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                    bath_dryer_tvonoff.setTextColor(view.getResources().getColor(R.color.tvoff));
                 }
             }
 
@@ -224,20 +207,10 @@ public class fragmentBathRoom extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
-                    imgwash.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    bath_wash_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    bath_wash_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
-                    bath_wash_tvonoff.setText("ON");
-                    bath_wash_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
                     // push to firebase
                     mHome.child("HOME").child("Bath room").child("Washing machine").child("Status").setValue("ON");
                 }
                 else {
-                    imgwash.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    bath_wash_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    bath_wash_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
-                    bath_wash_tvonoff.setText("OFF");
-                    bath_wash_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
                     // push to firebase
                     mHome.child("HOME").child("Bath room").child("Washing machine").child("Status").setValue("OFF");
                 }
@@ -249,18 +222,18 @@ public class fragmentBathRoom extends Fragment {
                 if (snapshot.getValue().toString().equals("ON")) {
                     swwash.setChecked(true);
                     imgwash.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    bath_wash_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    bath_wash_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    bath_wash_tvname.setTextColor(view.getResources().getColor(R.color.tvnameon));
+                    bath_wash_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                     bath_wash_tvonoff.setText("ON");
-                    bath_wash_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    bath_wash_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                 }
                 else {
                     swwash.setChecked(false);
                     imgwash.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    bath_wash_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    bath_wash_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
+                    bath_wash_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
+                    bath_wash_tvdevice.setTextColor(view.getResources().getColor(R.color.tvoff));
                     bath_wash_tvonoff.setText("OFF");
-                    bath_wash_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                    bath_wash_tvonoff.setTextColor(view.getResources().getColor(R.color.tvoff));
                 }
             }
 
