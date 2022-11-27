@@ -50,16 +50,16 @@
             android:layout_above="@+id/lamp_device"/>
 
         <com.example.afinal.custom_textView.RobotoRegularTextView
+            android:id="@+id/lamp_device"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/lamp_device"
+            android:layout_alignStart="@+id/lamp_off"
+            android:layout_alignBottom="@+id/lamp_off"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="25dp"
             android:text="10 Brightness"
             android:textColor="#666666"
-            android:textSize="13sp"
-            android:layout_marginBottom="25dp"
-            android:layout_marginStart="25dp"
-            android:layout_alignStart="@+id/lamp_off"
-            android:layout_alignBottom="@+id/lamp_off"/>
+            android:textSize="13sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

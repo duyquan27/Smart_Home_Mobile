@@ -64,10 +64,12 @@ public class fragmentBedRoom extends Fragment {
                 if (b){
                     // push to firebase
                     mHome.child("HOME").child("Bed room").child("Lamp").child("Status").setValue("ON");
+                    mHome.child("HOME").child("Bed room").child("Lamp").child("Intensity").setValue("45");
                 }
                 else {
                     // push to firebase
                     mHome.child("HOME").child("Bed room").child("Lamp").child("Status").setValue("OFF");
+                    mHome.child("HOME").child("Bed room").child("Lamp").child("Intensity").setValue("0");
                 }
             }
         });
@@ -90,6 +92,17 @@ public class fragmentBedRoom extends Fragment {
                     bed_light_tvonoff.setText("OFF");
                     bed_light_tvonoff.setTextColor(view.getResources().getColor(R.color.tvoff));
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        mHome.child("HOME").child("Bed room").child("Lamp").child("Intensity").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                bed_light_tvdevice.setText(snapshot.getValue().toString() + " %");
             }
 
             @Override

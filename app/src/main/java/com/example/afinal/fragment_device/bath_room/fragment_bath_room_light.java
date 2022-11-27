@@ -26,7 +26,7 @@ public class fragment_bath_room_light extends Fragment {
     TextView txIntensity;
     CircularSeekBar circularSeekBar;
     ImageButton imgBtnOnOff;
-    boolean checkOn = true;
+    boolean checkOn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,27 +48,26 @@ public class fragment_bath_room_light extends Fragment {
                     checkOn = true;
                     circularSeekBar.setEnabled(true);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_on);
-                    mRoom.child("HOME").child("Bath room").child("Lighting").child("Intensity").addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            txIntensity.setText(snapshot.getValue().toString() + "%");
-                            float f= new Float(snapshot.getValue().toString());
-                            circularSeekBar.setProgress(f);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
                 }
                 else {
                     checkOn = false;
                     circularSeekBar.setEnabled(false);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_off);
-                    txIntensity.setText("0 %");
-                    circularSeekBar.setProgress(0);
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mRoom.child("HOME").child("Bath room").child("Lighting").child("Intensity").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                txIntensity.setText(snapshot.getValue().toString() + "%");
+                float f= new Float(snapshot.getValue().toString());
+                circularSeekBar.setProgress(f);
             }
 
             @Override

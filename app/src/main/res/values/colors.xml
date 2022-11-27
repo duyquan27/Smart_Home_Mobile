@@ -19,7 +19,12 @@
     <color name="fan">#018AC3</color>
     <color name="background">#EAEAEA</color>
     <color name="yellow">#8F6000</color>
-    <color name="dynamic">#5C5F61</color>
+    <color name="vang">#FAFF00</color>
+    <color name="xanh">#2400FF</color>
+    <color name="tim">#8F00FF</color>
+    <color name="hong">#FF00F5</color>
+    <color name="doLamp">#FF0000</color>
+
 
     <color name="primary">#1B023B</color>
     <color name="secondary">#FF03DAC5</color>

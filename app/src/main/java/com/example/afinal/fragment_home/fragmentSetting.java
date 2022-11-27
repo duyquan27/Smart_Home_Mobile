@@ -16,22 +16,32 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+<<<<<<< HEAD
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+=======
+import android.widget.Switch;
+>>>>>>> origin/main
 import android.widget.Toast;
 
 import com.example.afinal.MainActivity;
 import com.example.afinal.R;
 import com.example.afinal.login.SignInActivity;
+<<<<<<< HEAD
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
+=======
+>>>>>>> origin/main
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class fragmentSetting extends Fragment {
+    DatabaseReference mHome;
+    Switch aSwitch;
 
     private MainActivity mMainActivity;
     private TextView tvUserName, tvPhoneNumber;
@@ -49,6 +59,7 @@ public class fragmentSetting extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View mview = inflater.inflate(R.layout.fragment_setting, container, false);
+<<<<<<< HEAD
 
         btnEditProfile = mview.findViewById(R.id.btnEditProfile);
         btnLogout = mview.findViewById(R.id.btnLogout);
@@ -64,13 +75,35 @@ public class fragmentSetting extends Fragment {
 
 
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
+=======
+        // Firebase
+        mHome = FirebaseDatabase.getInstance().getReference();
+        aSwitch = mview.findViewById(R.id.switch_noty_off);
+        FrameLayout btn_account = mview.findViewById(R.id.btn_account);
+        FrameLayout btn_logout = mview.findViewById(R.id.btn_logout);
+        btn_account.setOnClickListener(new View.OnClickListener() {
+>>>>>>> origin/main
             @Override
             public void onClick(View view) {
                 openAccountDialog(Gravity.CENTER);
             }
         });
+<<<<<<< HEAD
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
+=======
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b)
+                    mHome.child("SETTING").child("Notifications").setValue("ON");
+                else
+                    mHome.child("SETTING").child("Notifications").setValue("OFF");
+            }
+        });
+
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+>>>>>>> origin/main
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(),SignInActivity.class));
