@@ -15,20 +15,29 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.afinal.R;
 import com.example.afinal.login.SignInActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class fragmentSetting extends Fragment {
+    DatabaseReference mHome;
+    Switch aSwitch;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View mview = inflater.inflate(R.layout.fragment_setting, container, false);
+        // Firebase
+        mHome = FirebaseDatabase.getInstance().getReference();
+        aSwitch = mview.findViewById(R.id.switch_noty_off);
         FrameLayout btn_account = mview.findViewById(R.id.btn_account);
         FrameLayout btn_logout = mview.findViewById(R.id.btn_logout);
         btn_account.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +46,16 @@ public class fragmentSetting extends Fragment {
                 openAccountDialog(Gravity.CENTER);
             }
         });
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b)
+                    mHome.child("SETTING").child("Notifications").setValue("ON");
+                else
+                    mHome.child("SETTING").child("Notifications").setValue("OFF");
+            }
+        });
+
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
