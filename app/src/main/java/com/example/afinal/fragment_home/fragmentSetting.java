@@ -37,8 +37,12 @@ public class fragmentSetting extends Fragment {
     private TextView tvUserName, tvPhoneNumber;
     private Button btnEditProfile;
     private RelativeLayout btnLogout;
-    private String _userName, PATH, userID,_userEmail,_userPassword,_userPhone;
+    private String userPath, userID;
     private DatabaseReference mData;
+    private String getName, getEmail, getPhone, getPassword;
+
+    static final public String PATH_PHONE = "1";
+    static final public String PATH_EMAIL = "2";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,14 +57,11 @@ public class fragmentSetting extends Fragment {
         tvUserName = mview.findViewById(R.id.tvUserName);
         tvPhoneNumber = mview.findViewById(R.id.tvPhoneNumber);
 
-//        PATH = mMainActivity.getPath();
-//        userID = mMainActivity.getUserID();
-//        readData(PATH,userID);
+        userPath = mMainActivity.getUserPath();
+        userID = mMainActivity.getUserID();
 
-        tvUserName.setText("Hoang Duy");
+        getUsersDataByPath(userPath, userID);
 
-        //String _edtPhone = "+84 " + _userPhone.substring(1);
-        tvPhoneNumber.setText("+84947755275");
 
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,45 +79,53 @@ public class fragmentSetting extends Fragment {
         return mview;
     }
 
-    private void readData(String _path, String userID)
+    private void getUsersDataByPath(String user_path, String user_ID)
     {
-        if (_path.equals("PHONE"))
+        if (user_path.equals(PATH_PHONE))
         {
             mData = FirebaseDatabase.getInstance().getReference("USER/PHONE");
-            getData(userID);
-        }
-        else if (_path.equals("EMAIL"))
-        {
-            mData = FirebaseDatabase.getInstance().getReference("USER/EMAIL");
-            getData(userID);
-        }
-    }
-
-    private void getData(String userID)
-    {
-        mData.child(userID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful())
-                {
-                    if (task.getResult().exists())
+            mData.child(user_ID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task.isSuccessful())
                     {
-                        DataSnapshot snapshot = task.getResult();
-                        _userName = String.valueOf(snapshot.child("userName"));
-                        _userEmail = String.valueOf(snapshot.child("userEmail"));
-                        _userPhone = String.valueOf(snapshot.child("userPhone"));
-                        _userPassword = String.valueOf(snapshot.child("userPassword"));
-                    }
-                    else
-                    {
-                        _userName = "user_name";
-                        _userEmail = "user_email";
-                        _userPhone = "user_phone";
-                        _userPassword = "user_password";
+                        if (task.getResult().exists())
+                        {
+                            DataSnapshot dataSnapshot = task.getResult();
+                            getName = String.valueOf(dataSnapshot.child("userName").getValue());
+                            getEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
+                            getPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
+                            getPassword = String.valueOf(dataSnapshot.child("userPassword").getValue());
+                            tvUserName.setText(getName);
+                            tvPhoneNumber.setText(getPhone);
+                        }
                     }
                 }
-            }
-        });
+            });
+
+        }
+        else if (user_path.equals(PATH_EMAIL))
+        {
+            mData = FirebaseDatabase.getInstance().getReference("USER/UID");
+            mData.child(user_ID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task.isSuccessful())
+                    {
+                        if (task.getResult().exists())
+                        {
+                            DataSnapshot dataSnapshot = task.getResult();
+                            getName = String.valueOf(dataSnapshot.child("userName").getValue());
+                            getEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
+                            getPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
+                            getPhone = String.valueOf(dataSnapshot.child("userPassword").getValue());
+                            tvUserName.setText(getName);
+                            tvPhoneNumber.setText(getPhone);
+                        }
+                    }
+                }
+            });
+        }
     }
 
     private void openAccountDialog(int gravity){
@@ -147,10 +156,10 @@ public class fragmentSetting extends Fragment {
         Button btn_clear = dialog.findViewById(R.id.btn_clear);
         Button btn_apply = dialog.findViewById(R.id.btn_apply);
 
-        edtUsername.setText(_userName);
-        edtEmail.setText(_userEmail);
-        edtPhone.setText(_userPhone);
-        edtPassword.setText(_userPassword);
+        edtUsername.setText(getName);
+        edtEmail.setText(getEmail);
+        edtPhone.setText(getPhone);
+        edtPassword.setText(getPassword);
 
         btn_apply.setOnClickListener(new View.OnClickListener() {
 

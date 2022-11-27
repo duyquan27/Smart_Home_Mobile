@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.afinal.MainActivity;
 import com.example.afinal.R;
@@ -30,13 +32,20 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class fragmentHome extends Fragment {
+
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private View mView;
     private MainActivity mMainActivity;
     private RobotoBoldTextView username;
-    private String userName, PATH, userID;
+    private String userPath, userID;
     private DatabaseReference mData;
+
+    static final public String PATH_PHONE = "1";
+    static final public String PATH_EMAIL = "2";
+
+    public String getName;
+
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,12 +65,10 @@ public class fragmentHome extends Fragment {
         RobotoLightTextView tvDate =  mView.findViewById(R.id.time);
         tvDate.setText(currentDate);
 
-        PATH = mMainActivity.getPath();
+        userPath = mMainActivity.getUserPath();
         userID = mMainActivity.getUserID();
 
-        readData();
-
-        username.setText(userName);
+        getUsersDataByPath(userPath, userID);
 
         ViewPagerHomeAdapter adapter = new ViewPagerHomeAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
@@ -69,70 +76,46 @@ public class fragmentHome extends Fragment {
         return mView;
     }
 
-    private void readData()
+    private void getUsersDataByPath(String user_path, String user_ID)
     {
-        if (PATH.equals("PHONE"))
+        if (user_path.equals(PATH_PHONE))
         {
             mData = FirebaseDatabase.getInstance().getReference("USER/PHONE");
-            mData.child(userID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            mData.child(user_ID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (task.isSuccessful())
                     {
                         if (task.getResult().exists())
                         {
-                            DataSnapshot snapshot = task.getResult();
-                            userName = String.valueOf(snapshot.child("userName"));
-                        }
-                        else
-                        {
-                            userName = "user_name";
+                            DataSnapshot dataSnapshot = task.getResult();
+                            getName = String.valueOf(dataSnapshot.child("userName").getValue());
+                            username.setText(getName);
+                            Toast.makeText(getActivity(),"OKE" + getName,Toast.LENGTH_LONG).show();
                         }
                     }
                 }
             });
+
         }
-        else if (PATH.equals("EMAIL"))
+        else if (user_path.equals(PATH_EMAIL))
         {
-            mData = FirebaseDatabase.getInstance().getReference("USER/EMAIL");
-            mData.child(userID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            mData = FirebaseDatabase.getInstance().getReference("USER/UID");
+            mData.child(user_ID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (task.isSuccessful())
                     {
                         if (task.getResult().exists())
                         {
-                            DataSnapshot snapshot = task.getResult();
-                            userName = String.valueOf(snapshot.child("userName"));
-                        }
-                        else
-                        {
-                            userName = "user_name";
+                            DataSnapshot dataSnapshot = task.getResult();
+                            getName = String.valueOf(dataSnapshot.child("userName").getValue());
+                            username.setText(getName);
+                            Toast.makeText(getActivity(),"OKE" + getName,Toast.LENGTH_LONG).show();
                         }
                     }
                 }
             });
         }
     }
-
-//    private void getData(String userID)
-//    {
-//        mData.child(userID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                if (task.isSuccessful())
-//                {
-//                    if (task.getResult().exists())
-//                    {
-//                        DataSnapshot snapshot = task.getResult();
-//                        userName = String.valueOf(snapshot.child("userName"));
-//                    }
-//                    else
-//                    {
-//                        userName = "user_name";
-//                    }
-//                }
-//            }
-//        });
-//    }
 }

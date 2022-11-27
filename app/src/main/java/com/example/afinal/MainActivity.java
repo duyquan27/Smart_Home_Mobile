@@ -21,12 +21,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
+
     CustomViewPager viewPager;
     BottomNavigationView bottomNavigationView;
     DatabaseReference mData;
     private RobotoBoldTextView username;
     private View mView;
-    public String PATH, userID;
+    private String _userName, _userEmail, _userPhone, _userPassword, _userPath, _userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,8 +46,12 @@ public class MainActivity extends AppCompatActivity {
         fragmentSensor sensorFragment = new fragmentSensor();
         fragmentHome homeFragment = new fragmentHome();
 
-        PATH = getIntent().getStringExtra("PATH");
-        userID = getIntent().getStringExtra("USERID");
+        _userName = getIntent().getStringExtra("KEY_NAME");
+        _userEmail = getIntent().getStringExtra("KEY_EMAIL");
+        _userPhone = getIntent().getStringExtra("KEY_PHONE");
+        _userPassword = getIntent().getStringExtra("KEY_PASSWORD");
+        _userPath = getIntent().getStringExtra("KEY_PATH");
+        _userID = getIntent().getStringExtra("KEY_ID");
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -95,12 +101,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public String getPath() {
-        return PATH;
+    public String getUserName() {
+        return _userName;
+    }
+
+    public String getUserEmail() {
+        return _userEmail;
+    }
+
+    public String getUserPhone() {
+        return _userPhone;
+    }
+
+    public String getUserPassword() {
+        return _userPassword;
+    }
+
+    public String getUserPath() {
+        return _userPath;
     }
 
     public String getUserID() {
-        return userID;
+        return _userID;
     }
-
 }

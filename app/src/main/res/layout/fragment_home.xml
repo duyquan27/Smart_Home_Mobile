@@ -24,15 +24,15 @@
             android:textSize="20sp"
 
             />
+
         <com.example.afinal.custom_textView.RobotoBoldTextView
             android:id="@+id/welcome_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="40dp"
-            android:textSize="24sp"
-            android:text="text user"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="24sp" />
 
         <com.example.afinal.custom_textView.RobotoLightTextView
             android:id="@+id/time"

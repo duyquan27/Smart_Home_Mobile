@@ -43,19 +43,20 @@ public class SignInActivity extends AppCompatActivity {
     private FirebaseUser mUser;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
-    private USER_INFOR user_infor;
     private boolean checkEye = true;
 
     static final private String EMAIL_PATTERN = "[a-zA-Z0-9.-_]+@[a-z]+\\.+[a-z]+";
     static final private String PHONE_PATTERN = "^[0-9]{10}$";
+    static final public String PATH_PHONE = "1";
+    static final public String PATH_EMAIL = "2";
 
-    public String userName, userEmail, userPhone, userPassword;
+    public String userName, userEmail, userPhone, userPassword, userPath, userID;
 
     private CheckInternet checkInternet;
     private ProgressDialogNotify progress;
 
-    private String _path;
-    private String _userID;
+    public String _path;
+    public String _userID;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -80,8 +81,6 @@ public class SignInActivity extends AppCompatActivity {
 
         checkInternet = new CheckInternet();
         progress = ProgressDialogNotify.getInstance();
-
-        user_infor = new USER_INFOR();
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,9 +117,8 @@ public class SignInActivity extends AppCompatActivity {
                 else {
                     progress.stopProgressDialog();
                     Intent intent = new Intent(SignInActivity.this, SignUp1Activity.class);
-                    //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                    finish();
                 }
             }
         });
@@ -136,9 +134,8 @@ public class SignInActivity extends AppCompatActivity {
                 else {
                     progress.stopProgressDialog();
                     Intent intent = new Intent(SignInActivity.this, forgotPassWord.class);
-                    //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                    finish();
                 }
             }
         });
@@ -194,7 +191,6 @@ public class SignInActivity extends AppCompatActivity {
                 Toast.makeText(SignInActivity.this,getString(R.string.noti_no_internet),Toast.LENGTH_LONG).show();
             }
             else {
-
                 if (email.matches(PHONE_PATTERN)) {
                     mRef = mDatabase.getReference("USER/PHONE");
                     mRef.child(email).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -206,11 +202,15 @@ public class SignInActivity extends AppCompatActivity {
 
                                     DataSnapshot dataSnapshot = task.getResult();
                                     userPassword = String.valueOf(dataSnapshot.child("userPassword").getValue());
+                                    userName = String.valueOf(dataSnapshot.child("userName").getValue());
+                                    userEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
+                                    userPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
+                                    userPath = PATH_PHONE;
+                                    userID = email;
 
                                     if (password.equals(userPassword)) {
                                         progress.stopProgressDialog();
-                                        _path = "PHONE";
-                                        _userID = email;
+                                        sendUserToMainActivity();
                                     }
                                     else {
                                         progress.stopProgressDialog();
@@ -244,17 +244,20 @@ public class SignInActivity extends AppCompatActivity {
                         }
                     });
                 }
-                sendUserToMainActivity(_path,_userID);
             }
         }
     }
 
-    private void sendUserToMainActivity(String PATH, String userID)
+    private void sendUserToMainActivity()
     {
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-        intent.putExtra("PATH", PATH);
-        intent.putExtra("USERID",userID);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("KEY_NAME", userName);
+        intent.putExtra("KEY_EMAIL",userEmail);
+        intent.putExtra("KEY_PHONE", userPhone);
+        intent.putExtra("KEY_PASSWORD",userPassword);
+        intent.putExtra("KEY_PATH",userPath);
+        intent.putExtra("KEY_ID",userID);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
