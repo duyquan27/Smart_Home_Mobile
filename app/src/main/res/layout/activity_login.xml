@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/bgColor"
-    tools:context=".login.SignInActivity">
+    tools:context=".login.SignInActivity"
+    android:id="@+id/loginContainer">
 
     <RelativeLayout
         android:id="@+id/frmTop"

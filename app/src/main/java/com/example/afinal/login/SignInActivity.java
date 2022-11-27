@@ -3,6 +3,7 @@ package com.example.afinal.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -17,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.MainActivity;
 import com.example.afinal.R;
-import com.example.afinal.fragment_home.fragmentHome;
 import com.example.afinal.option.CheckInternet;
 import com.example.afinal.option.ProgressDialogNotify;
 import com.example.afinal.option.SessionManager;
@@ -44,7 +44,6 @@ public class SignInActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
     private USER_INFOR user_infor;
-    public String temp;
     private boolean checkEye = true;
 
     static final private String EMAIL_PATTERN = "[a-zA-Z0-9.-_]+@[a-z]+\\.+[a-z]+";
@@ -54,6 +53,9 @@ public class SignInActivity extends AppCompatActivity {
 
     private CheckInternet checkInternet;
     private ProgressDialogNotify progress;
+
+    private String _path;
+    private String _userID;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -115,9 +117,10 @@ public class SignInActivity extends AppCompatActivity {
                 }
                 else {
                     progress.stopProgressDialog();
-                    Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+                    Intent intent = new Intent(SignInActivity.this, SignUp1Activity.class);
                     //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -135,6 +138,7 @@ public class SignInActivity extends AppCompatActivity {
                     Intent intent = new Intent(SignInActivity.this, forgotPassWord.class);
                     //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -183,11 +187,11 @@ public class SignInActivity extends AppCompatActivity {
         //check email and password with database
         if (cancel) {
 
-            progress.showProgressDialog(this,getString(R.string.progress_message_login),false);
+            progress.showProgressDialog(SignInActivity.this,getString(R.string.progress_message_login),false);
 
-            if (!checkInternet.isConnected(this)) {
+            if (!checkInternet.isConnected(SignInActivity.this)) {
                 progress.stopProgressDialog();
-                Toast.makeText(this,getString(R.string.noti_no_internet),Toast.LENGTH_LONG).show();
+                Toast.makeText(SignInActivity.this,getString(R.string.noti_no_internet),Toast.LENGTH_LONG).show();
             }
             else {
 
@@ -201,15 +205,12 @@ public class SignInActivity extends AppCompatActivity {
                                 if (task.getResult().exists()) {
 
                                     DataSnapshot dataSnapshot = task.getResult();
-                                    userEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
-                                    userName = String.valueOf(dataSnapshot.child("userName").getValue());
                                     userPassword = String.valueOf(dataSnapshot.child("userPassword").getValue());
-                                    userPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
-                                    temp = userName;
 
                                     if (password.equals(userPassword)) {
                                         progress.stopProgressDialog();
-                                        sendUserToMainActivity();
+                                        _path = "PHONE";
+                                        _userID = email;
                                     }
                                     else {
                                         progress.stopProgressDialog();
@@ -233,8 +234,8 @@ public class SignInActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 progress.stopProgressDialog();
-                                getUserData(email);
-                                sendUserToMainActivity();
+                                _path = "EMAIL";
+                                _userID = mAuth.getCurrentUser().getUid();
                             }
                             else {
                                 progress.stopProgressDialog();
@@ -243,28 +244,17 @@ public class SignInActivity extends AppCompatActivity {
                         }
                     });
                 }
-
-                // Send user data to Home Fragment
-
-                Bundle bundle = new Bundle();
-                bundle.putString("user_name",userName);
-                bundle.putString("user_email",userEmail);
-                bundle.putString("user_phone",userPhone);
-                bundle.putString("user_password",userPassword);
-                fragmentHome myFrag = new fragmentHome();
-                myFrag.setArguments(bundle);
+                sendUserToMainActivity(_path,_userID);
             }
         }
-
-
-
     }
 
-    private void sendUserToMainActivity()
+    private void sendUserToMainActivity(String PATH, String userID)
     {
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-        intent.putExtra("key_username",userName);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("PATH", PATH);
+        intent.putExtra("USERID",userID);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
@@ -280,36 +270,5 @@ public class SignInActivity extends AppCompatActivity {
         openEye.setBackgroundResource(R.drawable.eye_close);
         txtPassword.setInputType( InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
         txtPassword.setSelection(txtPassword.getText().length());
-    }
-
-    private String FindUserID(String email)
-    {
-        return email.replace(".","1");
-    }
-
-    private void getUserData(String email)
-    {
-        mRef = mDatabase.getReference("USER/UID");
-        mRef.child(FindUserID(email)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful()) {
-                    if (task.getResult().exists()) {
-                        DataSnapshot dataSnapshot = task.getResult();
-                        userEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
-                        userName = String.valueOf(dataSnapshot.child("userName").getValue());
-                        userPassword = String.valueOf(dataSnapshot.child("userPassword").getValue());
-                        userPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
-                    }
-                }
-            }
-        });
-    }
-    public void sendDataToFragmentHome(String data)
-    {
-
-    }
-    public String getUserName() {
-        return userName;
     }
 }

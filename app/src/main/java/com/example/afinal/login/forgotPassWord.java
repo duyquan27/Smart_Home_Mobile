@@ -19,6 +19,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.afinal.R;
+import com.example.afinal.option.CheckInternet;
+import com.example.afinal.option.ProgressDialogNotify;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -29,24 +31,24 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.hbb20.CountryCodePicker;
 
 import java.util.concurrent.TimeUnit;
 
 public class forgotPassWord extends AppCompatActivity {
 
-    private static final String TAG = forgotPassWord.class.getName();
-
     private TextView btnSignIn;
     private ImageButton btnBack, btnSubmit;
-    private FrameLayout yourAddress, yourOTP, yourNewPassword;
-    private EditText txtAddress, txtYourOTP, txtNewPassword, txtConfirmNewPassword;
-    private Button openEyeNewPass, openEyeConfirmNewPass;
-    private String recevieOTP;
-    private String receviePhone;
-
+    private EditText txtAddress;
     private FirebaseAuth mAuth;
-
-    private ProgressDialog progressDialog;
+    private ProgressDialogNotify progress;
+    private CheckInternet checkInternet;
+    private DatabaseReference mRef;
+    private FirebaseDatabase mDatabase;
+    private CountryCodePicker countryCodePicker;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -56,8 +58,12 @@ public class forgotPassWord extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Init();
-        
+
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
+
+        checkInternet = new CheckInternet();
+        progress = ProgressDialogNotify.getInstance();
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,155 +77,78 @@ public class forgotPassWord extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (yourAddress.getVisibility() == View.VISIBLE) {
-
-                    String phoneNumber = txtAddress.getText().toString().trim();
-                    if(phoneNumber.matches(""))
-                    {
-                        txtAddress.setError(getString(R.string.error_field_phone_empty));
-                    }
-                    else {
-                        onClickVerifyPhoneNumber(phoneNumber);
-                    }
-                }
-
-                if (yourOTP.getVisibility() == View.VISIBLE) {
-                    String code = txtYourOTP.getText().toString().trim();
-                    onClickSendOTP(code);
-                }
-
+                verifyPhoneNumber();
             }
         });
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (yourAddress.getVisibility() == View.VISIBLE) {
-                    Intent intent = new Intent(forgotPassWord.this,SignInActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }
-
-                if (yourOTP.getVisibility() == View.VISIBLE) {
-                    yourOTP.setVisibility(View.GONE);
-                    yourAddress.setVisibility(View.VISIBLE);
-                }
-
-                if (yourNewPassword.getVisibility() == View.VISIBLE) {
-                    yourOTP.setVisibility(View.VISIBLE);
-                    yourAddress.setVisibility(View.GONE);
-                }
-
+                startActivity(new Intent(forgotPassWord.this, SignInActivity.class));
             }
         });
 
     }
+
     private void Init()
     {
         btnSignIn = (TextView) findViewById(R.id.btnSignIn);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnSubmit = (ImageButton) findViewById(R.id.btnSubmit);
-        yourAddress = (FrameLayout) findViewById(R.id.yourAddress);
-        yourOTP = (FrameLayout) findViewById(R.id.yourOTP);
-        yourNewPassword = (FrameLayout) findViewById(R.id.yourNewPassword);
         txtAddress = (EditText) findViewById(R.id.txtAddress);
-        txtYourOTP = (EditText) findViewById(R.id.txtYourOTP);
-        txtNewPassword = (EditText) findViewById(R.id.txtNewPassword);
-        txtConfirmNewPassword = (EditText) findViewById(R.id.txtConfirmPassword);
-        openEyeNewPass = (Button) findViewById(R.id.openEyeNewPass);
-        openEyeConfirmNewPass = (Button) findViewById(R.id.openEyeConfirmNewPass);
-
-        yourAddress.setVisibility(View.VISIBLE);
-        yourOTP.setVisibility(View.GONE);
-        yourNewPassword.setVisibility(View.GONE);
+        countryCodePicker = (CountryCodePicker) findViewById(R.id.countryCode);
     }
 
-    private void onClickVerifyPhoneNumber(String phone)
+    public void verifyPhoneNumber()
     {
-        PhoneAuthOptions options =
-                PhoneAuthOptions.newBuilder(mAuth)
-                        .setPhoneNumber(phone)       // Phone number to verify
-                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                        .setActivity(this)                 // Activity (for callback binding)
-                        .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                            @Override
-                            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                                signInWithPhoneAuthCredentialENTERPHONE(phoneAuthCredential);
-                            }
+        String _getUserEnteredPhoneNumber = txtAddress.getText().toString().trim();
 
-                            @Override
-                            public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Toast.makeText(forgotPassWord.this, "onVerificationFailed",Toast.LENGTH_LONG).show();
-                            }
+        boolean cancel = true;
 
-                            @Override
-                            public void onCodeSent(@NonNull String verifycationID, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                                super.onCodeSent(verifycationID, forceResendingToken);
+        if (_getUserEnteredPhoneNumber.matches("")) {
+            txtAddress.setError(getString(R.string.error_field_address_empty));
+            cancel = false;
+        }
 
-                                goToEnterOTP(phone,verifycationID);
+        if (cancel)
+        {
 
-                            }
-                        })          // OnVerificationStateChangedCallbacks
-                        .build();
-        PhoneAuthProvider.verifyPhoneNumber(options);
-    }
+            progress.showProgressDialog(forgotPassWord.this, getString(R.string.progress_message_check_phone_exist), true);
 
-    private void signInWithPhoneAuthCredentialENTERPHONE(PhoneAuthCredential credential) {
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            if (!checkInternet.isConnected(this)) {
+                Toast.makeText(this,getString(R.string.noti_no_internet),Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                final String _phoneNo = "+" + countryCodePicker.getFullNumber() + _getUserEnteredPhoneNumber.substring(1);
+                mRef = mDatabase.getReference("USER/PHONE");
+                mRef.child(_getUserEnteredPhoneNumber).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.e(TAG, "signInWithCredential:success");
-
-                            FirebaseUser user = task.getResult().getUser();
-                            // Update UI
-                        } else {
-                            // Sign in failed, display a message and update the UI
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                // The verification code entered was invalid
-                                Toast.makeText(forgotPassWord.this, "The verification code entered was invalid",Toast.LENGTH_LONG).show();
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful())
+                        {
+                            if (task.getResult().exists())
+                            {
+                                progress.stopProgressDialog();
+                                DataSnapshot dataSnapshot = task.getResult();
+                                String userEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
+                                Intent intent = new Intent(forgotPassWord.this, verifyOTP.class);
+                                intent.putExtra("userPhone", _getUserEnteredPhoneNumber);
+                                intent.putExtra("whatToDo", "updateData");
+                                intent.putExtra("phoneNo", _phoneNo);
+                                intent.putExtra("userEmail",userEmail);
+                                startActivity(intent);
+                                finish();
+                            }
+                            else
+                            {
+                                Toast.makeText(forgotPassWord.this,getString(R.string.noti_phone_not_exist),Toast.LENGTH_LONG).show();
                             }
                         }
                     }
                 });
-    }
+            }
+        }
 
-    private void goToEnterOTP(String phone, String verificationID)
-    {
-        recevieOTP = verificationID;
-        receviePhone = phone;
-    }
-
-    private void onClickSendOTP(String code) {
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(recevieOTP, code);
-        signInWithPhoneAuthCredentialENTEROTP(credential);
-    }
-
-    private void signInWithPhoneAuthCredentialENTEROTP(PhoneAuthCredential credential) {
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.e(TAG, "signInWithCredential:success");
-
-                            FirebaseUser user = task.getResult().getUser();
-                            // Update UI
-                        } else {
-                            // Sign in failed, display a message and update the UI
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                // The verification code entered was invalid
-                                Toast.makeText(forgotPassWord.this, "The verification code entered was invalid",Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    }
-                });
     }
 }

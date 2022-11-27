@@ -17,6 +17,7 @@
     <string name="error_field_phone_empty">Phone cannot be empty</string>
     <string name="error_field_email_existed">Email is Registered</string>
     <string name="error_filed_phone_existed">Phone Number is Registered</string>
+    <string name="error_field_address_empty">Your Address cannot be empty</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -27,14 +28,17 @@
     <string name="noti_incorrect_phone">Incorrect Phone Number</string>
     <string name="noti_signup_success">Sign Up Successful</string>
     <string name="noti_email_exist">Email is Registered</string>
+    <string name="noti_phone_not_exist">Phone Number is not existed</string>
 
     <!-- TITLE PROGRESS -->
     <string name="progress_message_login">Please Wait While Login...</string>
     <string name="progress_message_signup">Please Wait While Registration...</string>
     <string name="progress_message_check_internet">Pleas Wait While Check Internet</string>
+    <string name="progress_message_check_phone_exist">Please Wait While Check Phone Number Existed</string>
 
     <string-array name="rangeSlider">
         <item>10</item>
         <item>50</item>
     </string-array>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

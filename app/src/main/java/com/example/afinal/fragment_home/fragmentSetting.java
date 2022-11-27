@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.Gravity;
@@ -17,27 +18,58 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.afinal.MainActivity;
 import com.example.afinal.R;
 import com.example.afinal.login.SignInActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class fragmentSetting extends Fragment {
+
+    private MainActivity mMainActivity;
+    private TextView tvUserName, tvPhoneNumber;
+    private Button btnEditProfile;
+    private RelativeLayout btnLogout;
+    private String _userName, PATH, userID,_userEmail,_userPassword,_userPhone;
+    private DatabaseReference mData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View mview = inflater.inflate(R.layout.fragment_setting, container, false);
-        FrameLayout btn_account = mview.findViewById(R.id.btn_account);
-        FrameLayout btn_logout = mview.findViewById(R.id.btn_logout);
-        btn_account.setOnClickListener(new View.OnClickListener() {
+
+        btnEditProfile = mview.findViewById(R.id.btnEditProfile);
+        btnLogout = mview.findViewById(R.id.btnLogout);
+        mMainActivity = (MainActivity) getActivity();
+
+        tvUserName = mview.findViewById(R.id.tvUserName);
+        tvPhoneNumber = mview.findViewById(R.id.tvPhoneNumber);
+
+//        PATH = mMainActivity.getPath();
+//        userID = mMainActivity.getUserID();
+//        readData(PATH,userID);
+
+        tvUserName.setText("Hoang Duy");
+
+        //String _edtPhone = "+84 " + _userPhone.substring(1);
+        tvPhoneNumber.setText("+84947755275");
+
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openAccountDialog(Gravity.CENTER);
             }
         });
-        btn_logout.setOnClickListener(new View.OnClickListener() {
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(),SignInActivity.class));
@@ -45,8 +77,50 @@ public class fragmentSetting extends Fragment {
         });
         return mview;
     }
+
+    private void readData(String _path, String userID)
+    {
+        if (_path.equals("PHONE"))
+        {
+            mData = FirebaseDatabase.getInstance().getReference("USER/PHONE");
+            getData(userID);
+        }
+        else if (_path.equals("EMAIL"))
+        {
+            mData = FirebaseDatabase.getInstance().getReference("USER/EMAIL");
+            getData(userID);
+        }
+    }
+
+    private void getData(String userID)
+    {
+        mData.child(userID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful())
+                {
+                    if (task.getResult().exists())
+                    {
+                        DataSnapshot snapshot = task.getResult();
+                        _userName = String.valueOf(snapshot.child("userName"));
+                        _userEmail = String.valueOf(snapshot.child("userEmail"));
+                        _userPhone = String.valueOf(snapshot.child("userPhone"));
+                        _userPassword = String.valueOf(snapshot.child("userPassword"));
+                    }
+                    else
+                    {
+                        _userName = "user_name";
+                        _userEmail = "user_email";
+                        _userPhone = "user_phone";
+                        _userPassword = "user_password";
+                    }
+                }
+            }
+        });
+    }
+
     private void openAccountDialog(int gravity){
-        final Dialog dialog = new Dialog(getContext());
+        final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_layout);
         Window window = dialog.getWindow();
@@ -72,6 +146,11 @@ public class fragmentSetting extends Fragment {
         EditText edtPhone = dialog.findViewById(R.id.ed_phonenum);
         Button btn_clear = dialog.findViewById(R.id.btn_clear);
         Button btn_apply = dialog.findViewById(R.id.btn_apply);
+
+        edtUsername.setText(_userName);
+        edtEmail.setText(_userEmail);
+        edtPhone.setText(_userPhone);
+        edtPassword.setText(_userPassword);
 
         btn_apply.setOnClickListener(new View.OnClickListener() {
 

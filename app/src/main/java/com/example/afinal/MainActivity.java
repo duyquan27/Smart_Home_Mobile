@@ -26,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference mData;
     private RobotoBoldTextView username;
     private View mView;
-    public String userID = "";
-    public String strUser;
+    public String PATH, userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentSensor sensorFragment = new fragmentSensor();
         fragmentHome homeFragment = new fragmentHome();
 
-        strUser = getIntent().getStringExtra("key_username");
+        PATH = getIntent().getStringExtra("PATH");
+        userID = getIntent().getStringExtra("USERID");
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -95,7 +95,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public String getStrUser() {
-        return strUser;
+    public String getPath() {
+        return PATH;
     }
+
+    public String getUserID() {
+        return userID;
+    }
+
 }
