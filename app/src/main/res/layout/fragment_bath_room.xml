@@ -37,7 +37,8 @@
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
             android:layout_alignTop="@+id/light_bath_off"
-            android:layout_alignRight="@+id/light_bath_off"/>
+            android:layout_alignRight="@+id/light_bath_off"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <com.example.afinal.custom_textView.RobotoBoldTextView
             android:layout_width="wrap_content"
@@ -52,16 +53,16 @@
             android:layout_above="@+id/light_bath_device"/>
 
         <com.example.afinal.custom_textView.RobotoRegularTextView
+            android:id="@+id/light_bath_device"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/light_bath_device"
+            android:layout_alignStart="@+id/light_bath_off"
+            android:layout_alignBottom="@+id/light_bath_off"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="25dp"
             android:text="10 Brightness"
             android:textColor="#666666"
-            android:textSize="13sp"
-            android:layout_marginBottom="25dp"
-            android:layout_marginStart="25dp"
-            android:layout_alignStart="@+id/light_bath_off"
-            android:layout_alignBottom="@+id/light_bath_off"/>
+            android:textSize="13sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,141 +76,13 @@
             android:layout_alignBottom="@+id/light_bath_off"/>
 
         <ImageButton
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/pana_off"
-            android:background="@drawable/bg_roomitem_off"
-            android:layout_marginStart="15dp"
-            android:layout_toRightOf="@+id/light_bath_off"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="16dp"
-            android:layout_alignLeft="@+id/pana_off"
-            android:layout_alignTop="@+id/pana_off"
-            android:background="@drawable/icon_bath_shower" />
-
-        <Switch
-            android:id="@+id/switch_pana_off"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:thumb="@drawable/thumb_selector"
-            android:track="@drawable/track_selector"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="20dp"
-            android:layout_alignTop="@+id/pana_off"
-            android:layout_alignRight="@+id/pana_off"/>
-
-        <com.example.afinal.custom_textView.RobotoBoldTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/name_pana"
-            android:text="Panasonic"
-            android:textColor="#666666"
-            android:textSize="16sp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginStart="25dp"
-            android:layout_alignStart="@+id/pana_off"
-            android:layout_above="@+id/pana_device"/>
-
-        <com.example.afinal.custom_textView.RobotoRegularTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/pana_device"
-            android:text="1 device"
-            android:textColor="#666666"
-            android:textSize="13sp"
-            android:layout_marginBottom="25dp"
-            android:layout_marginStart="25dp"
-            android:layout_alignStart="@+id/pana_off"
-            android:layout_alignBottom="@+id/pana_off"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/on_off_pana"
-            android:text="OFF"
-            android:textColor="#666666"
-            android:textSize="13sp"
-            android:layout_marginBottom="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_alignEnd="@+id/pana_off"
-            android:layout_alignBottom="@+id/pana_off"/>
-        <!--        TV      -->
-        <ImageButton
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/dryer_off"
-            android:background="@drawable/bg_roomitem_off"
-            android:layout_marginTop="25dp"
-            android:layout_below="@+id/light_bath_off"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="16dp"
-            android:layout_alignLeft="@+id/dryer_off"
-            android:layout_alignTop="@+id/dryer_off"
-            android:background="@drawable/icon_bath_dryer" />
-
-        <Switch
-            android:id="@+id/switch_dryer_off"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:thumb="@drawable/thumb_selector"
-            android:track="@drawable/track_selector"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="20dp"
-            android:layout_alignTop="@+id/dryer_off"
-            android:layout_alignRight="@+id/dryer_off"/>
-
-        <com.example.afinal.custom_textView.RobotoBoldTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/name_dryer"
-            android:text="Samsung"
-            android:textColor="#666666"
-            android:textSize="16sp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginStart="25dp"
-            android:layout_alignStart="@+id/dryer_off"
-            android:layout_above="@+id/dryer_device"/>
-
-        <com.example.afinal.custom_textView.RobotoRegularTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/dryer_device"
-            android:text="1 device"
-            android:textColor="#666666"
-            android:textSize="13sp"
-            android:layout_marginBottom="25dp"
-            android:layout_marginStart="25dp"
-            android:layout_alignStart="@+id/dryer_off"
-            android:layout_alignBottom="@+id/dryer_off"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/on_off_dryer"
-            android:text="OFF"
-            android:textColor="#666666"
-            android:textSize="13sp"
-            android:layout_marginBottom="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_alignEnd="@+id/dryer_off"
-            android:layout_alignBottom="@+id/dryer_off"/>
-        <!--     Music     -->
-        <ImageButton
             android:id="@+id/wash_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/pana_off"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="25dp"
-            android:layout_toRightOf="@+id/dryer_off"
+            android:layout_toRightOf="@+id/light_bath_off"
+            android:layout_alignTop="@+id/light_bath_off"
             android:background="@drawable/bg_roomitem_off" />
 
         <ImageView

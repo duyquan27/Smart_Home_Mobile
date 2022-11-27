@@ -34,7 +34,6 @@ public class fragmentLivingRoom extends Fragment {
     TextView lv_light_tvname, lv_light_tvdevice, lv_light_tvonoff;
     TextView lv_ac_tvname, lv_ac_tvdevice, lv_ac_tvonoff;
     TextView lv_tv_tvname, lv_tv_tvdevice, lv_tv_tvonoff;
-    TextView lv_audio_tvname, lv_audio_tvdevice, lv_audio_tvonoff;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,12 +59,6 @@ public class fragmentLivingRoom extends Fragment {
         lv_tv_tvonoff = (TextView) view.findViewById(R.id.on_off_tv);
         swtv = (Switch) view.findViewById(R.id.switch_tv_off);
         imgtv = (ImageButton) view.findViewById(R.id.tv_off);
-        //Audio_living
-        lv_audio_tvname = (TextView) view.findViewById(R.id.name_ms);
-        lv_audio_tvdevice = (TextView) view.findViewById(R.id.ms_device);
-        lv_audio_tvonoff = (TextView) view.findViewById(R.id.on_off_ms);
-        swaudio = (Switch) view.findViewById(R.id.switch_ms_off);
-        imgaudio = (ImageButton) view.findViewById(R.id.ms_off);
         // Firebase
         mHome = FirebaseDatabase.getInstance().getReference();
 
@@ -74,21 +67,11 @@ public class fragmentLivingRoom extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    imglight.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    lv_light_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    lv_light_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
-                    lv_light_tvonoff.setText("ON");
-                    lv_light_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
                     // push to firebase
                     mHome.child("HOME").child("Living room").child("Lighting").child("Status").setValue("ON");
                     mHome.child("HOME").child("Living room").child("Lighting").child("Intensity").setValue("75");
                 }
                 else {
-                    imglight.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    lv_light_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    lv_light_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
-                    lv_light_tvonoff.setText("OFF");
-                    lv_light_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
                     // push to firebase
                     mHome.child("HOME").child("Living room").child("Lighting").child("Status").setValue("OFF");
                     mHome.child("HOME").child("Living room").child("Lighting").child("Intensity").setValue("0");
@@ -101,18 +84,18 @@ public class fragmentLivingRoom extends Fragment {
                 if (snapshot.getValue().toString().equals("ON")) {
                     swlight.setChecked(true);
                     imglight.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    lv_light_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    lv_light_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    lv_light_tvname.setTextColor(view.getResources().getColor(R.color.tvnameon));
+                    lv_light_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                     lv_light_tvonoff.setText("ON");
-                    lv_light_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    lv_light_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                 }
                 else {
                     swlight.setChecked(false);
                     imglight.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    lv_light_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    lv_light_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
+                    lv_light_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
+                    lv_light_tvdevice.setTextColor(view.getResources().getColor(R.color.tvoff));
                     lv_light_tvonoff.setText("OFF");
-                    lv_light_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                    lv_light_tvonoff.setTextColor(view.getResources().getColor(R.color.tvoff));
                 }
             }
 
@@ -124,7 +107,7 @@ public class fragmentLivingRoom extends Fragment {
         mHome.child("HOME").child("Living room").child("Lighting").child("Intensity").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                lv_light_tvdevice.setText(snapshot.getValue().toString());
+                lv_light_tvdevice.setText(snapshot.getValue().toString() + " %");
             }
 
             @Override
@@ -138,20 +121,10 @@ public class fragmentLivingRoom extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                    imgac.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    lv_ac_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    lv_ac_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
-                    lv_ac_tvonoff.setText("ON");
-                    lv_ac_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
                     // push to firebase
                     mHome.child("HOME").child("Living room").child("AC").child("Status").setValue("ON");
                 }
                 else {
-                    imgac.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    lv_ac_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    lv_ac_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
-                    lv_ac_tvonoff.setText("OFF");
-                    lv_ac_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
                     // push to firebase
                     mHome.child("HOME").child("Living room").child("AC").child("Status").setValue("OFF");
                 }
@@ -163,18 +136,18 @@ public class fragmentLivingRoom extends Fragment {
                 if (snapshot.getValue().toString().equals("ON")) {
                     swac.setChecked(true);
                     imgac.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    lv_ac_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    lv_ac_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    lv_ac_tvname.setTextColor(view.getResources().getColor(R.color.tvnameon));
+                    lv_ac_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                     lv_ac_tvonoff.setText("ON");
-                    lv_ac_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    lv_ac_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                 }
                 else {
                     swac.setChecked(false);
                     imgac.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    lv_ac_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    lv_ac_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
+                    lv_ac_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
+                    lv_ac_tvdevice.setTextColor(view.getResources().getColor(R.color.tvoff));
                     lv_ac_tvonoff.setText("OFF");
-                    lv_ac_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                    lv_ac_tvonoff.setTextColor(view.getResources().getColor(R.color.tvoff));
                 }
             }
 
@@ -189,20 +162,10 @@ public class fragmentLivingRoom extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                    imgtv.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    lv_tv_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    lv_tv_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
-                    lv_tv_tvonoff.setText("ON");
-                    lv_tv_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
                     // push to firebase
                     mHome.child("HOME").child("Living room").child("TV").child("Status").setValue("ON");
                 }
                 else {
-                    imgtv.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    lv_tv_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    lv_tv_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
-                    lv_tv_tvonoff.setText("OFF");
-                    lv_tv_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
                     // push to firebase
                     mHome.child("HOME").child("Living room").child("TV").child("Status").setValue("OFF");
                 }
@@ -214,18 +177,18 @@ public class fragmentLivingRoom extends Fragment {
                 if (snapshot.getValue().toString().equals("ON")) {
                     swtv.setChecked(true);
                     imgtv.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    lv_tv_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    lv_tv_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    lv_tv_tvname.setTextColor(view.getResources().getColor(R.color.tvnameon));
+                    lv_tv_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                     lv_tv_tvonoff.setText("ON");
-                    lv_tv_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
+                    lv_tv_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                 }
                 else {
                     swtv.setChecked(false);
                     imgtv.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    lv_tv_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    lv_tv_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
+                    lv_tv_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
+                    lv_tv_tvdevice.setTextColor(view.getResources().getColor(R.color.tvoff));
                     lv_tv_tvonoff.setText("OFF");
-                    lv_tv_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
+                    lv_tv_tvonoff.setTextColor(view.getResources().getColor(R.color.tvoff));
                 }
             }
 
@@ -235,56 +198,6 @@ public class fragmentLivingRoom extends Fragment {
             }
         });
 
-        // Sony Studio
-        swaudio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    imgaudio.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    lv_audio_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    lv_audio_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
-                    lv_audio_tvonoff.setText("ON");
-                    lv_audio_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
-                    // push to firebase
-                    mHome.child("HOME").child("Living room").child("Sony Studio").child("Status").setValue("ON");
-                }
-                else {
-                    imgaudio.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    lv_audio_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    lv_audio_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
-                    lv_audio_tvonoff.setText("OFF");
-                    lv_audio_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
-                    // push to firebase
-                    mHome.child("HOME").child("Living room").child("Sony Studio").child("Status").setValue("OFF");
-                }
-            }
-        });
-        mHome.child("HOME").child("Living room").child("Sony Studio").child("Status").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.getValue().toString().equals("ON")) {
-                    swaudio.setChecked(true);
-                    imgaudio.setBackgroundResource(R.drawable.bg_roomitem_on);
-                    lv_audio_tvname.setTextColor(getResources().getColor(R.color.tvnameon));
-                    lv_audio_tvdevice.setTextColor(getResources().getColor(R.color.tvdeviceon));
-                    lv_audio_tvonoff.setText("ON");
-                    lv_audio_tvonoff.setTextColor(getResources().getColor(R.color.tvdeviceon));
-                }
-                else {
-                    swaudio.setChecked(false);
-                    imgaudio.setBackgroundResource(R.drawable.bg_roomitem_off);
-                    lv_audio_tvname.setTextColor(getResources().getColor(R.color.tvoff));
-                    lv_audio_tvdevice.setTextColor(getResources().getColor(R.color.tvoff));
-                    lv_audio_tvonoff.setText("OFF");
-                    lv_audio_tvonoff.setTextColor(getResources().getColor(R.color.tvoff));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
         imglight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

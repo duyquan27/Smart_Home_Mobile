@@ -34,7 +34,8 @@
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
             android:layout_alignTop="@+id/lamp_off"
-            android:layout_alignRight="@+id/lamp_off"/>
+            android:layout_alignRight="@+id/lamp_off"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <com.example.afinal.custom_textView.RobotoBoldTextView
             android:layout_width="wrap_content"
@@ -98,7 +99,8 @@
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
             android:layout_alignTop="@+id/ac_bed_off"
-            android:layout_alignRight="@+id/ac_bed_off"/>
+            android:layout_alignRight="@+id/ac_bed_off"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <com.example.afinal.custom_textView.RobotoBoldTextView
             android:layout_width="wrap_content"
@@ -162,7 +164,8 @@
             android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
             android:layout_alignTop="@+id/tv_bed_off"
-            android:layout_alignRight="@+id/tv_bed_off"/>
+            android:layout_alignRight="@+id/tv_bed_off"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <com.example.afinal.custom_textView.RobotoBoldTextView
             android:layout_width="wrap_content"
@@ -198,73 +201,6 @@
             android:layout_marginEnd="25dp"
             android:layout_alignEnd="@+id/tv_bed_off"
             android:layout_alignBottom="@+id/tv_bed_off"/>
-        <!--     Music     -->
-        <ImageButton
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/ss_off"
-            android:background="@drawable/bg_roomitem_off"
-            android:layout_marginStart="15dp"
-            android:layout_below="@+id/ac_bed_off"
-            android:layout_marginTop="25dp"
-            android:layout_toRightOf="@+id/tv_bed_off"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="16dp"
-            android:layout_alignLeft="@+id/ss_off"
-            android:layout_alignTop="@+id/ss_off"
-            android:background="@drawable/icon_bed_rem" />
-
-        <Switch
-            android:id="@+id/switch_ss_off"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:thumb="@drawable/thumb_selector"
-            android:track="@drawable/track_selector"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="20dp"
-            android:layout_alignTop="@+id/ss_off"
-            android:layout_alignRight="@+id/ss_off"/>
-
-        <com.example.afinal.custom_textView.RobotoBoldTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/name_ss"
-            android:text="Samsung"
-            android:textColor="#666666"
-            android:textSize="16sp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginStart="25dp"
-            android:layout_alignStart="@+id/ss_off"
-            android:layout_above="@+id/ss_device"/>
-
-        <com.example.afinal.custom_textView.RobotoRegularTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ss_device"
-            android:text="2 devices"
-            android:textColor="#666666"
-            android:textSize="13sp"
-            android:layout_marginBottom="25dp"
-            android:layout_marginStart="25dp"
-            android:layout_alignStart="@+id/ss_off"
-            android:layout_alignBottom="@+id/ss_off"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/on_off_ss"
-            android:text="OFF"
-            android:textColor="#666666"
-            android:textSize="13sp"
-            android:layout_marginBottom="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_alignEnd="@+id/ss_off"
-            android:layout_alignBottom="@+id/ss_off"/>
-
 
     </RelativeLayout>
 </FrameLayout>
