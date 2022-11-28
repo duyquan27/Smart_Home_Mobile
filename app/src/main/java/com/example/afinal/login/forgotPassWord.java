@@ -50,6 +50,8 @@ public class forgotPassWord extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private CountryCodePicker countryCodePicker;
 
+    static final private String PHONE_PATTERN = "^[0-9]{10}$";
+
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -101,53 +103,29 @@ public class forgotPassWord extends AppCompatActivity {
 
     public void verifyPhoneNumber()
     {
-        String _getUserEnteredPhoneNumber = txtAddress.getText().toString().trim();
+        txtAddress.setError(null);
+        String getUserEnteredPhone = txtAddress.getText().toString().trim();
 
         boolean cancel = true;
 
-        if (_getUserEnteredPhoneNumber.matches("")) {
+        if (getUserEnteredPhone.matches("")) {
             txtAddress.setError(getString(R.string.error_field_address_empty));
             cancel = false;
         }
+        else if (!getUserEnteredPhone.matches(PHONE_PATTERN))
+        {
+            txtAddress.setError(getString(R.string.error_field_phone_required));
+            cancel = false;
+        }
+
+        String _phoneNo = "+" + countryCodePicker.getSelectedCountryCode() + getUserEnteredPhone;
 
         if (cancel)
         {
-
-            progress.showProgressDialog(forgotPassWord.this, getString(R.string.progress_message_check_phone_exist), true);
-
-            if (!checkInternet.isConnected(this)) {
-                Toast.makeText(this,getString(R.string.noti_no_internet),Toast.LENGTH_LONG).show();
-            }
-            else
-            {
-                final String _phoneNo = "+" + countryCodePicker.getFullNumber() + _getUserEnteredPhoneNumber.substring(1);
-                mRef = mDatabase.getReference("USER/PHONE");
-                mRef.child(_getUserEnteredPhoneNumber).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if (task.isSuccessful())
-                        {
-                            if (task.getResult().exists())
-                            {
-                                progress.stopProgressDialog();
-                                DataSnapshot dataSnapshot = task.getResult();
-                                String userEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
-                                Intent intent = new Intent(forgotPassWord.this, verifyOTP.class);
-                                intent.putExtra("userPhone", _getUserEnteredPhoneNumber);
-                                intent.putExtra("whatToDo", "updateData");
-                                intent.putExtra("phoneNo", _phoneNo);
-                                intent.putExtra("userEmail",userEmail);
-                                startActivity(intent);
-                                finish();
-                            }
-                            else
-                            {
-                                Toast.makeText(forgotPassWord.this,getString(R.string.noti_phone_not_exist),Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    }
-                });
-            }
+            Intent intent = new Intent(forgotPassWord.this, verifyOTP.class);
+            intent.putExtra("FG_USERPHONE", getUserEnteredPhone);
+            intent.putExtra("FG_PHONENO", _phoneNo);
+            startActivity(intent);
         }
 
     }

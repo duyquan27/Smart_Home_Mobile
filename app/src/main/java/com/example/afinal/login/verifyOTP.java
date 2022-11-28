@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.chaos.view.PinView;
 import com.example.afinal.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,6 +24,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
@@ -29,11 +32,12 @@ import java.util.concurrent.TimeUnit;
 public class verifyOTP extends AppCompatActivity {
 
     private ImageButton btnBack, btnSubmit;
-    private EditText txtOTP;
+    private PinView txtOTP;
     private TextView btnSignIn;
     private String codeBySystem;
+    private FirebaseAuth mAuth;
 
-    private String userPhone, whatToDo, phoneNo, userEmail;
+    private String userPhone, phoneNo;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -43,10 +47,17 @@ public class verifyOTP extends AppCompatActivity {
 
         Init();
 
-        userPhone = getIntent().getStringExtra("userPhone");
-        whatToDo = getIntent().getStringExtra("whatToDo");
-        phoneNo = getIntent().getStringExtra("phoneNo");
-        userEmail = getIntent().getStringExtra("userEmail");
+        mAuth = FirebaseAuth.getInstance();
+        userPhone = getIntent().getStringExtra("FG_USERPHONE");
+        phoneNo = getIntent().getStringExtra("FG_PHONENO");
+
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(verifyOTP.this,SignInActivity.class));
+                finish();
+            }
+        });
 
         sendVerificationCodeToUser(phoneNo);
     }
@@ -55,21 +66,23 @@ public class verifyOTP extends AppCompatActivity {
     {
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnSubmit = (ImageButton) findViewById(R.id.btnSubmit);
-        txtOTP = (EditText) findViewById(R.id.txtYourOTP);
+        txtOTP = (PinView) findViewById(R.id.pin_view);
         btnSignIn = (TextView) findViewById(R.id.btnSignIn);
     }
 
-    private void sendVerificationCodeToUser(String phoneNo)
+    private void sendVerificationCodeToUser(String phone)
     {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneNo,
-                60,
-                TimeUnit.SECONDS,
-                (Activity) TaskExecutors.MAIN_THREAD,
-                mCallbacks);
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(mAuth)
+                        .setPhoneNumber(phone)       // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setActivity(this)                 // Activity (for callback binding)
+                        .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
+                        .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
     }
 
-    private  PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 @Override
                 public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
@@ -80,7 +93,8 @@ public class verifyOTP extends AppCompatActivity {
                 @Override
                 public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                     String code = phoneAuthCredential.getSmsCode();
-                    if (code != null) {
+                    if (code != null)
+                    {
                         txtOTP.setText(code);
                         verifyCode(code);
                     }
@@ -88,7 +102,7 @@ public class verifyOTP extends AppCompatActivity {
 
                 @Override
                 public void onVerificationFailed(@NonNull FirebaseException e) {
-                    Toast.makeText(verifyOTP.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(verifyOTP.this, e.getMessage(),Toast.LENGTH_LONG).show();
                 }
             };
 
@@ -98,42 +112,40 @@ public class verifyOTP extends AppCompatActivity {
         signInWithPhoneAuthCredential(credential);
     }
 
-    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential)
-    {
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuth.signInWithCredential(credential)
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful())
-                        {
-                            if (whatToDo.equals("updateData")) {
-                                updateOldUserData();
-                            }
-                        }
-                        else
-                        {
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                Toast.makeText(verifyOTP.this, "Verify Not Completed! Try Again",Toast.LENGTH_LONG).show();
-                            }
+                        if (task.isSuccessful()) {
+
+                            sendUserToResetPassword();
+
+//                        } else {
+//                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+//                                Toast.makeText(verifyOTP.this, "Verifycation Not Completed! Try again",Toast.LENGTH_LONG).show();
+//                            }
+//                            else
+//                            {
+//                                Toast.makeText(verifyOTP.this, "Phone is registered",Toast.LENGTH_LONG).show();
+//                            }
                         }
                     }
                 });
     }
 
-    private void updateOldUserData()
+    private void sendUserToResetPassword()
     {
-        Intent intent = new Intent(getApplicationContext(), resetPassword.class);
-        intent.putExtra("phoneNo", userPhone);
-        intent.putExtra("userEmail",userEmail);
+        Intent intent = new Intent(verifyOTP.this, resetPassword.class);
+        intent.putExtra("RS_USERPHONE",userPhone);
         startActivity(intent);
-        finish();
     }
 
-    public void callNextScreenFromOTP(View view)
+    public void clickToResetPassword(View view)
     {
         String code = txtOTP.getText().toString();
-        if (!code.isEmpty()) {
+        if (!code.isEmpty())
+        {
             verifyCode(code);
         }
     }
