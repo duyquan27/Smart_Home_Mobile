@@ -61,7 +61,7 @@
             app:layout_constraintStart_toEndOf="@+id/imageView29" />
 
         <TextView
-            android:id="@+id/quality1"
+            android:id="@+id/tvAirVal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="35dp"
@@ -80,18 +80,25 @@
             app:layout_constraintStart_toEndOf="@+id/imageView29">
 
             <com.google.android.material.slider.RangeSlider
-                android:id="@+id/slider1"
+                android:id="@+id/slider_air"
                 app:labelStyle="@style/tooltip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:theme="@style/MyMaterialTheme"
-                android:stepSize="1"
+
                 android:valueFrom="0"
-                android:valueTo="100"
+                android:valueTo="500"
+                app:trackColorActive="@color/trackActive"
+                app:trackColorInactive="@color/trackInactive"
+                app:trackHeight="5dp"
+                app:thumbStrokeWidth="1dp"
+                app:thumbStrokeColor="@color/background"
+                app:labelBehavior="floating"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:values="@array/rangeSlider"
+                app:values="@null"
                 tools:ignore="MissingConstraints" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -127,18 +134,23 @@
             app:layout_constraintStart_toEndOf="@+id/imageView32">
 
             <com.google.android.material.slider.RangeSlider
-                android:id="@+id/slider2"
+                android:id="@+id/slider_humi"
                 app:labelStyle="@style/tooltip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:theme="@style/MyMaterialTheme"
                 android:valueFrom="0"
                 android:valueTo="100"
-                android:stepSize="1"
+                app:trackColorActive="@color/trackActive"
+                app:trackColorInactive="@color/trackInactive"
+                app:trackHeight="5dp"
+                app:thumbStrokeWidth="1dp"
+                app:thumbStrokeColor="@color/background"
+                app:labelBehavior="floating"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:values="@array/rangeSlider"
+                app:values="@null"
                 tools:ignore="MissingConstraints" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -156,7 +168,7 @@
             app:layout_constraintStart_toEndOf="@+id/imageView32" />
 
         <TextView
-            android:id="@+id/textView37"
+            android:id="@+id/tvHumiVal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="35dp"
@@ -195,18 +207,23 @@
             app:layout_constraintStart_toEndOf="@+id/imageView33">
 
             <com.google.android.material.slider.RangeSlider
-                android:id="@+id/slider3"
+                android:id="@+id/slider_noise"
                 app:labelStyle="@style/tooltip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:theme="@style/MyMaterialTheme"
                 android:valueFrom="0"
-                android:valueTo="100"
-                android:stepSize="1"
+                android:valueTo="140"
+                app:trackColorActive="@color/trackActive"
+                app:trackColorInactive="@color/trackInactive"
+                app:trackHeight="5dp"
+                app:thumbStrokeWidth="1dp"
+                app:thumbStrokeColor="@color/background"
+                app:labelBehavior="floating"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:values="@array/rangeSlider"
+                app:values="@null"
                 tools:ignore="MissingConstraints" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -224,7 +241,7 @@
             app:layout_constraintStart_toEndOf="@+id/imageView33" />
 
         <TextView
-            android:id="@+id/textView39"
+            android:id="@+id/tvNoiseVal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="35dp"
@@ -264,18 +281,22 @@
             app:layout_constraintStart_toEndOf="@+id/imageView34">
 
             <com.google.android.material.slider.RangeSlider
-                android:id="@+id/slider4"
+                android:id="@+id/slider_temp"
                 app:labelStyle="@style/tooltip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:theme="@style/MyMaterialTheme"
                 android:valueFrom="0"
                 android:valueTo="100"
-                android:stepSize="1"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:trackColorActive="@color/trackActive"
+                app:trackColorInactive="@color/trackInactive"
+                app:trackHeight="5dp"
+                app:thumbStrokeWidth="1dp"
+                app:thumbStrokeColor="@color/background"
+                app:labelBehavior="floating"                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:values="@array/rangeSlider"
+                app:values="@null"
                 tools:ignore="MissingConstraints" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -293,7 +314,7 @@
             app:layout_constraintStart_toEndOf="@+id/imageView34" />
 
         <TextView
-            android:id="@+id/temp_value"
+            android:id="@+id/tvTempVal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="35dp"
