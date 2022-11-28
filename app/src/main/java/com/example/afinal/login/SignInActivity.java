@@ -202,11 +202,7 @@ public class SignInActivity extends AppCompatActivity {
 
                                     DataSnapshot dataSnapshot = task.getResult();
                                     userPassword = String.valueOf(dataSnapshot.child("userPassword").getValue());
-                                    userName = String.valueOf(dataSnapshot.child("userName").getValue());
-                                    userEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
-                                    userPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
 
-                                    userPath = PATH_PHONE;
                                     userID = email;
 
                                     if (password.equals(userPassword)) {
@@ -228,23 +224,22 @@ public class SignInActivity extends AppCompatActivity {
                     });
 
                 }
-
-                else if (!email.matches(PHONE_PATTERN)){
-                    mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                progress.stopProgressDialog();
-                                userPath = PATH_EMAIL;
-                                _userID = mAuth.getCurrentUser().getUid();
-                            }
-                            else {
-                                progress.stopProgressDialog();
-                                Toast.makeText(SignInActivity.this,getString(R.string.noti_incorrect_email),Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-                }
+//                else if (!email.matches(PHONE_PATTERN)){
+//                    mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<AuthResult> task) {
+//                            if (task.isSuccessful()) {
+//                                progress.stopProgressDialog();
+//                                userPath = PATH_EMAIL;
+//                                _userID = mAuth.getCurrentUser().getUid();
+//                            }
+//                            else {
+//                                progress.stopProgressDialog();
+//                                Toast.makeText(SignInActivity.this,getString(R.string.noti_incorrect_email),Toast.LENGTH_LONG).show();
+//                            }
+//                        }
+//                    });
+//                }
             }
         }
     }
@@ -252,11 +247,6 @@ public class SignInActivity extends AppCompatActivity {
     private void sendUserToMainActivity()
     {
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-        intent.putExtra("KEY_NAME", userName);
-        intent.putExtra("KEY_EMAIL",userEmail);
-        intent.putExtra("KEY_PHONE", userPhone);
-        intent.putExtra("KEY_PASSWORD",userPassword);
-        intent.putExtra("KEY_PATH",userPath);
         intent.putExtra("KEY_ID",userID);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);

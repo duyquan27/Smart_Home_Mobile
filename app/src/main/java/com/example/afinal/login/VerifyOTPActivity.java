@@ -129,6 +129,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             USER_INFOR addUser = new USER_INFOR(fullname,username,email,password,phone,date,gender);
                             createAccount(email,password, addUser);
+                            storeNewUsersDataByPhone(addUser);
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 Toast.makeText(VerifyOTPActivity.this, "Verifycation Not Completed! Try again",Toast.LENGTH_LONG).show();
@@ -165,16 +166,15 @@ public class VerifyOTPActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
                         {
-                            FirebaseDatabase.getInstance().getReference("USER/UID")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(newUser).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            storeNewUsersDataByPhone(newUser);
-                                            Toast.makeText(VerifyOTPActivity.this, "Verifycation Completed! ",Toast.LENGTH_LONG).show();
-                                        }
-                                    });
-
+//                            FirebaseDatabase.getInstance().getReference("USER/UID")
+//                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                                    .setValue(newUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<Void> task) {
+//                                            storeNewUsersDataByPhone(newUser);
+//                                            Toast.makeText(VerifyOTPActivity.this, "Verifycation Completed! ",Toast.LENGTH_LONG).show();
+//                                        }
+//                                    });
                             startActivity(new Intent(VerifyOTPActivity.this,SignInActivity.class));
 
                         }

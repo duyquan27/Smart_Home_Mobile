@@ -41,7 +41,7 @@ public class fragmentHome extends Fragment {
     private View mView;
     private MainActivity mMainActivity;
     private RobotoBoldTextView username;
-    private String userPath, userID;
+    private String userID;
     private DatabaseReference mData;
 
     static final public String PATH_PHONE = "1";
@@ -68,10 +68,9 @@ public class fragmentHome extends Fragment {
         RobotoLightTextView tvDate =  mView.findViewById(R.id.time);
         tvDate.setText(currentDate);
 
-        userPath = mMainActivity.getUserPath();
         userID = mMainActivity.getUserID();
 
-        getUsersDataByPath(userPath, userID);
+        getUsersDataByPath(userID);
 
         ViewPagerHomeAdapter adapter = new ViewPagerHomeAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
@@ -81,55 +80,33 @@ public class fragmentHome extends Fragment {
         return mView;
     }
 
-    private void getUsersDataByPath(String user_path, String user_ID)
+    private void getUsersDataByPath(String user_ID)
     {
-        if (user_path.equals(PATH_PHONE))
-        {
-            mData = FirebaseDatabase.getInstance().getReference("USER/PHONE");
-            mData.child(user_ID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (task.isSuccessful())
+        mData = FirebaseDatabase.getInstance().getReference("USER/PHONE");
+        mData.child(user_ID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful())
+                {
+                    if (task.getResult().exists())
                     {
-                        if (task.getResult().exists())
-                        {
-                            DataSnapshot dataSnapshot = task.getResult();
-                            getPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
-                            mHome.child("USER").child("PHONE").child(getPhone).child("userName").addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    username.setText("Hello " + snapshot.getValue().toString());
-                                }
+                        DataSnapshot dataSnapshot = task.getResult();
+                        getPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
+                        mHome.child("USER").child("PHONE").child(getPhone).child("userName").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                username.setText("Hello " + snapshot.getValue().toString());
+                            }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                                }
-                            });
+                            }
+                        });
 
-                        }
                     }
                 }
-            });
-
-        }
-        else if (user_path.equals(PATH_EMAIL))
-        {
-            mData = FirebaseDatabase.getInstance().getReference("USER/UID");
-            mData.child(user_ID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (task.isSuccessful())
-                    {
-                        if (task.getResult().exists())
-                        {
-                            DataSnapshot dataSnapshot = task.getResult();
-                            getPhone = String.valueOf(dataSnapshot.child("userName").getValue());
-                            username.setText(getPhone);
-                        }
-                    }
-                }
-            });
-        }
+            }
+        });
     }
 }

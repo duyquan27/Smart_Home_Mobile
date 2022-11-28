@@ -44,7 +44,7 @@ public class fragmentSetting extends Fragment {
     private TextView tvUserName, tvPhoneNumber;
     private Button btnEditProfile;
     private RelativeLayout btnLogout;
-    private String userPath, userID;
+    private String userID;
     private DatabaseReference mData;
     private String getName, getEmail, getPhone, getPassword;
 
@@ -65,10 +65,9 @@ public class fragmentSetting extends Fragment {
         tvUserName = mview.findViewById(R.id.tvUserName);
         tvPhoneNumber = mview.findViewById(R.id.tvPhoneNumber);
 
-        userPath = mMainActivity.getUserPath();
         userID = mMainActivity.getUserID();
 
-        getUsersDataByPath(userPath, userID);
+        getUsersDataByPath(userID);
 
 
        btnEditProfile.setOnClickListener(new View.OnClickListener() {
@@ -87,73 +86,47 @@ public class fragmentSetting extends Fragment {
         return mview;
     }
 
-    private void getUsersDataByPath(String user_path, String user_ID)
+    private void getUsersDataByPath(String user_ID)
     {
-        if (user_path.equals(PATH_PHONE))
-        {
-            mData = FirebaseDatabase.getInstance().getReference("USER/PHONE");
-            mData.child(user_ID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (task.isSuccessful())
+        mData = FirebaseDatabase.getInstance().getReference("USER/PHONE");
+        mData.child(user_ID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful())
+                {
+                    if (task.getResult().exists())
                     {
-                        if (task.getResult().exists())
-                        {
-                            DataSnapshot dataSnapshot = task.getResult();
-                            getName = String.valueOf(dataSnapshot.child("userName").getValue());
-                            getEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
-                            getPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
-                            getPassword = String.valueOf(dataSnapshot.child("userPassword").getValue());
-                            mHome.child("USER").child("PHONE").child(getPhone).child("userName").addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    tvUserName.setText(snapshot.getValue().toString());
-                                }
+                        DataSnapshot dataSnapshot = task.getResult();
+                        getName = String.valueOf(dataSnapshot.child("userName").getValue());
+                        getEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
+                        getPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
+                        getPassword = String.valueOf(dataSnapshot.child("userPassword").getValue());
+                        mHome.child("USER").child("PHONE").child(getPhone).child("userName").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                tvUserName.setText(snapshot.getValue().toString());
+                            }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                                }
-                            });
-                            mHome.child("USER").child("PHONE").child(getPhone).child("userPhone").addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    tvPhoneNumber.setText(snapshot.getValue().toString());
-                                }
+                            }
+                        });
+                        mHome.child("USER").child("PHONE").child(getPhone).child("userPhone").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                tvPhoneNumber.setText(snapshot.getValue().toString());
+                            }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                                }
-                            });
-                        }
+                            }
+                        });
                     }
                 }
-            });
-
-        }
-        else if (user_path.equals(PATH_EMAIL))
-        {
-            mData = FirebaseDatabase.getInstance().getReference("USER/UID");
-            mData.child(user_ID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (task.isSuccessful())
-                    {
-                        if (task.getResult().exists())
-                        {
-                            DataSnapshot dataSnapshot = task.getResult();
-                            getName = String.valueOf(dataSnapshot.child("userName").getValue());
-                            getEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
-                            getPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
-                            getPhone = String.valueOf(dataSnapshot.child("userPassword").getValue());
-                            tvUserName.setText(getName);
-                            tvPhoneNumber.setText(getPhone);
-                        }
-                    }
-                }
-            });
-        }
+            }
+        });
     }
 
     private void openAccountDialog(int gravity){
@@ -267,14 +240,14 @@ public class fragmentSetting extends Fragment {
                     change += " phone number";
                     check = 1;
                 }
-                if (check == 1)
-                {
-                    Toast.makeText(getContext(),change,Toast.LENGTH_SHORT).show();
-                }
-                else if (check == 0)
-                {
-                    Toast.makeText(getContext(),"nothing was changed",Toast.LENGTH_SHORT).show();
-                }
+//                if (check == 1)
+//                {
+//                    Toast.makeText(getContext(),change,Toast.LENGTH_SHORT).show();
+//                }
+//                else if (check == 0)
+//                {
+//                    Toast.makeText(getContext(),"nothing was changed",Toast.LENGTH_SHORT).show();
+//                }
             }
         });
         btn_clear.setOnClickListener(new View.OnClickListener() {
