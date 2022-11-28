@@ -132,7 +132,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                             storeNewUsersDataByPhone(addUser);
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                Toast.makeText(VerifyOTPActivity.this, "Verifycation Not Completed! Try again",Toast.LENGTH_LONG).show();
+//                                Toast.makeText(VerifyOTPActivity.this, "Verifycation Not Completed! Try again",Toast.LENGTH_LONG).show();
                             }
                             else
                             {
