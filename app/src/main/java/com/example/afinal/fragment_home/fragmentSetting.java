@@ -19,30 +19,27 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-<<<<<<< HEAD
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-=======
 import android.widget.Switch;
->>>>>>> origin/main
 import android.widget.Toast;
 
 import com.example.afinal.MainActivity;
 import com.example.afinal.R;
 import com.example.afinal.login.SignInActivity;
-<<<<<<< HEAD
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
-=======
->>>>>>> origin/main
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class fragmentSetting extends Fragment {
-    DatabaseReference mHome;
-    Switch aSwitch;
+//    DatabaseReference mHome;
+//    Switch aSwitch;
 
+    DatabaseReference mHome;
     private MainActivity mMainActivity;
     private TextView tvUserName, tvPhoneNumber;
     private Button btnEditProfile;
@@ -59,8 +56,8 @@ public class fragmentSetting extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View mview = inflater.inflate(R.layout.fragment_setting, container, false);
-<<<<<<< HEAD
 
+        mHome = FirebaseDatabase.getInstance().getReference();
         btnEditProfile = mview.findViewById(R.id.btnEditProfile);
         btnLogout = mview.findViewById(R.id.btnLogout);
         mMainActivity = (MainActivity) getActivity();
@@ -74,36 +71,14 @@ public class fragmentSetting extends Fragment {
         getUsersDataByPath(userPath, userID);
 
 
-        btnEditProfile.setOnClickListener(new View.OnClickListener() {
-=======
-        // Firebase
-        mHome = FirebaseDatabase.getInstance().getReference();
-        aSwitch = mview.findViewById(R.id.switch_noty_off);
-        FrameLayout btn_account = mview.findViewById(R.id.btn_account);
-        FrameLayout btn_logout = mview.findViewById(R.id.btn_logout);
-        btn_account.setOnClickListener(new View.OnClickListener() {
->>>>>>> origin/main
-            @Override
-            public void onClick(View view) {
-                openAccountDialog(Gravity.CENTER);
-            }
-        });
-<<<<<<< HEAD
+       btnEditProfile.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               openAccountDialog(Gravity.CENTER);
+           }
+       });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
-=======
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b)
-                    mHome.child("SETTING").child("Notifications").setValue("ON");
-                else
-                    mHome.child("SETTING").child("Notifications").setValue("OFF");
-            }
-        });
-
-        btn_logout.setOnClickListener(new View.OnClickListener() {
->>>>>>> origin/main
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(),SignInActivity.class));
@@ -129,8 +104,28 @@ public class fragmentSetting extends Fragment {
                             getEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
                             getPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
                             getPassword = String.valueOf(dataSnapshot.child("userPassword").getValue());
-                            tvUserName.setText(getName);
-                            tvPhoneNumber.setText(getPhone);
+                            mHome.child("USER").child("PHONE").child(getPhone).child("userName").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    tvUserName.setText(snapshot.getValue().toString());
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                            mHome.child("USER").child("PHONE").child(getPhone).child("userPhone").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    tvPhoneNumber.setText(snapshot.getValue().toString());
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                         }
                     }
                 }
@@ -189,34 +184,86 @@ public class fragmentSetting extends Fragment {
         Button btn_clear = dialog.findViewById(R.id.btn_clear);
         Button btn_apply = dialog.findViewById(R.id.btn_apply);
 
-        edtUsername.setText(getName);
-        edtEmail.setText(getEmail);
-        edtPhone.setText(getPhone);
-        edtPassword.setText(getPassword);
+        mHome.child("USER").child("PHONE").child(getPhone).child("userName").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                edtUsername.setText(snapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mHome.child("USER").child("PHONE").child(getPhone).child("userEmail").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                edtEmail.setText(snapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mHome.child("USER").child("PHONE").child(getPhone).child("userPhone").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                edtPhone.setText(snapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mHome.child("USER").child("PHONE").child(getPhone).child("userPassword").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                edtPassword.setText(snapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         btn_apply.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
+                String valueEditText;
                 String change = "changed ";
                 int check = 0;
-                if (!(edtUsername.getText().toString().equals("")))
+                if (!(edtUsername.getText().toString().equals(getName)))
                 {
+                    valueEditText = edtUsername.getText().toString();
+                    mHome.child("USER").child("PHONE").child(getPhone).child("userName").setValue(valueEditText);
                     change += " username";
                     check = 1;
                 }
                 if (!(edtPassword.getText().toString().equals("")))
                 {
+                    valueEditText = edtPassword.getText().toString();
+                    mHome.child("USER").child("PHONE").child(getPhone).child("userPassword").setValue(valueEditText);
                     change += " password";
                     check = 1;
                 }
                 if (!(edtEmail.getText().toString().equals("")))
                 {
+                    valueEditText = edtEmail.getText().toString();
+                    mHome.child("USER").child("PHONE").child(getPhone).child("userEmail").setValue(valueEditText);
                     change += " email";
                     check = 1;
                 }
                 if (!(edtPhone.getText().toString().equals("")))
                 {
+                    valueEditText = edtPhone.getText().toString();
+                    mHome.child("USER").child("PHONE").child(getPhone).child("userPhone").setValue(valueEditText);
                     change += " phone number";
                     check = 1;
                 }
@@ -238,4 +285,5 @@ public class fragmentSetting extends Fragment {
         });
         dialog.show();
     }
+
 }

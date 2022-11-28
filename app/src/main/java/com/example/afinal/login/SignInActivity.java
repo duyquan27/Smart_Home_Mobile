@@ -205,6 +205,7 @@ public class SignInActivity extends AppCompatActivity {
                                     userName = String.valueOf(dataSnapshot.child("userName").getValue());
                                     userEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
                                     userPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
+
                                     userPath = PATH_PHONE;
                                     userID = email;
 
@@ -234,7 +235,7 @@ public class SignInActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 progress.stopProgressDialog();
-                                _path = "EMAIL";
+                                userPath = PATH_EMAIL;
                                 _userID = mAuth.getCurrentUser().getUid();
                             }
                             else {

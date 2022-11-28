@@ -24,8 +24,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -33,6 +35,7 @@ import java.util.Date;
 
 public class fragmentHome extends Fragment {
 
+    DatabaseReference mHome;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private View mView;
@@ -44,7 +47,7 @@ public class fragmentHome extends Fragment {
     static final public String PATH_PHONE = "1";
     static final public String PATH_EMAIL = "2";
 
-    public String getName;
+    public String getPhone;
 
     @Override
 
@@ -73,6 +76,8 @@ public class fragmentHome extends Fragment {
         ViewPagerHomeAdapter adapter = new ViewPagerHomeAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        mHome = FirebaseDatabase.getInstance().getReference();
         return mView;
     }
 
@@ -89,9 +94,19 @@ public class fragmentHome extends Fragment {
                         if (task.getResult().exists())
                         {
                             DataSnapshot dataSnapshot = task.getResult();
-                            getName = String.valueOf(dataSnapshot.child("userName").getValue());
-                            username.setText(getName);
-                            Toast.makeText(getActivity(),"OKE" + getName,Toast.LENGTH_LONG).show();
+                            getPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
+                            mHome.child("USER").child("PHONE").child(getPhone).child("userName").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    username.setText("Hello " + snapshot.getValue().toString());
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
                         }
                     }
                 }
@@ -109,9 +124,8 @@ public class fragmentHome extends Fragment {
                         if (task.getResult().exists())
                         {
                             DataSnapshot dataSnapshot = task.getResult();
-                            getName = String.valueOf(dataSnapshot.child("userName").getValue());
-                            username.setText(getName);
-                            Toast.makeText(getActivity(),"OKE" + getName,Toast.LENGTH_LONG).show();
+                            getPhone = String.valueOf(dataSnapshot.child("userName").getValue());
+                            username.setText(getPhone);
                         }
                     }
                 }
