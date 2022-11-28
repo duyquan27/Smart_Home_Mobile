@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".login.verifyOTP">
 
     <RelativeLayout
@@ -45,24 +46,28 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/logoOTP"
                     android:layout_marginTop="20dp"
-                    android:text="An 4 digit code has been sent to your address."
+                    android:text="An 6 digit code has been sent to your address."
                     android:textColor="@color/white"
                     android:textSize="14sp" />
 
-                <EditText
-                    android:id="@+id/txtYourOTP"
-                    android:layout_width="match_parent"
+                <com.chaos.view.PinView
+                    android:id="@+id/pin_view"
+                    style="@style/PinWidget.PinView"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtOTP"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/txt_otp"
-                    android:hint="Enter OTP"
-                    android:inputType="text"
-                    android:paddingLeft="55dp"
-                    android:paddingBottom="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    android:textSize="14sp" />
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"
+                    android:cursorVisible="true"
+                    android:inputType="number"
+                    android:itemBackground="#9C27B0"
+                    app:cursorColor="@color/black"
+                    app:hideLineWhenFilled="true"
+                    app:itemCount="6"
+                    app:itemHeight="50dp"
+                    app:itemRadius="5dp"
+                    app:itemWidth="50dp"
+                    app:lineWidth="1dp" />
 
             </RelativeLayout>
 
@@ -76,7 +81,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="50dp"
             android:background="@drawable/btn_submit"
-            android:onClick="callNextScreenFromOTP"/>
+            android:onClick="clickToResetPassword" />
 
     </RelativeLayout>
 
