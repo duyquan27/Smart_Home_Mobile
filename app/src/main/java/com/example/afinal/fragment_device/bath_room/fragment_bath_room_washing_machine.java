@@ -100,7 +100,7 @@ public class fragment_bath_room_washing_machine extends Fragment {
                                 }
                                 @Override
                                 public void onFinish() {
-                                    MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music);
+                                    MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.nhac);
                                     mediaPlayer.start();
                                     btn_run.setEnabled(true);
                                     reset();

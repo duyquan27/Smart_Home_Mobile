@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.example.afinal.custom_textView.RobotoBoldTextView;
 import com.example.afinal.fragment_home.ViewPagerMainAdapter;
@@ -28,13 +30,13 @@ public class MainActivity extends AppCompatActivity {
     private RobotoBoldTextView username;
     private View mView;
     private String _userID;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         mData = FirebaseDatabase.getInstance().getReference();
         viewPager = (CustomViewPager) findViewById(R.id.view_pager_device_bed_room);
@@ -95,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
     public String getUserID() {
         return _userID;
     }

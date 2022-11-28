@@ -3,6 +3,7 @@ package com.example.afinal.fragment_home;
 import static com.example.afinal.MyApp.*;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -248,12 +249,11 @@ public class fragmentSensor extends Fragment {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
         String sdfDate = simpleDateFormat.format(new Date());
         notificationLayout.setTextViewText(R.id.time,sdfDate);
-
         Notification notification = new NotificationCompat.Builder(getContext(), CHANNEL_ID_TEMP)
-                .setSmallIcon(R.drawable.small_icon)
+                .setSmallIcon(R.drawable.icon_smart_home)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setCustomContentView(notificationLayout)
-                .setSound(alarmSound)
+                .setAutoCancel(true)
                 .build();
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getContext());
         notificationManagerCompat.notify(getNotificationId(),notification);
