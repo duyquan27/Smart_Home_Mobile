@@ -115,7 +115,9 @@ public class fragmentSetting extends Fragment {
                         mHome.child("USER").child("PHONE").child(getPhone).child("userPhone").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                tvPhoneNumber.setText(snapshot.getValue().toString());
+                                String _getPhone = snapshot.getValue().toString();
+                                String _phoneCountryCode = "+84" + _getPhone.substring(1);
+                                tvPhoneNumber.setText(_phoneCountryCode);
                             }
 
                             @Override
@@ -219,35 +221,37 @@ public class fragmentSetting extends Fragment {
                     change += " username";
                     check = 1;
                 }
-                if (!(edtPassword.getText().toString().equals("")))
+                if (!(edtPassword.getText().toString().equals(getPassword)))
                 {
                     valueEditText = edtPassword.getText().toString();
                     mHome.child("USER").child("PHONE").child(getPhone).child("userPassword").setValue(valueEditText);
                     change += " password";
                     check = 1;
                 }
-                if (!(edtEmail.getText().toString().equals("")))
+                if (!(edtEmail.getText().toString().equals(getEmail)))
                 {
                     valueEditText = edtEmail.getText().toString();
                     mHome.child("USER").child("PHONE").child(getPhone).child("userEmail").setValue(valueEditText);
                     change += " email";
                     check = 1;
                 }
-                if (!(edtPhone.getText().toString().equals("")))
+                if (!(edtPhone.getText().toString().equals(getPhone)))
                 {
                     valueEditText = edtPhone.getText().toString();
                     mHome.child("USER").child("PHONE").child(getPhone).child("userPhone").setValue(valueEditText);
                     change += " phone number";
                     check = 1;
                 }
-//                if (check == 1)
-//                {
-//                    Toast.makeText(getContext(),change,Toast.LENGTH_SHORT).show();
-//                }
-//                else if (check == 0)
-//                {
-//                    Toast.makeText(getContext(),"nothing was changed",Toast.LENGTH_SHORT).show();
-//                }
+                if (check == 1)
+                {
+                    Toast.makeText(getContext(), getString(R.string.notification_data_user_changed_success),Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+                else if (check == 0)
+                {
+                    Toast.makeText(getContext(),getString(R.string.notification_no_data_user_changed),Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
             }
         });
         btn_clear.setOnClickListener(new View.OnClickListener() {

@@ -47,6 +47,11 @@
     <string name="notification_title">Over Threshold</string>
     <string name="notification_info">temp sensor was over threshold</string>
 
+
+<!-- Notify data changed -->
+    <string name="notification_data_user_changed_success">Data Changed Successfully</string>
+    <string name="notification_no_data_user_changed">No Data Changed</string>
+
     <string-array name="rangeSlider">
         <item>10</item>
         <item>50</item>
