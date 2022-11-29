@@ -73,6 +73,10 @@ public class SignInActivity extends AppCompatActivity {
             HashMap<String, String> rememberDetails = sessionManager.getRememberMeDetailFromSession();
             txtEmail.setText(rememberDetails.get(SessionManager.KEY_SESSIONPHONENUMBER));
             txtPassword.setText(rememberDetails.get(SessionManager.KEY_SESSIONPASSWORD));
+            checkboxRememberMe.setChecked(true);
+        }
+        else {
+            checkboxRememberMe.setChecked(false);
         }
 
         mAuth = FirebaseAuth.getInstance();
@@ -177,8 +181,14 @@ public class SignInActivity extends AppCompatActivity {
         }
 
         if (checkboxRememberMe.isChecked()) {
+            checkboxRememberMe.setChecked(true);
             SessionManager sessionManager = new SessionManager(SignInActivity.this, SessionManager.SESSION_REMEMBERME);
             sessionManager.createRememberSession(email,password);
+        }
+        else {
+            checkboxRememberMe.setChecked(false);
+            SessionManager sessionManager = new SessionManager(SignInActivity.this, SessionManager.SESSION_REMEMBERME);
+            sessionManager.logoutRememberMe();
         }
 
         //check email and password with database
@@ -248,7 +258,7 @@ public class SignInActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
         intent.putExtra("KEY_ID",userID);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
