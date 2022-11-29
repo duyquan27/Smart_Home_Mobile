@@ -24,6 +24,7 @@
     <color name="tim">#8F00FF</color>
     <color name="hong">#FF00F5</color>
     <color name="doLamp">#FF0000</color>
+    <color name="no">#00FF0000</color>
     <color name="trackActive">#A073FF</color>
     <color name="trackInactive">#D9D9D9</color>
 
