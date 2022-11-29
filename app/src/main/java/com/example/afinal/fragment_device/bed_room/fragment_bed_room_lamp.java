@@ -61,11 +61,40 @@ public class fragment_bed_room_lamp extends Fragment {
                     checkOn = true;
                     seekBar.setEnabled(true);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_on);
+                    mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.getValue().toString().equals("YELLOW")) {
+                                imageView.setImageResource(R.drawable.icon_lamp_vang);
+                                seekBar.setProgressTintList(ColorStateList.valueOf(view.getResources().getColor(R.color.vang)));
+                            } else if (snapshot.getValue().toString().equals("BLUE")) {
+                                imageView.setImageResource(R.drawable.icon_lamp_xanh);
+                                seekBar.setProgressTintList(ColorStateList.valueOf(view.getResources().getColor(R.color.xanh)));
+                            } else if (snapshot.getValue().toString().equals("PURPLE")) {
+                                imageView.setImageResource(R.drawable.icon_lighting_bed);
+                                seekBar.setProgressTintList(ColorStateList.valueOf(view.getResources().getColor(R.color.tim)));
+                            }
+                            else if (snapshot.getValue().toString().equals("PINK")) {
+                                imageView.setImageResource(R.drawable.icon_lamp_hong);
+                                seekBar.setProgressTintList(ColorStateList.valueOf(view.getResources().getColor(R.color.hong)));
+                            }
+                            else {
+                                imageView.setImageResource(R.drawable.icon_lamp_do);
+                                seekBar.setProgressTintList(ColorStateList.valueOf(view.getResources().getColor(R.color.doLamp)));
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
                 else {
                     checkOn = false;
                     seekBar.setEnabled(false);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_off);
+                    imageView.setImageResource(R.drawable.icon_lamp_off);
                 }
             }
 
@@ -81,35 +110,6 @@ public class fragment_bed_room_lamp extends Fragment {
                 txIntensity.setText(snapshot.getValue().toString() + " %");
                 int i= new Integer(snapshot.getValue().toString());
                 seekBar.setProgress(i);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.getValue().toString().equals("YELLOW")) {
-                    imageView.setImageResource(R.drawable.icon_lamp_vang);
-                    seekBar.setProgressTintList(ColorStateList.valueOf(view.getResources().getColor(R.color.vang)));
-                } else if (snapshot.getValue().toString().equals("BLUE")) {
-                    imageView.setImageResource(R.drawable.icon_lamp_xanh);
-                    seekBar.setProgressTintList(ColorStateList.valueOf(view.getResources().getColor(R.color.xanh)));
-                } else if (snapshot.getValue().toString().equals("PURPLE")) {
-                    imageView.setImageResource(R.drawable.icon_lighting_bed);
-                    seekBar.setProgressTintList(ColorStateList.valueOf(view.getResources().getColor(R.color.tim)));
-                }
-                else if (snapshot.getValue().toString().equals("PINK")) {
-                    imageView.setImageResource(R.drawable.icon_lamp_hong);
-                    seekBar.setProgressTintList(ColorStateList.valueOf(view.getResources().getColor(R.color.hong)));
-                }
-                else {
-                    imageView.setImageResource(R.drawable.icon_lamp_do);
-                    seekBar.setProgressTintList(ColorStateList.valueOf(view.getResources().getColor(R.color.doLamp)));
-                }
             }
 
             @Override
