@@ -36,6 +36,7 @@ import java.util.Date;
 public class fragmentHome extends Fragment {
 
     DatabaseReference mHome;
+    private  RobotoMediumTextView temp;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private View mView;
@@ -63,6 +64,7 @@ public class fragmentHome extends Fragment {
         tabLayout = mView.findViewById(R.id.tab_layout_device_living);
         viewPager = mView.findViewById(R.id.room_viewpager);
         username = mView.findViewById(R.id.welcome_username);
+        temp = mView.findViewById(R.id.temperature);
         RobotoMediumTextView local = mView.findViewById(R.id.local);
         //test
         RobotoLightTextView tvDate =  mView.findViewById(R.id.time);
@@ -77,6 +79,17 @@ public class fragmentHome extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
 
         mHome = FirebaseDatabase.getInstance().getReference();
+        mHome.child("HOME").child("Weather temperature").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                temp.setText(snapshot.getValue().toString() + "°C");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         return mView;
     }
 

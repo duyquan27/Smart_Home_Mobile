@@ -107,7 +107,50 @@ public class fragment_bath_room_washing_machine extends Fragment {
             }
         });
 
-        btn_run.setEnabled(false);
+        mHome.child("HOME").child("Bath room").child("Washing machine").child("Regime").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue().toString().equals("Baby care")) {
+                    tx_time.setText("01 : 00");
+                    btn_babycare.setImageResource(R.drawable.icon_baby_care_on);
+                    btn_sportwear.setImageResource(R.drawable.icon_sport_wear);
+                    btn_cotton.setImageResource(R.drawable.icon_cotton);
+                    btn_mix.setImageResource(R.drawable.icon_mix);
+                    check_mode = 1;
+                }
+                else if (snapshot.getValue().toString().equals("Sport wear")) {
+                    tx_time.setText("00 : 20");
+                    btn_babycare.setImageResource(R.drawable.icon_baby_care);
+                    btn_sportwear.setImageResource(R.drawable.icon_sport_wear_on);
+                    btn_cotton.setImageResource(R.drawable.icon_cotton);
+                    btn_mix.setImageResource(R.drawable.icon_mix);
+                    check_mode = 2;
+                }
+                else if (snapshot.getValue().toString().equals("Cotton")) {
+                    tx_time.setText("00 : 30");
+                    btn_babycare.setImageResource(R.drawable.icon_baby_care);
+                    btn_sportwear.setImageResource(R.drawable.icon_sport_wear);
+                    btn_cotton.setImageResource(R.drawable.icon_cotton_on);
+                    btn_mix.setImageResource(R.drawable.icon_mix);
+                    check_mode = 3;
+                }
+                else {
+                    tx_time.setText("00 : 40");
+                    btn_babycare.setImageResource(R.drawable.icon_baby_care);
+                    btn_sportwear.setImageResource(R.drawable.icon_sport_wear);
+                    btn_cotton.setImageResource(R.drawable.icon_cotton);
+                    btn_mix.setImageResource(R.drawable.icon_mix_on);
+                    check_mode = 4;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
 
 
@@ -162,7 +205,7 @@ public class fragment_bath_room_washing_machine extends Fragment {
                                 }
                                 @Override
                                 public void onFinish() {
-                                    MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music2);
+                                    MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music3);
                                     mediaPlayer.start();
                                     btn_run.setEnabled(true);
                                     reset();
@@ -178,7 +221,7 @@ public class fragment_bath_room_washing_machine extends Fragment {
                                 }
                                 @Override
                                 public void onFinish() {
-                                    MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music2);
+                                    MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music3);
                                     mediaPlayer.start();
                                     btn_run.setEnabled(true);
                                     reset();
@@ -195,12 +238,7 @@ public class fragment_bath_room_washing_machine extends Fragment {
             @Override
             public void onClick(View view) {
                 if (check_onoff){
-                    tx_time.setText("01:00");
-                    btn_babycare.setImageResource(R.drawable.icon_baby_care_on);
-                    btn_sportwear.setImageResource(R.drawable.icon_sport_wear);
-                    btn_cotton.setImageResource(R.drawable.icon_cotton);
-                    btn_mix.setImageResource(R.drawable.icon_mix);
-                    check_mode = 1;
+                    mHome.child("HOME").child("Bath room").child("Washing machine").child("Regime").setValue("Baby care");
                 }
             }
         });
@@ -208,12 +246,7 @@ public class fragment_bath_room_washing_machine extends Fragment {
             @Override
             public void onClick(View view) {
                 if (check_onoff){
-                    tx_time.setText("00 : 20");
-                    btn_babycare.setImageResource(R.drawable.icon_baby_care);
-                    btn_sportwear.setImageResource(R.drawable.icon_sport_wear_on);
-                    btn_cotton.setImageResource(R.drawable.icon_cotton);
-                    btn_mix.setImageResource(R.drawable.icon_mix);
-                    check_mode = 2;
+                    mHome.child("HOME").child("Bath room").child("Washing machine").child("Regime").setValue("Sport wear");
                 }
             }
         });
@@ -221,12 +254,7 @@ public class fragment_bath_room_washing_machine extends Fragment {
             @Override
             public void onClick(View view) {
                 if (check_onoff){
-                    tx_time.setText("00 : 30");
-                    btn_babycare.setImageResource(R.drawable.icon_baby_care);
-                    btn_sportwear.setImageResource(R.drawable.icon_sport_wear);
-                    btn_cotton.setImageResource(R.drawable.icon_cotton_on);
-                    btn_mix.setImageResource(R.drawable.icon_mix);
-                    check_mode = 3;
+                    mHome.child("HOME").child("Bath room").child("Washing machine").child("Regime").setValue("Cotton");
                 }
             }
         });
@@ -234,12 +262,7 @@ public class fragment_bath_room_washing_machine extends Fragment {
             @Override
             public void onClick(View view) {
                 if (check_onoff){
-                    tx_time.setText("00 : 40");
-                    btn_babycare.setImageResource(R.drawable.icon_baby_care);
-                    btn_sportwear.setImageResource(R.drawable.icon_sport_wear);
-                    btn_cotton.setImageResource(R.drawable.icon_cotton);
-                    btn_mix.setImageResource(R.drawable.icon_mix_on);
-                    check_mode = 4;
+                    mHome.child("HOME").child("Bath room").child("Washing machine").child("Regime").setValue("Mix");
                 }
             }
         });
