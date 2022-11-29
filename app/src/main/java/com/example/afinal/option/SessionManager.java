@@ -103,4 +103,9 @@ public class SessionManager {
             return false;
         }
     }
+    public void logoutRememberMe()
+    {
+        editor.clear();
+        editor.commit();
+    }
 }
