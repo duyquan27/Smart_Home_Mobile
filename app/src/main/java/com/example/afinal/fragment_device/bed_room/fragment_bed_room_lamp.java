@@ -121,6 +121,7 @@ public class fragment_bed_room_lamp extends Fragment {
         btnVang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (checkOn)
                 mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("YELLOW");
             }
         });
@@ -128,6 +129,7 @@ public class fragment_bed_room_lamp extends Fragment {
         btnXanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (checkOn)
                 mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("BLUE");
             }
         });
@@ -135,6 +137,7 @@ public class fragment_bed_room_lamp extends Fragment {
         btnTim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (checkOn)
                 mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("PURPLE");
             }
         });
@@ -142,6 +145,7 @@ public class fragment_bed_room_lamp extends Fragment {
         btnHong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (checkOn)
                 mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("PINK");
             }
         });
@@ -149,6 +153,7 @@ public class fragment_bed_room_lamp extends Fragment {
         btnDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (checkOn)
                 mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("RED");
             }
         });
