@@ -21,6 +21,7 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.afinal.MainActivity;
 import com.example.afinal.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,13 +48,14 @@ public class fragmentSensor extends Fragment {
     public List<Float> sliderNoiseVal = new ArrayList<>();
     public List<Float> sliderAirVal = new ArrayList<>();
     static final int defaultTrackHeight = 30;
-
+    public boolean checker;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View mView = inflater.inflate(R.layout.fragment_sensor, container, false);
         //init tv value
+        mData = FirebaseDatabase.getInstance().getReference();
         tv_temp_val = mView.findViewById(R.id.tvTempVal);
         tv_humi_val = mView.findViewById(R.id.tvHumiVal);
         tv_noise_val = mView.findViewById(R.id.tvNoiseVal);
@@ -68,8 +70,18 @@ public class fragmentSensor extends Fragment {
         slider_humi.setTrackHeight(defaultTrackHeight);
         slider_noise.setTrackHeight(defaultTrackHeight);
         slider_air.setTrackHeight(defaultTrackHeight);
+        mData.child("SETTING/Notifications").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                checker = Boolean.parseBoolean(snapshot.getValue().toString());
+                Log.d("Checker in sensor", String.valueOf(checker));
+            }
 
-        mData = FirebaseDatabase.getInstance().getReference();
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         //setup slider range
         mData.child("SENSOR").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -86,6 +98,23 @@ public class fragmentSensor extends Fragment {
                 slider_humi.setValues(sliderHumiVal);
                 slider_noise.setValues(sliderNoiseVal);
                 slider_air.setValues(sliderAirVal);
+                tempVal = snapshot.child("Value/Temp").getValue().toString();
+                humiVal = snapshot.child("Value/Humi").getValue().toString();
+                noiseVal = snapshot.child("Value/Noise").getValue().toString();
+                airVal = snapshot.child("Value/Air").getValue().toString();
+
+                tv_temp_val.setText(tempVal + "℃");
+                tv_humi_val.setText(humiVal + "%");
+                tv_noise_val.setText(noiseVal + "db");
+                tv_air_val.setText(airVal);
+
+                if (checker)
+                {
+                    checkThreshold(slider_temp, "Temperature", tempVal);
+                    checkThreshold(slider_humi, "Humidity", humiVal);
+                    checkThreshold(slider_noise, "Noise", noiseVal);
+                    checkThreshold(slider_air, "Air Quality", airVal);
+                }
                 Log.d("check slider init", slider_temp.getValues() + " " + slider_humi.getValues() + " " + slider_noise.getValues() + " " + slider_air.getValues());
             }
 
@@ -94,6 +123,9 @@ public class fragmentSensor extends Fragment {
 
             }
         });
+
+        mData = FirebaseDatabase.getInstance().getReference();
+
         //data from firebase change
         mData.child("SENSOR").addValueEventListener(new ValueEventListener() {
             @Override
@@ -108,11 +140,15 @@ public class fragmentSensor extends Fragment {
                 tv_humi_val.setText(humiVal + "%");
                 tv_noise_val.setText(noiseVal + "db");
                 tv_air_val.setText(airVal);
+                Log.d("Checker in value change", String.valueOf(checker));
+                if (checker)
+                {
+                    checkThreshold(slider_temp, "Temperature", tempVal);
+                    checkThreshold(slider_humi, "Humidity", humiVal);
+                    checkThreshold(slider_noise, "Noise", noiseVal);
+                    checkThreshold(slider_air, "Air Quality", airVal);
+                }
 
-                checkThreshold(slider_temp, "Temperature", tempVal);
-                checkThreshold(slider_humi, "Humidity", humiVal);
-                checkThreshold(slider_noise, "Noise", noiseVal);
-                checkThreshold(slider_air, "Air Quality", airVal);
             }
 
             @Override
@@ -175,10 +211,11 @@ public class fragmentSensor extends Fragment {
                 mData.child("SENSOR/Air Quality/Upper").setValue(slider.getValues().get(1).toString());
             }
         });
+
+
         return mView;
 
     }
-
     private void checkThreshold(RangeSlider slider, String key, String val) {
         int thumbCheck = 2;
         if (Float.valueOf(val) < slider.getValues().get(0)) {
@@ -190,7 +227,6 @@ public class fragmentSensor extends Fragment {
         }
 
     }
-
     private void sendTempNotification(String key, int checker) {
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         RemoteViews notificationLayout = null;
