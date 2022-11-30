@@ -150,10 +150,9 @@ public class fragment_bed_room_tv extends Fragment {
                 }
             }
         });
-
-        btnVolUp.setOnTouchListener(new View.OnTouchListener() {
+        btnVolUp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onClick(View view) {
                 if (checkOn) {
                     if (volume == 100) {
                         volume = 100;
@@ -163,13 +162,13 @@ public class fragment_bed_room_tv extends Fragment {
                     }
                     mRoom.child("HOME").child("Bed room").child("TV").child("Volume").setValue(volume);
                 }
-                return false;
             }
         });
 
-        btnVolDown.setOnTouchListener(new View.OnTouchListener() {
+
+        btnVolDown.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onClick(View view) {
                 if (checkOn) {
                     if (volume == 0) {
                         iconVolume.setImageResource(R.drawable.icon_audio_mute);
@@ -178,7 +177,6 @@ public class fragment_bed_room_tv extends Fragment {
                     }
                     mRoom.child("HOME").child("Bed room").child("TV").child("Volume").setValue(volume);
                 }
-                return false;
             }
         });
 
