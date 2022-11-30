@@ -46,6 +46,14 @@
     <string name="channel_air_description">this is channel air</string>
     <string name="notification_title">Over Threshold</string>
     <string name="notification_info">temp sensor was over threshold</string>
+    <string name="channel_wash_baby">channel wash baby</string>
+    <string name="channel_baby_description">this is channel wash baby</string>
+    <string name="channel_wash_sport">channel wash sport</string>
+    <string name="channel_sport_description">this is channel wash sport</string>
+    <string name="channel_wash_cotton">channel wash cotton</string>
+    <string name="channel_cotton_description">this is channel wash cotton</string>
+    <string name="channel_wash_mix">channel wash mix</string>
+    <string name="channel_mix_description">this is channel wash mix</string>
 
 
 <!-- Notify data changed -->

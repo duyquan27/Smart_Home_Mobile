@@ -1,10 +1,17 @@
 package com.example.afinal.fragment_device.bath_room;
 
+import static com.example.afinal.MyApp.CHANNEL_ID_TEMP;
+
 import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.CountDownTimer;
@@ -12,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import com.example.afinal.R;
@@ -20,6 +28,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class fragment_bath_room_washing_machine extends Fragment {
     DatabaseReference mHome;
@@ -70,6 +81,42 @@ public class fragment_bath_room_washing_machine extends Fragment {
             minutesString = "0" + minutesString;
         }
         tx_time.setText(minutesString + " : " + secondsString);
+    }
+
+    public void sendNotification(int mode){
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        RemoteViews notificationLayout = new RemoteViews(getActivity().getPackageName(),R.layout.custom_notification_layout);
+        notificationLayout.setTextViewText(R.id.title,"WASHING MACHINE");
+        switch (mode){
+            case 1:{
+                notificationLayout.setTextViewText(R.id.info,"Finished washing mode Baby Care");
+                break;
+            }
+            case 2:{
+                notificationLayout.setTextViewText(R.id.info,"Finished washing mode Sport wear");
+                break;
+            }
+            case 3:{
+                notificationLayout.setTextViewText(R.id.info,"Finished washing mode Cotton");
+                break;
+            }
+            case 4:{
+                notificationLayout.setTextViewText(R.id.info,"Finished washing mode Mix");
+                break;
+            }
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+        String sdfDate = simpleDateFormat.format(new Date());
+        notificationLayout.setTextViewText(R.id.time,sdfDate);
+
+        Notification notification = new NotificationCompat.Builder(getContext(), CHANNEL_ID_TEMP)
+                .setSmallIcon(R.drawable.icon_bath_wash)
+                .setCustomContentView(notificationLayout)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setAutoCancel(true)
+                .build();
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getContext());
+        notificationManagerCompat.notify(getNotificationId(),notification);
     }
 
     @SuppressLint("MissingInflatedId")
@@ -169,6 +216,7 @@ public class fragment_bath_room_washing_machine extends Fragment {
 
                                 @Override
                                 public void onFinish() {
+                                    sendNotification(check_mode);
                                     MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music1);
                                     mediaPlayer.start();
                                     btn_run.setEnabled(true);
@@ -186,7 +234,8 @@ public class fragment_bath_room_washing_machine extends Fragment {
 
                                 @Override
                                 public void onFinish() {
-                                    MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music2);
+                                    sendNotification(check_mode);
+                                    MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music1);
                                     mediaPlayer.start();
                                     btn_run.setEnabled(true);
                                     reset();
@@ -203,7 +252,8 @@ public class fragment_bath_room_washing_machine extends Fragment {
 
                                 @Override
                                 public void onFinish() {
-                                    MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music3);
+                                    sendNotification(check_mode);
+                                    MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music2);
                                     mediaPlayer.start();
                                     btn_run.setEnabled(true);
                                     reset();
@@ -220,7 +270,8 @@ public class fragment_bath_room_washing_machine extends Fragment {
 
                                 @Override
                                 public void onFinish() {
-                                    MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music3);
+                                    sendNotification(check_mode);
+                                    MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music2);
                                     mediaPlayer.start();
                                     btn_run.setEnabled(true);
                                     reset();
@@ -278,5 +329,8 @@ public class fragment_bath_room_washing_machine extends Fragment {
         });
 
         return view;
+    }
+    private int getNotificationId() {
+        return (int) new Date().getTime();
     }
 }
