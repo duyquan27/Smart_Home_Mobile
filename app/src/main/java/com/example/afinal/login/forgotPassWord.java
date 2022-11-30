@@ -3,6 +3,7 @@ package com.example.afinal.login;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -50,6 +51,7 @@ public class forgotPassWord extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private CountryCodePicker countryCodePicker;
 
+
     static final private String PHONE_PATTERN = "^[0-9]{10}$";
 
     @Override
@@ -57,7 +59,7 @@ public class forgotPassWord extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.forgot_password);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Init();
 
@@ -70,11 +72,13 @@ public class forgotPassWord extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(forgotPassWord.this,SignInActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                Intent intent = new Intent(forgotPassWord.this, SignInActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
+
+
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +96,7 @@ public class forgotPassWord extends AppCompatActivity {
 
     }
 
-    private void Init()
-    {
+    private void Init() {
         btnSignIn = (TextView) findViewById(R.id.btnSignIn);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnSubmit = (ImageButton) findViewById(R.id.btnSubmit);
@@ -101,8 +104,7 @@ public class forgotPassWord extends AppCompatActivity {
         countryCodePicker = (CountryCodePicker) findViewById(R.id.countryCode);
     }
 
-    public void verifyPhoneNumber()
-    {
+    public void verifyPhoneNumber() {
         txtAddress.setError(null);
         String getUserEnteredPhone = txtAddress.getText().toString().trim();
 
@@ -111,17 +113,14 @@ public class forgotPassWord extends AppCompatActivity {
         if (getUserEnteredPhone.matches("")) {
             txtAddress.setError(getString(R.string.error_field_address_empty));
             cancel = false;
-        }
-        else if (!getUserEnteredPhone.matches(PHONE_PATTERN))
-        {
+        } else if (!getUserEnteredPhone.matches(PHONE_PATTERN)) {
             txtAddress.setError(getString(R.string.error_field_phone_required));
             cancel = false;
         }
 
         String _phoneNo = "+" + countryCodePicker.getSelectedCountryCode() + getUserEnteredPhone;
 
-        if (cancel)
-        {
+        if (cancel) {
             Intent intent = new Intent(forgotPassWord.this, verifyOTP.class);
             intent.putExtra("FG_USERPHONE", getUserEnteredPhone);
             intent.putExtra("FG_PHONENO", _phoneNo);
@@ -129,4 +128,6 @@ public class forgotPassWord extends AppCompatActivity {
         }
 
     }
+
+
 }

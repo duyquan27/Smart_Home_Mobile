@@ -28,7 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUp1Activity extends AppCompatActivity {
 
-    private EditText txtUsername,txtEmail,txtFullName,txtPassword;
+    private EditText txtUsername, txtEmail, txtFullName, txtPassword;
     private ImageButton btnNext;
     private TextView btnSignIn;
     private Button openEye;
@@ -47,7 +47,7 @@ public class SignUp1Activity extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_sign_up1);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         txtUsername = (EditText) findViewById(R.id.txtUsername);
         txtEmail = (EditText) findViewById(R.id.txtEmail);
@@ -64,13 +64,10 @@ public class SignUp1Activity extends AppCompatActivity {
         openEye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkEye)
-                {
+                if (checkEye) {
                     closePassword();
                     checkEye = false;
-                }
-                else
-                {
+                } else {
                     openPassword();
                     checkEye = true;
                 }
@@ -80,8 +77,8 @@ public class SignUp1Activity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignUp1Activity.this,SignInActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                Intent intent = new Intent(SignUp1Activity.this, SignInActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
@@ -95,8 +92,7 @@ public class SignUp1Activity extends AppCompatActivity {
 
     }
 
-    private void sendUserToSignUp2()
-    {
+    private void sendUserToSignUp2() {
         //reset error
         txtFullName.setError(null);
         txtUsername.setError(null);
@@ -112,56 +108,48 @@ public class SignUp1Activity extends AppCompatActivity {
         boolean cancel = true;
 
         // Check username
-        if (username.matches("")){
+        if (username.matches("")) {
             txtUsername.setError(getString(R.string.error_field_username_empty));
             cancel = false;
-        }
-        else if (!username.matches(USERNAME_PATTERN)){
+        } else if (!username.matches(USERNAME_PATTERN)) {
             txtUsername.setError(getString(R.string.error_field_username_required));
             cancel = false;
         }
 
         // Check email
-        if (email.matches("")){
+        if (email.matches("")) {
             txtEmail.setError(getString(R.string.error_field_email_empty));
             cancel = false;
-        }
-        else if (!email.matches(EMAIL_PATTERN)) {
+        } else if (!email.matches(EMAIL_PATTERN)) {
             txtEmail.setError(getString(R.string.error_field_email_required));
             cancel = false;
         }
 
         // Check Phone number
-        if (fullname.matches("")){
+        if (fullname.matches("")) {
             txtFullName.setError(getString(R.string.error_field_username_empty));
             cancel = false;
-        }
-        else if (!fullname.matches(USERNAME_PATTERN)) {
+        } else if (!fullname.matches(USERNAME_PATTERN)) {
             txtFullName.setError(getString(R.string.error_field_username_required));
             cancel = false;
         }
 
         // Check password
-        if (password.matches("")){
+        if (password.matches("")) {
             txtPassword.setError(getString(R.string.error_field_password_empty));
             cancel = false;
-        }
-        else if (!password.matches(PASSWORD_PATTERN)) {
+        } else if (!password.matches(PASSWORD_PATTERN)) {
             txtPassword.setError(getString(R.string.error_field_password_required));
             cancel = false;
         }
 
-        if (cancel)
-        {
-            progress.showProgressDialog(SignUp1Activity.this,getString(R.string.progress_message_signup),false);
+        if (cancel) {
+            progress.showProgressDialog(SignUp1Activity.this, getString(R.string.progress_message_signup), false);
 
-            if (!checkInternet.isConnected(SignUp1Activity.this))
-            {
+            if (!checkInternet.isConnected(SignUp1Activity.this)) {
                 progress.stopProgressDialog();
-                Toast.makeText(SignUp1Activity.this,getString(R.string.noti_no_internet),Toast.LENGTH_LONG).show();
-            }
-            else
-            {
+                Toast.makeText(SignUp1Activity.this, getString(R.string.noti_no_internet), Toast.LENGTH_LONG).show();
+            } else {
                 progress.stopProgressDialog();
                 Intent intent = new Intent(SignUp1Activity.this, SignUp2Activity.class);
                 intent.putExtra("USER_USERNAME", username);
@@ -259,17 +247,15 @@ public class SignUp1Activity extends AppCompatActivity {
 //        }
 //    }
 
-    private void closePassword()
-    {
+    private void closePassword() {
         openEye.setBackgroundResource(R.drawable.eye_open);
         txtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         txtPassword.setSelection(txtPassword.getText().length());
     }
 
-    private void openPassword()
-    {
+    private void openPassword() {
         openEye.setBackgroundResource(R.drawable.eye_close);
-        txtPassword.setInputType( InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+        txtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
         txtPassword.setSelection(txtPassword.getText().length());
     }
 

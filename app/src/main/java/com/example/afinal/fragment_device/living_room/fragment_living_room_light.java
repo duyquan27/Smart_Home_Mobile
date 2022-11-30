@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import me.tankery.lib.circularseekbar.CircularSeekBar;
 
-public class fragment_living_room_light extends Fragment{
+public class fragment_living_room_light extends Fragment {
     DatabaseReference mRoom;
     CircularSeekBar circularSeekBar;
     TextView txIntensity;
@@ -47,8 +47,7 @@ public class fragment_living_room_light extends Fragment{
                     checkOn = true;
                     circularSeekBar.setEnabled(true);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_on);
-                }
-                else {
+                } else {
                     checkOn = false;
                     circularSeekBar.setEnabled(false);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_off);
@@ -65,7 +64,7 @@ public class fragment_living_room_light extends Fragment{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 txIntensity.setText(snapshot.getValue().toString() + " %");
-                float f= new Float(snapshot.getValue().toString());
+                float f = new Float(snapshot.getValue().toString());
                 circularSeekBar.setProgress(f);
             }
 
@@ -81,8 +80,7 @@ public class fragment_living_room_light extends Fragment{
                 if (checkOn) {
                     // push to firebase
                     mRoom.child("HOME").child("Living room").child("Lighting").child("Status").setValue("OFF");
-                }
-                else {
+                } else {
                     // push to firebase
                     mRoom.child("HOME").child("Living room").child("Lighting").child("Status").setValue("ON");
                 }
@@ -92,7 +90,7 @@ public class fragment_living_room_light extends Fragment{
         circularSeekBar.setOnSeekBarChangeListener(new CircularSeekBar.OnCircularSeekBarChangeListener() {
             @Override
             public void onProgressChanged(CircularSeekBar circularSeekBar, float progress, boolean fromUser) {
-                int intensity = (int)progress;
+                int intensity = (int) progress;
                 txIntensity.setText(intensity + " %");
                 mRoom.child("HOME").child("Living room").child("Lighting").child("Intensity").setValue(intensity);
             }

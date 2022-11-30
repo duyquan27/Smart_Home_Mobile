@@ -8,9 +8,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.example.afinal.DeviceLivingRoomActivity;
 
 public class ViewPagerLingRoomDeviceAdapter extends FragmentStateAdapter {
-    public ViewPagerLingRoomDeviceAdapter (@NonNull FragmentActivity fragmentActivity) {
+    public ViewPagerLingRoomDeviceAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
+
     @NonNull
     @Override
     public Fragment createFragment(int position) {

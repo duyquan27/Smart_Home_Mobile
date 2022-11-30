@@ -62,8 +62,7 @@ public class fragmentBathRoom extends Fragment {
                     // push to firebase
                     mHome.child("HOME").child("Bath room").child("Lighting").child("Status").setValue("ON");
                     mHome.child("HOME").child("Bath room").child("Lighting").child("Intensity").setValue("65");
-                }
-                else {
+                } else {
                     // push to firebase
                     mHome.child("HOME").child("Bath room").child("Lighting").child("Status").setValue("OFF");
                     mHome.child("HOME").child("Bath room").child("Lighting").child("Intensity").setValue("0");
@@ -74,15 +73,14 @@ public class fragmentBathRoom extends Fragment {
         mHome.child("HOME").child("Bath room").child("Lighting").child("Status").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getValue().toString().equals("ON")) {
+                if (snapshot.getValue().toString().equals("ON")) {
                     swlight.setChecked(true);
                     bath_light_tvonoff.setText("ON");
                     imglight.setBackgroundResource(R.drawable.bg_roomitem_on);
                     bath_light_tvname.setTextColor(view.getResources().getColor(R.color.tvnameon));
                     bath_light_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                     bath_light_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
-                }
-                else {
+                } else {
                     swlight.setChecked(false);
                     imglight.setBackgroundResource(R.drawable.bg_roomitem_off);
                     bath_light_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
@@ -114,11 +112,10 @@ public class fragmentBathRoom extends Fragment {
         swwash.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
+                if (b) {
                     // push to firebase
                     mHome.child("HOME").child("Bath room").child("Washing machine").child("Status").setValue("ON");
-                }
-                else {
+                } else {
                     // push to firebase
                     mHome.child("HOME").child("Bath room").child("Washing machine").child("Status").setValue("OFF");
                 }
@@ -134,8 +131,7 @@ public class fragmentBathRoom extends Fragment {
                     bath_wash_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                     bath_wash_tvonoff.setText("ON");
                     bath_wash_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
-                }
-                else {
+                } else {
                     swwash.setChecked(false);
                     imgwash.setBackgroundResource(R.drawable.bg_roomitem_off);
                     bath_wash_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
@@ -156,7 +152,7 @@ public class fragmentBathRoom extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), DeviceBathRoomActivity.class);
-                i.putExtra("selector","0");
+                i.putExtra("selector", "0");
                 startActivity(i);
             }
         });
@@ -164,7 +160,7 @@ public class fragmentBathRoom extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), DeviceBathRoomActivity.class);
-                i.putExtra("selector","1");
+                i.putExtra("selector", "1");
                 startActivity(i);
             }
         });

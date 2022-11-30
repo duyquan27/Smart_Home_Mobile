@@ -4,7 +4,8 @@ public class USER_INFOR {
 
     public String userFullname, userName, userEmail, userPassword, userPhone, userDate, userGender;
 
-    public USER_INFOR(){}
+    public USER_INFOR() {
+    }
 
     public USER_INFOR(String userFullname, String userName, String userEmail, String userPassword, String userPhone, String userDate, String userGender) {
         this.userFullname = userFullname;

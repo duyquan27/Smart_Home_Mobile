@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.afinal.R;
 import com.example.afinal.option.CheckInternet;
 import com.example.afinal.option.ProgressDialogNotify;
@@ -30,14 +31,14 @@ public class SignUp2Activity extends AppCompatActivity {
     private CheckInternet checkInternet;
     private ProgressDialogNotify progress;
 
-    private String userFullname,userName, userEmail, userPassword;
+    private String userFullname, userName, userEmail, userPassword;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_sign_up2);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         radioGroup = (RadioGroup) findViewById(R.id.rdGroup);
         datePicker = (DatePicker) findViewById(R.id.chooseDate);
@@ -64,7 +65,7 @@ public class SignUp2Activity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignUp2Activity.this,SignUp1Activity.class));
+                startActivity(new Intent(SignUp2Activity.this, SignUp1Activity.class));
                 finish();
             }
         });
@@ -72,55 +73,48 @@ public class SignUp2Activity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignUp2Activity.this,SignInActivity.class));
+                startActivity(new Intent(SignUp2Activity.this, SignInActivity.class));
                 finish();
             }
         });
     }
 
-    private void sendUserToSignUp3()
-    {
+    private void sendUserToSignUp3() {
         selectGender = findViewById(radioGroup.getCheckedRadioButtonId());
         int day = datePicker.getDayOfMonth();
         int month = datePicker.getMonth();
         int year = datePicker.getYear();
         boolean cancel = true;
 
-        if (radioGroup.getCheckedRadioButtonId() == -1)
-        {
-            Toast.makeText(SignUp2Activity.this, "Please Select Gender",Toast.LENGTH_LONG).show();
+        if (radioGroup.getCheckedRadioButtonId() == -1) {
+            Toast.makeText(SignUp2Activity.this, "Please Select Gender", Toast.LENGTH_LONG).show();
             cancel = false;
         }
 
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         int isAgeValid = currentYear - year;
-        if (isAgeValid < 15)
-        {
-            Toast.makeText(SignUp2Activity.this, "You are not eligible to apply",Toast.LENGTH_LONG).show();
+        if (isAgeValid < 15) {
+            Toast.makeText(SignUp2Activity.this, "You are not eligible to apply", Toast.LENGTH_LONG).show();
             cancel = false;
         }
 
-        if (cancel)
-        {
-            progress.showProgressDialog(SignUp2Activity.this,getString(R.string.progress_message_signup),false);
+        if (cancel) {
+            progress.showProgressDialog(SignUp2Activity.this, getString(R.string.progress_message_signup), false);
 
-            if (!checkInternet.isConnected(this))
-            {
+            if (!checkInternet.isConnected(this)) {
                 progress.stopProgressDialog();
-                Toast.makeText(SignUp2Activity.this,getString(R.string.noti_no_internet),Toast.LENGTH_LONG).show();
-            }
-            else
-            {
+                Toast.makeText(SignUp2Activity.this, getString(R.string.noti_no_internet), Toast.LENGTH_LONG).show();
+            } else {
                 String _gender = selectGender.getText().toString();
                 String date = day + "/" + month + "/" + year;
                 progress.stopProgressDialog();
                 Intent intent = new Intent(SignUp2Activity.this, SignUp3Activity.class);
                 intent.putExtra("USER_GENDER", _gender);
                 intent.putExtra("USER_DATE", date);
-                intent.putExtra("USER_FULLNAME",userFullname);
-                intent.putExtra("USER_NAME",userName);
-                intent.putExtra("USER_EMAIL",userEmail);
-                intent.putExtra("USER_PASSWORD",userPassword);
+                intent.putExtra("USER_FULLNAME", userFullname);
+                intent.putExtra("USER_NAME", userName);
+                intent.putExtra("USER_EMAIL", userEmail);
+                intent.putExtra("USER_PASSWORD", userPassword);
                 startActivity(intent);
             }
         }

@@ -70,32 +70,29 @@ public class fragmentSetting extends Fragment {
         getUsersDataByPath(userID);
 
 
-       btnEditProfile.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               openAccountDialog(Gravity.CENTER);
-           }
-       });
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAccountDialog(Gravity.CENTER);
+            }
+        });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),SignInActivity.class));
+                startActivity(new Intent(getActivity(), SignInActivity.class));
             }
         });
         return mview;
     }
 
-    private void getUsersDataByPath(String user_ID)
-    {
+    private void getUsersDataByPath(String user_ID) {
         mData = FirebaseDatabase.getInstance().getReference("USER/PHONE");
         mData.child(user_ID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful())
-                {
-                    if (task.getResult().exists())
-                    {
+                if (task.isSuccessful()) {
+                    if (task.getResult().exists()) {
                         DataSnapshot dataSnapshot = task.getResult();
                         getName = String.valueOf(dataSnapshot.child("userName").getValue());
                         getEmail = String.valueOf(dataSnapshot.child("userEmail").getValue());
@@ -131,25 +128,22 @@ public class fragmentSetting extends Fragment {
         });
     }
 
-    private void openAccountDialog(int gravity){
+    private void openAccountDialog(int gravity) {
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_layout);
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         WindowManager.LayoutParams windowAttributes = window.getAttributes();
         windowAttributes.gravity = gravity;
         window.setAttributes(windowAttributes);
-        if (Gravity.CENTER == gravity)
-        {
+        if (Gravity.CENTER == gravity) {
             dialog.setCancelable(true);
-        }
-        else {
+        } else {
             dialog.setCancelable(false);
         }
         EditText edtUsername = dialog.findViewById(R.id.ed_username);
@@ -207,6 +201,8 @@ public class fragmentSetting extends Fragment {
             }
         });
 
+        edtPhone.setEnabled(false);
+
         btn_apply.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -214,42 +210,35 @@ public class fragmentSetting extends Fragment {
                 String valueEditText;
                 String change = "changed ";
                 int check = 0;
-                if (!(edtUsername.getText().toString().equals(getName)))
-                {
+                if (!(edtUsername.getText().toString().equals(getName))) {
                     valueEditText = edtUsername.getText().toString();
                     mHome.child("USER").child("PHONE").child(getPhone).child("userName").setValue(valueEditText);
                     change += " username";
                     check = 1;
                 }
-                if (!(edtPassword.getText().toString().equals(getPassword)))
-                {
+                if (!(edtPassword.getText().toString().equals(getPassword))) {
                     valueEditText = edtPassword.getText().toString();
                     mHome.child("USER").child("PHONE").child(getPhone).child("userPassword").setValue(valueEditText);
                     change += " password";
                     check = 1;
                 }
-                if (!(edtEmail.getText().toString().equals(getEmail)))
-                {
+                if (!(edtEmail.getText().toString().equals(getEmail))) {
                     valueEditText = edtEmail.getText().toString();
                     mHome.child("USER").child("PHONE").child(getPhone).child("userEmail").setValue(valueEditText);
                     change += " email";
                     check = 1;
                 }
-                if (!(edtPhone.getText().toString().equals(getPhone)))
-                {
+                if (!(edtPhone.getText().toString().equals(getPhone))) {
                     valueEditText = edtPhone.getText().toString();
-                    mHome.child("USER").child("PHONE").child(getPhone).child("userPhone").setValue(valueEditText);
+//                    mHome.child("USER").child("PHONE").child(getPhone).child("userPhone").setValue(valueEditText);
                     change += " phone number";
                     check = 1;
                 }
-                if (check == 1)
-                {
-                    Toast.makeText(getContext(), getString(R.string.notification_data_user_changed_success),Toast.LENGTH_SHORT).show();
+                if (check == 1) {
+                    Toast.makeText(getContext(), getString(R.string.notification_data_user_changed_success), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-                }
-                else if (check == 0)
-                {
-                    Toast.makeText(getContext(),getString(R.string.notification_no_data_user_changed),Toast.LENGTH_SHORT).show();
+                } else if (check == 0) {
+                    Toast.makeText(getContext(), getString(R.string.notification_no_data_user_changed), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
             }

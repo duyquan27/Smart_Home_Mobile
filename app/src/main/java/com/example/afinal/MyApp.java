@@ -8,13 +8,14 @@ import android.net.Uri;
 import android.os.Build;
 
 public class MyApp extends Application {
-    public static final String CHANNEL_ID_TEMP= "CHANNEL TEMP";
+    public static final String CHANNEL_ID_TEMP = "CHANNEL TEMP";
 
     @Override
     public void onCreate() {
         createNotificationChannel();
         super.onCreate();
     }
+
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -28,8 +29,7 @@ public class MyApp extends Application {
             channel_temp.setDescription(description_channel_temp);
             channel_temp.enableVibration(true);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            if (notificationManager!=null)
-            {
+            if (notificationManager != null) {
                 notificationManager.createNotificationChannel(channel_temp);
             }
         }

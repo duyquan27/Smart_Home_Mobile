@@ -23,10 +23,11 @@ import me.tankery.lib.circularseekbar.CircularSeekBar;
 public class fragment_bed_room_air_conditioner extends Fragment {
     private DatabaseReference mRoom;
     private CircularSeekBar circularSeekBar;
-    private TextView txview,tx_onoff, tx_mode;
-    private ImageButton imgbtn_onoff, imgbtn_dry,imgbtn_fan, imgbtn_cool;
+    private TextView txview, tx_onoff, tx_mode;
+    private ImageButton imgbtn_onoff, imgbtn_dry, imgbtn_fan, imgbtn_cool;
     private boolean check_on;
     private int check_mode = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,8 +54,7 @@ public class fragment_bed_room_air_conditioner extends Fragment {
                     check_on = true;
                     imgbtn_onoff.setImageResource(R.drawable.icon_on_air);
                     tx_onoff.setText("On");
-                }
-                else {
+                } else {
                     check_mode = 0;
                     circularSeekBar.setEnabled(false);
                     check_on = false;
@@ -72,7 +72,7 @@ public class fragment_bed_room_air_conditioner extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 txview.setText(snapshot.getValue().toString() + "°C");
-                float f= new Float(snapshot.getValue().toString());
+                float f = new Float(snapshot.getValue().toString());
                 circularSeekBar.setProgress(f);
             }
 
@@ -90,15 +90,13 @@ public class fragment_bed_room_air_conditioner extends Fragment {
                     imgbtn_cool.setImageResource(R.drawable.icon_cool_air_on);
                     imgbtn_fan.setImageResource(R.drawable.icon_fan_air);
                     imgbtn_dry.setImageResource(R.drawable.icon_dry_air);
-                }
-                else if (snapshot.getValue().toString().equals("DRY")) {
+                } else if (snapshot.getValue().toString().equals("DRY")) {
                     tx_mode.setText("Drying");
                     circularSeekBar.setCircleProgressColor(view.getResources().getColor(R.color.dry));
                     imgbtn_dry.setImageResource(R.drawable.icon_dry_air_on);
                     imgbtn_cool.setImageResource(R.drawable.icon_cool_air);
                     imgbtn_fan.setImageResource(R.drawable.icon_fan_air);
-                }
-                else {
+                } else {
                     tx_mode.setText("Fan");
                     circularSeekBar.setCircleProgressColor(view.getResources().getColor(R.color.fan));
                     imgbtn_fan.setImageResource(R.drawable.icon_fan_air_on);
@@ -116,7 +114,7 @@ public class fragment_bed_room_air_conditioner extends Fragment {
         imgbtn_cool.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check_mode == 1){
+                if (check_mode == 1) {
                     circularSeekBar.setProgress(20);
                     txview.setText("20°C");
                     mRoom.child("HOME").child("Bed room").child("AC").child("Regime").setValue("COOL");
@@ -126,7 +124,7 @@ public class fragment_bed_room_air_conditioner extends Fragment {
         imgbtn_dry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check_mode == 1){
+                if (check_mode == 1) {
                     circularSeekBar.setProgress(30);
                     txview.setText("30°C");
                     mRoom.child("HOME").child("Bed room").child("AC").child("Regime").setValue("DRY");
@@ -136,7 +134,7 @@ public class fragment_bed_room_air_conditioner extends Fragment {
         imgbtn_fan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check_mode == 1){
+                if (check_mode == 1) {
                     circularSeekBar.setProgress(25);
                     txview.setText("25°C");
                     mRoom.child("HOME").child("Bed room").child("AC").child("Regime").setValue("FAN");
@@ -146,10 +144,9 @@ public class fragment_bed_room_air_conditioner extends Fragment {
         imgbtn_onoff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check_on){
+                if (check_on) {
                     mRoom.child("HOME").child("Bed room").child("AC").child("Status").setValue("OFF");
-                }
-                else {
+                } else {
                     mRoom.child("HOME").child("Bed room").child("AC").child("Status").setValue("ON");
                 }
             }
@@ -157,7 +154,7 @@ public class fragment_bed_room_air_conditioner extends Fragment {
         circularSeekBar.setOnSeekBarChangeListener(new CircularSeekBar.OnCircularSeekBarChangeListener() {
             @Override
             public void onProgressChanged(CircularSeekBar circularSeekBar, float progress, boolean fromUser) {
-                int tmp = (int)progress;
+                int tmp = (int) progress;
                 txview.setText(tmp + "°C");
                 mRoom.child("HOME").child("Bed room").child("AC").child("Temp").setValue(tmp);
             }

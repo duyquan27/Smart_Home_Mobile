@@ -31,6 +31,7 @@ public class fragmentBedRoom extends Fragment {
     TextView bed_light_tvname, bed_light_tvdevice, bed_light_tvonoff;
     TextView bed_ac_tvname, bed_ac_tvdevice, bed_ac_tvonoff;
     TextView bed_tv_tvname, bed_tv_tvdevice, bed_tv_tvonoff;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,12 +62,11 @@ public class fragmentBedRoom extends Fragment {
         swlamp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
+                if (b) {
                     // push to firebase
                     mHome.child("HOME").child("Bed room").child("Lamp").child("Status").setValue("ON");
                     mHome.child("HOME").child("Bed room").child("Lamp").child("Intensity").setValue("45");
-                }
-                else {
+                } else {
                     // push to firebase
                     mHome.child("HOME").child("Bed room").child("Lamp").child("Status").setValue("OFF");
                     mHome.child("HOME").child("Bed room").child("Lamp").child("Intensity").setValue("0");
@@ -83,8 +83,7 @@ public class fragmentBedRoom extends Fragment {
                     bed_light_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                     bed_light_tvonoff.setText("ON");
                     bed_light_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
-                }
-                else {
+                } else {
                     swlamp.setChecked(false);
                     imglamp.setBackgroundResource(R.drawable.bg_roomitem_off);
                     bed_light_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
@@ -115,11 +114,10 @@ public class fragmentBedRoom extends Fragment {
         swac.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
+                if (b) {
                     // push to firebase
                     mHome.child("HOME").child("Bed room").child("AC").child("Status").setValue("ON");
-                }
-                else {
+                } else {
                     // push to firebase
                     mHome.child("HOME").child("Bed room").child("AC").child("Status").setValue("OFF");
                 }
@@ -135,8 +133,7 @@ public class fragmentBedRoom extends Fragment {
                     bed_ac_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                     bed_ac_tvonoff.setText("ON");
                     bed_ac_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
-                }
-                else {
+                } else {
                     swac.setChecked(false);
                     imgac.setBackgroundResource(R.drawable.bg_roomitem_off);
                     bed_ac_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
@@ -156,11 +153,10 @@ public class fragmentBedRoom extends Fragment {
         swtv.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
+                if (b) {
                     // push to firebase
                     mHome.child("HOME").child("Bed room").child("TV").child("Status").setValue("ON");
-                }
-                else {
+                } else {
                     // push to firebase
                     mHome.child("HOME").child("Bed room").child("TV").child("Status").setValue("OFF");
                 }
@@ -176,8 +172,7 @@ public class fragmentBedRoom extends Fragment {
                     bed_tv_tvdevice.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
                     bed_tv_tvonoff.setText("ON");
                     bed_tv_tvonoff.setTextColor(view.getResources().getColor(R.color.tvdeviceon));
-                }
-                else {
+                } else {
                     swtv.setChecked(false);
                     imgtv.setBackgroundResource(R.drawable.bg_roomitem_off);
                     bed_tv_tvname.setTextColor(view.getResources().getColor(R.color.tvoff));
@@ -196,7 +191,7 @@ public class fragmentBedRoom extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), DeviceBedRoomActivity.class);
-                i.putExtra("selector","0");
+                i.putExtra("selector", "0");
                 startActivity(i);
             }
         });
@@ -204,7 +199,7 @@ public class fragmentBedRoom extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), DeviceBedRoomActivity.class);
-                i.putExtra("selector","1");
+                i.putExtra("selector", "1");
                 startActivity(i);
             }
         });
@@ -212,7 +207,7 @@ public class fragmentBedRoom extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), DeviceBedRoomActivity.class);
-                i.putExtra("selector","2");
+                i.putExtra("selector", "2");
                 startActivity(i);
             }
         });

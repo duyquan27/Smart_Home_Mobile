@@ -43,7 +43,7 @@ public class verifyOTP extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.enter_otp_code);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Init();
 
@@ -54,7 +54,7 @@ public class verifyOTP extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(verifyOTP.this,SignInActivity.class));
+                startActivity(new Intent(verifyOTP.this, SignInActivity.class));
                 finish();
             }
         });
@@ -62,16 +62,14 @@ public class verifyOTP extends AppCompatActivity {
         sendVerificationCodeToUser(phoneNo);
     }
 
-    public void Init()
-    {
+    public void Init() {
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnSubmit = (ImageButton) findViewById(R.id.btnSubmit);
         txtOTP = (PinView) findViewById(R.id.pin_view);
         btnSignIn = (TextView) findViewById(R.id.btnSignIn);
     }
 
-    private void sendVerificationCodeToUser(String phone)
-    {
+    private void sendVerificationCodeToUser(String phone) {
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)
                         .setPhoneNumber(phone)       // Phone number to verify
@@ -93,8 +91,7 @@ public class verifyOTP extends AppCompatActivity {
                 @Override
                 public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                     String code = phoneAuthCredential.getSmsCode();
-                    if (code != null)
-                    {
+                    if (code != null) {
                         txtOTP.setText(code);
                         verifyCode(code);
                     }
@@ -102,13 +99,12 @@ public class verifyOTP extends AppCompatActivity {
 
                 @Override
                 public void onVerificationFailed(@NonNull FirebaseException e) {
-                    Toast.makeText(verifyOTP.this, e.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(verifyOTP.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             };
 
-    private void verifyCode(String code)
-    {
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeBySystem,code);
+    private void verifyCode(String code) {
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeBySystem, code);
         signInWithPhoneAuthCredential(credential);
     }
 
@@ -134,18 +130,15 @@ public class verifyOTP extends AppCompatActivity {
                 });
     }
 
-    private void sendUserToResetPassword()
-    {
+    private void sendUserToResetPassword() {
         Intent intent = new Intent(verifyOTP.this, resetPassword.class);
-        intent.putExtra("RS_USERPHONE",userPhone);
+        intent.putExtra("RS_USERPHONE", userPhone);
         startActivity(intent);
     }
 
-    public void clickToResetPassword(View view)
-    {
+    public void clickToResetPassword(View view) {
         String code = txtOTP.getText().toString();
-        if (!code.isEmpty())
-        {
+        if (!code.isEmpty()) {
             verifyCode(code);
         }
     }

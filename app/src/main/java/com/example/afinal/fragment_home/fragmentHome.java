@@ -36,7 +36,7 @@ import java.util.Date;
 public class fragmentHome extends Fragment {
 
     DatabaseReference mHome;
-    private  RobotoMediumTextView temp;
+    private RobotoMediumTextView temp;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private View mView;
@@ -60,14 +60,14 @@ public class fragmentHome extends Fragment {
         String currentDate = DateFormat.getDateInstance().format(calendar.getTime());
 
         // Inflate the layout for this fragment
-        mView =  inflater.inflate(R.layout.fragment_home, container, false);
+        mView = inflater.inflate(R.layout.fragment_home, container, false);
         tabLayout = mView.findViewById(R.id.tab_layout_device_living);
         viewPager = mView.findViewById(R.id.room_viewpager);
         username = mView.findViewById(R.id.welcome_username);
         temp = mView.findViewById(R.id.temperature);
         RobotoMediumTextView local = mView.findViewById(R.id.local);
         //test
-        RobotoLightTextView tvDate =  mView.findViewById(R.id.time);
+        RobotoLightTextView tvDate = mView.findViewById(R.id.time);
         tvDate.setText(currentDate);
 
         userID = mMainActivity.getUserID();
@@ -93,16 +93,13 @@ public class fragmentHome extends Fragment {
         return mView;
     }
 
-    private void getUsersDataByPath(String user_ID)
-    {
+    private void getUsersDataByPath(String user_ID) {
         mData = FirebaseDatabase.getInstance().getReference("USER/PHONE");
         mData.child(user_ID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful())
-                {
-                    if (task.getResult().exists())
-                    {
+                if (task.isSuccessful()) {
+                    if (task.getResult().exists()) {
                         DataSnapshot dataSnapshot = task.getResult();
                         getPhone = String.valueOf(dataSnapshot.child("userPhone").getValue());
                         mHome.child("USER").child("PHONE").child(getPhone).child("userName").addValueEventListener(new ValueEventListener() {

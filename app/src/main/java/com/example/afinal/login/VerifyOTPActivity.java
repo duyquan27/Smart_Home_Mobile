@@ -71,7 +71,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(VerifyOTPActivity.this,SignInActivity.class));
+                startActivity(new Intent(VerifyOTPActivity.this, SignInActivity.class));
                 finish();
             }
         });
@@ -79,8 +79,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
         sendVerificationCodeToUser(phoneNo);
     }
 
-    private void sendVerificationCodeToUser(String phone)
-    {
+    private void sendVerificationCodeToUser(String phone) {
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)
                         .setPhoneNumber(phone)       // Phone number to verify
@@ -102,8 +101,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 @Override
                 public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                     String code = phoneAuthCredential.getSmsCode();
-                    if (code != null)
-                    {
+                    if (code != null) {
                         pinFromUser.setText(code);
                         verifyCode(code);
                     }
@@ -111,13 +109,12 @@ public class VerifyOTPActivity extends AppCompatActivity {
 
                 @Override
                 public void onVerificationFailed(@NonNull FirebaseException e) {
-                    Toast.makeText(VerifyOTPActivity.this, e.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(VerifyOTPActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             };
 
-    private void verifyCode(String code)
-    {
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeBySystem,code);
+    private void verifyCode(String code) {
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeBySystem, code);
         signInWithPhoneAuthCredential(credential);
     }
 
@@ -127,45 +124,38 @@ public class VerifyOTPActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            USER_INFOR addUser = new USER_INFOR(fullname,username,email,password,phone,date,gender);
-                            createAccount(email,password, addUser);
+                            USER_INFOR addUser = new USER_INFOR(fullname, username, email, password, phone, date, gender);
+                            createAccount(email, password, addUser);
                             storeNewUsersDataByPhone(addUser);
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
 //                                Toast.makeText(VerifyOTPActivity.this, "Verifycation Not Completed! Try again",Toast.LENGTH_LONG).show();
-                            }
-                            else
-                            {
-                                Toast.makeText(VerifyOTPActivity.this, "Phone is registered",Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(VerifyOTPActivity.this, "Phone is registered", Toast.LENGTH_LONG).show();
                             }
                         }
                     }
                 });
     }
 
-    private void storeNewUsersDataByPhone(USER_INFOR newUser)
-    {
+    private void storeNewUsersDataByPhone(USER_INFOR newUser) {
         mDataPhone = mFbData.getReference("USER/PHONE");
         mDataPhone.child(phone).setValue(newUser);
     }
 
-    public void clickVerifyOTP(View view)
-    {
+    public void clickVerifyOTP(View view) {
         String code = pinFromUser.getText().toString();
-        if (!code.isEmpty())
-        {
+        if (!code.isEmpty()) {
             verifyCode(code);
         }
     }
 
-    private void createAccount(String _email, String _password, USER_INFOR newUser)
-    {
-        mAuth.createUserWithEmailAndPassword(_email,_password)
+    private void createAccount(String _email, String _password, USER_INFOR newUser) {
+        mAuth.createUserWithEmailAndPassword(_email, _password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful())
-                        {
+                        if (task.isSuccessful()) {
 //                            FirebaseDatabase.getInstance().getReference("USER/UID")
 //                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
 //                                    .setValue(newUser).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -175,12 +165,10 @@ public class VerifyOTPActivity extends AppCompatActivity {
 //                                            Toast.makeText(VerifyOTPActivity.this, "Verifycation Completed! ",Toast.LENGTH_LONG).show();
 //                                        }
 //                                    });
-                            startActivity(new Intent(VerifyOTPActivity.this,SignInActivity.class));
+                            startActivity(new Intent(VerifyOTPActivity.this, SignInActivity.class));
 
-                        }
-                        else
-                        {
-                            Toast.makeText(VerifyOTPActivity.this, "Email is existed ",Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(VerifyOTPActivity.this, "Email is existed ", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

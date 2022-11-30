@@ -47,7 +47,7 @@ public class SignUp3Activity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignUp3Activity.this,SignUp1Activity.class));
+                startActivity(new Intent(SignUp3Activity.this, SignUp1Activity.class));
                 finish();
             }
         });
@@ -55,7 +55,7 @@ public class SignUp3Activity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignUp3Activity.this,SignInActivity.class));
+                startActivity(new Intent(SignUp3Activity.this, SignInActivity.class));
                 finish();
             }
         });
@@ -70,18 +70,16 @@ public class SignUp3Activity extends AppCompatActivity {
         });
     }
 
-    private void sendUserToOTPVerification()
-    {
+    private void sendUserToOTPVerification() {
         txtPhone.setError(null);
         String getUserEnteredPhone = txtPhone.getText().toString().trim();
 
         boolean cancel = true;
 
-        if (getUserEnteredPhone.matches("")){
+        if (getUserEnteredPhone.matches("")) {
             txtPhone.setError(getString(R.string.error_field_phone_empty));
             cancel = false;
-        }
-        else if (!getUserEnteredPhone.matches(PHONE_PATTERN)) {
+        } else if (!getUserEnteredPhone.matches(PHONE_PATTERN)) {
             txtPhone.setError(getString(R.string.error_field_phone_required));
             cancel = false;
         }
@@ -95,10 +93,9 @@ public class SignUp3Activity extends AppCompatActivity {
         String subPhone = getUserEnteredPhone.substring(1);
         String _phone = "+" + countryCodePicker.getSelectedCountryCode() + subPhone;
 
-        Log.d("PHONE",_phone);
+        Log.d("PHONE", _phone);
 
-        if(cancel)
-        {
+        if (cancel) {
 //            progress.showProgressDialog(getApplicationContext(),getString(R.string.progress_message_signup),false);
 //
 //            if (!checkInternet.isConnected(SignUp3Activity.this))
@@ -109,16 +106,16 @@ public class SignUp3Activity extends AppCompatActivity {
 //            else
 //            {
 //                progress.stopProgressDialog();
-                Intent intent = new Intent(SignUp3Activity.this, VerifyOTPActivity.class);
-                intent.putExtra("FULLNAME", _fullname);
-                intent.putExtra("USERNAME", _username);
-                intent.putExtra("EMAIL", _email);
-                intent.putExtra("PASSWORD", _password);
-                intent.putExtra("GENDER", _gender);
-                intent.putExtra("DATE", _date);
-                intent.putExtra("PHONE", getUserEnteredPhone);
-                intent.putExtra("PHONENO", _phone);
-                startActivity(intent);
+            Intent intent = new Intent(SignUp3Activity.this, VerifyOTPActivity.class);
+            intent.putExtra("FULLNAME", _fullname);
+            intent.putExtra("USERNAME", _username);
+            intent.putExtra("EMAIL", _email);
+            intent.putExtra("PASSWORD", _password);
+            intent.putExtra("GENDER", _gender);
+            intent.putExtra("DATE", _date);
+            intent.putExtra("PHONE", getUserEnteredPhone);
+            intent.putExtra("PHONENO", _phone);
+            startActivity(intent);
             //}
         }
     }

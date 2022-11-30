@@ -59,8 +59,7 @@ public class fragment_living_room_tv extends Fragment {
                     txCh.setBackgroundColor(view.getResources().getColor(R.color.white));
                     txVol.setBackgroundColor(view.getResources().getColor(R.color.white));
                     iconVolume.setBackgroundColor(view.getResources().getColor(R.color.white));
-                }
-                else {
+                } else {
                     checkOn = false;
                     btnOnOff.setImageResource(R.drawable.icon_btn_off);
                     layoutOff.setBackgroundColor(view.getResources().getColor(R.color.black));
@@ -83,17 +82,13 @@ public class fragment_living_room_tv extends Fragment {
                 txCh.setText("CH " + channel);
                 if (snapshot.getValue().toString().equals("1")) {
                     imgCh.setImageResource(R.drawable.channel01);
-                }
-                else if (snapshot.getValue().toString().equals("2")) {
+                } else if (snapshot.getValue().toString().equals("2")) {
                     imgCh.setImageResource(R.drawable.channel02);
-                }
-                else if (snapshot.getValue().toString().equals("3")) {
+                } else if (snapshot.getValue().toString().equals("3")) {
                     imgCh.setImageResource(R.drawable.channel03);
-                }
-                else if (snapshot.getValue().toString().equals("4")) {
+                } else if (snapshot.getValue().toString().equals("4")) {
                     imgCh.setImageResource(R.drawable.channel04);
-                }
-                else {
+                } else {
                     imgCh.setImageResource(R.drawable.channel05);
                 }
             }
@@ -123,8 +118,7 @@ public class fragment_living_room_tv extends Fragment {
                 if (checkOn) {
                     // push to firebase
                     mRoom.child("HOME").child("Living room").child("TV").child("Status").setValue("OFF");
-                }
-                else {
+                } else {
                     // push to firebase
                     mRoom.child("HOME").child("Living room").child("TV").child("Status").setValue("ON");
                 }
@@ -137,9 +131,8 @@ public class fragment_living_room_tv extends Fragment {
                 if (checkOn) {
                     if (channel == 5) {
                         channel = 1;
-                    }
-                    else {
-                        channel ++;
+                    } else {
+                        channel++;
                     }
                     mRoom.child("HOME").child("Living room").child("TV").child("Channel").setValue(channel);
                 }
@@ -153,7 +146,7 @@ public class fragment_living_room_tv extends Fragment {
                     if (channel == 1)
                         channel = 5;
                     else {
-                        channel --;
+                        channel--;
                     }
                     mRoom.child("HOME").child("Living room").child("TV").child("Channel").setValue(channel);
                 }
@@ -166,9 +159,8 @@ public class fragment_living_room_tv extends Fragment {
                 if (checkOn) {
                     if (volume == 100) {
                         volume = 100;
-                    }
-                    else {
-                        volume ++;
+                    } else {
+                        volume++;
                         iconVolume.setImageResource(R.drawable.icon_audio);
                     }
                     mRoom.child("HOME").child("Living room").child("TV").child("Volume").setValue(volume);
@@ -183,9 +175,8 @@ public class fragment_living_room_tv extends Fragment {
                 if (checkOn) {
                     if (volume == 0) {
                         iconVolume.setImageResource(R.drawable.icon_audio_mute);
-                    }
-                    else {
-                        volume --;
+                    } else {
+                        volume--;
                     }
                     mRoom.child("HOME").child("Living room").child("TV").child("Volume").setValue(volume);
                 }

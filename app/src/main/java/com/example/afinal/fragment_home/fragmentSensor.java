@@ -39,14 +39,15 @@ import java.util.List;
 
 public class fragmentSensor extends Fragment {
     DatabaseReference mData;
-    String tempVal,humiVal,noiseVal,airVal;
+    String tempVal, humiVal, noiseVal, airVal;
     TextView tv_temp_val, tv_humi_val, tv_noise_val, tv_air_val;
-    com.google.android.material.slider.RangeSlider slider_temp,slider_humi,slider_noise,slider_air;
+    com.google.android.material.slider.RangeSlider slider_temp, slider_humi, slider_noise, slider_air;
     public List<Float> sliderTempVal = new ArrayList<>();
     public List<Float> sliderHumiVal = new ArrayList<>();
     public List<Float> sliderNoiseVal = new ArrayList<>();
-    public  List<Float> sliderAirVal = new ArrayList<>();
+    public List<Float> sliderAirVal = new ArrayList<>();
     static final int defaultTrackHeight = 30;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,19 +74,19 @@ public class fragmentSensor extends Fragment {
         mData.child("SENSOR").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-            sliderTempVal.add(0, Float.parseFloat((String) snapshot.child("Temperature/Lower").getValue()));
-            sliderTempVal.add(1, Float.parseFloat((String) snapshot.child("Temperature/Upper").getValue()));
-            sliderHumiVal.add(0, Float.parseFloat((String) snapshot.child("Humidity/Lower").getValue()));
-            sliderHumiVal.add(1, Float.parseFloat((String) snapshot.child("Humidity/Upper").getValue()));
-            sliderNoiseVal.add(0, Float.parseFloat((String) snapshot.child("Noise/Lower").getValue()));
-            sliderNoiseVal.add(1, Float.parseFloat((String) snapshot.child("Noise/Upper").getValue()));
-            sliderAirVal.add(0, Float.parseFloat((String)  snapshot.child("Air Quality/Lower").getValue()));
-            sliderAirVal.add(1, Float.parseFloat((String)  snapshot.child("Air Quality/Upper").getValue()));
-            slider_temp.setValues(sliderTempVal);
-            slider_humi.setValues(sliderHumiVal);
-            slider_noise.setValues(sliderNoiseVal);
-            slider_air.setValues(sliderAirVal);
-            Log.d("check slider init", slider_temp.getValues() + " " + slider_humi.getValues() + " " + slider_noise.getValues() + " " + slider_air.getValues());
+                sliderTempVal.add(0, Float.parseFloat((String) snapshot.child("Temperature/Lower").getValue()));
+                sliderTempVal.add(1, Float.parseFloat((String) snapshot.child("Temperature/Upper").getValue()));
+                sliderHumiVal.add(0, Float.parseFloat((String) snapshot.child("Humidity/Lower").getValue()));
+                sliderHumiVal.add(1, Float.parseFloat((String) snapshot.child("Humidity/Upper").getValue()));
+                sliderNoiseVal.add(0, Float.parseFloat((String) snapshot.child("Noise/Lower").getValue()));
+                sliderNoiseVal.add(1, Float.parseFloat((String) snapshot.child("Noise/Upper").getValue()));
+                sliderAirVal.add(0, Float.parseFloat((String) snapshot.child("Air Quality/Lower").getValue()));
+                sliderAirVal.add(1, Float.parseFloat((String) snapshot.child("Air Quality/Upper").getValue()));
+                slider_temp.setValues(sliderTempVal);
+                slider_humi.setValues(sliderHumiVal);
+                slider_noise.setValues(sliderNoiseVal);
+                slider_air.setValues(sliderAirVal);
+                Log.d("check slider init", slider_temp.getValues() + " " + slider_humi.getValues() + " " + slider_noise.getValues() + " " + slider_air.getValues());
             }
 
             @Override
@@ -98,20 +99,20 @@ public class fragmentSensor extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                tempVal=snapshot.child("Value/Temp").getValue().toString();
-                humiVal=snapshot.child("Value/Humi").getValue().toString();
-                noiseVal=snapshot.child("Value/Noise").getValue().toString();
-                airVal=snapshot.child("Value/Air").getValue().toString();
+                tempVal = snapshot.child("Value/Temp").getValue().toString();
+                humiVal = snapshot.child("Value/Humi").getValue().toString();
+                noiseVal = snapshot.child("Value/Noise").getValue().toString();
+                airVal = snapshot.child("Value/Air").getValue().toString();
 
                 tv_temp_val.setText(tempVal + "℃");
                 tv_humi_val.setText(humiVal + "%");
                 tv_noise_val.setText(noiseVal + "db");
                 tv_air_val.setText(airVal);
 
-                checkThreshold(slider_temp,"Temperature",tempVal);
-                checkThreshold(slider_humi,"Humidity",humiVal);
-                checkThreshold(slider_noise,"Noise",noiseVal);
-                checkThreshold(slider_air,"Air Quality",airVal);
+                checkThreshold(slider_temp, "Temperature", tempVal);
+                checkThreshold(slider_humi, "Humidity", humiVal);
+                checkThreshold(slider_noise, "Noise", noiseVal);
+                checkThreshold(slider_air, "Air Quality", airVal);
             }
 
             @Override
@@ -180,67 +181,51 @@ public class fragmentSensor extends Fragment {
 
     private void checkThreshold(RangeSlider slider, String key, String val) {
         int thumbCheck = 2;
-        if (Float.valueOf(val) < slider.getValues().get(0))
-        {
+        if (Float.valueOf(val) < slider.getValues().get(0)) {
             thumbCheck = 1;
             sendTempNotification(key, thumbCheck);
-        }
-        else if (Float.valueOf(val) > slider.getValues().get(1))
-        {
+        } else if (Float.valueOf(val) > slider.getValues().get(1)) {
             thumbCheck = 0;
-            sendTempNotification(key , thumbCheck);
+            sendTempNotification(key, thumbCheck);
         }
 
     }
 
-    private void sendTempNotification(String key , int checker) {
+    private void sendTempNotification(String key, int checker) {
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         RemoteViews notificationLayout = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-            notificationLayout = new RemoteViews(getActivity().getOpPackageName(),R.layout.custom_notification_layout);
+            notificationLayout = new RemoteViews(getActivity().getOpPackageName(), R.layout.custom_notification_layout);
         }
-        notificationLayout.setTextViewText(R.id.title,"THRESHOLD WARNING");
+        notificationLayout.setTextViewText(R.id.title, "THRESHOLD WARNING");
 
-        switch (key)
-        {
+        switch (key) {
             case "Temperature":
-                if (checker == 1)
-                {
-                    notificationLayout.setTextViewText(R.id.info,"temp so cold");
-                }
-                else if (checker == 0)
-                {
-                    notificationLayout.setTextViewText(R.id.info,"temp so hot");
+                if (checker == 1) {
+                    notificationLayout.setTextViewText(R.id.info, "temp so cold");
+                } else if (checker == 0) {
+                    notificationLayout.setTextViewText(R.id.info, "temp so hot");
                 }
                 break;
             case "Humidity":
-                if (checker == 1)
-                {
-                    notificationLayout.setTextViewText(R.id.info,"humi so dry");
-                }
-                else if (checker == 0)
-                {
-                    notificationLayout.setTextViewText(R.id.info,"humi so wet");
+                if (checker == 1) {
+                    notificationLayout.setTextViewText(R.id.info, "humi so dry");
+                } else if (checker == 0) {
+                    notificationLayout.setTextViewText(R.id.info, "humi so wet");
                 }
                 break;
             case "Noise":
-                if (checker == 1)
-                {
-                    notificationLayout.setTextViewText(R.id.info,"there no sound");
-                }
-                else if (checker == 0)
-                {
-                    notificationLayout.setTextViewText(R.id.info,"there so loud");
+                if (checker == 1) {
+                    notificationLayout.setTextViewText(R.id.info, "there no sound");
+                } else if (checker == 0) {
+                    notificationLayout.setTextViewText(R.id.info, "there so loud");
                 }
                 break;
             case "Air Quality":
-                if (checker == 1)
-                {
-                    notificationLayout.setTextViewText(R.id.info,"air so good");
-                }
-                else if (checker == 0)
-                {
-                    notificationLayout.setTextViewText(R.id.info,"air so bad");
+                if (checker == 1) {
+                    notificationLayout.setTextViewText(R.id.info, "air so good");
+                } else if (checker == 0) {
+                    notificationLayout.setTextViewText(R.id.info, "air so bad");
                 }
                 break;
         }
@@ -248,7 +233,7 @@ public class fragmentSensor extends Fragment {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
         String sdfDate = simpleDateFormat.format(new Date());
-        notificationLayout.setTextViewText(R.id.time,sdfDate);
+        notificationLayout.setTextViewText(R.id.time, sdfDate);
         Notification notification = new NotificationCompat.Builder(getContext(), CHANNEL_ID_TEMP)
                 .setSmallIcon(R.drawable.icon_smart_home)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
@@ -256,11 +241,10 @@ public class fragmentSensor extends Fragment {
                 .setAutoCancel(true)
                 .build();
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getContext());
-        notificationManagerCompat.notify(getNotificationId(),notification);
+        notificationManagerCompat.notify(getNotificationId(), notification);
     }
 
-    private int getNotificationId()
-    {
+    private int getNotificationId() {
         return (int) new Date().getTime();
     }
 }

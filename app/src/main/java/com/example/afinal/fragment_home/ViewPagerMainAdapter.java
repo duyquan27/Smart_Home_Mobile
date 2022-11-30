@@ -18,7 +18,7 @@ public class ViewPagerMainAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 return new fragmentHome();
             case 1:
@@ -39,7 +39,7 @@ public class ViewPagerMainAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         String title = "";
-        switch (position){
+        switch (position) {
             case 0:
                 title = "Home";
                 break;

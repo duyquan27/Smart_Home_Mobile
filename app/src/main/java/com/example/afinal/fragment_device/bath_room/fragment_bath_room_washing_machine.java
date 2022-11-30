@@ -23,32 +23,32 @@ import com.google.firebase.database.ValueEventListener;
 
 public class fragment_bath_room_washing_machine extends Fragment {
     DatabaseReference mHome;
-    private TextView tx_time,tx_status;
+    private TextView tx_time, tx_status;
     private ImageButton btn_onoff_wash, btn_cotton, btn_mix, btn_sportwear, btn_babycare, btn_run;
     private boolean check_onoff = true, counterIsActive = false;
     private int check_mode = 3, check = 0;
     CountDownTimer countDownTimer;
 
-    public void reset(){
+    public void reset() {
         btn_run.setImageResource(R.drawable.icon_start_wm);
         check_onoff = true;
-        switch (check_mode){
-            case 1:{
+        switch (check_mode) {
+            case 1: {
                 tx_time.setText("01 : 00");
                 tx_status.setText("Ready");
                 break;
             }
-            case 2:{
+            case 2: {
                 tx_time.setText("00 : 20");
                 tx_status.setText("Ready");
                 break;
             }
-            case 3:{
+            case 3: {
                 tx_time.setText("00 : 30");
                 tx_status.setText("Ready");
                 break;
             }
-            case 4:{
+            case 4: {
                 tx_time.setText("00 : 40");
                 tx_status.setText("Ready");
                 break;
@@ -57,19 +57,21 @@ public class fragment_bath_room_washing_machine extends Fragment {
         countDownTimer.cancel();
         counterIsActive = false;
     }
-    public void updateTimer(int secondsLeft){
-        int minutes = secondsLeft/60;
+
+    public void updateTimer(int secondsLeft) {
+        int minutes = secondsLeft / 60;
         int seconds = secondsLeft - (minutes * 60);
         String secondsString = Integer.toString(seconds);
         String minutesString = Integer.toString(minutes);
-        if (seconds <= 9){
+        if (seconds <= 9) {
             secondsString = "0" + secondsString;
         }
-        if (minutes <= 9){
+        if (minutes <= 9) {
             minutesString = "0" + minutesString;
         }
-        tx_time.setText(minutesString +" : "+ secondsString);
+        tx_time.setText(minutesString + " : " + secondsString);
     }
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,12 +91,11 @@ public class fragment_bath_room_washing_machine extends Fragment {
         mHome.child("HOME").child("Bath room").child("Washing machine").child("Status").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.getValue().toString().equals("ON")){
+                if (snapshot.getValue().toString().equals("ON")) {
                     check_onoff = true;
                     btn_onoff_wash.setImageResource(R.drawable.icon_btn_on);
                     btn_run.setEnabled(true);
-                }
-                else {
+                } else {
                     check_onoff = false;
                     btn_onoff_wash.setImageResource(R.drawable.icon_btn_off);
                     btn_run.setEnabled(false);
@@ -117,24 +118,21 @@ public class fragment_bath_room_washing_machine extends Fragment {
                     btn_cotton.setImageResource(R.drawable.icon_cotton);
                     btn_mix.setImageResource(R.drawable.icon_mix);
                     check_mode = 1;
-                }
-                else if (snapshot.getValue().toString().equals("Sport wear")) {
+                } else if (snapshot.getValue().toString().equals("Sport wear")) {
                     tx_time.setText("00 : 20");
                     btn_babycare.setImageResource(R.drawable.icon_baby_care);
                     btn_sportwear.setImageResource(R.drawable.icon_sport_wear_on);
                     btn_cotton.setImageResource(R.drawable.icon_cotton);
                     btn_mix.setImageResource(R.drawable.icon_mix);
                     check_mode = 2;
-                }
-                else if (snapshot.getValue().toString().equals("Cotton")) {
+                } else if (snapshot.getValue().toString().equals("Cotton")) {
                     tx_time.setText("00 : 30");
                     btn_babycare.setImageResource(R.drawable.icon_baby_care);
                     btn_sportwear.setImageResource(R.drawable.icon_sport_wear);
                     btn_cotton.setImageResource(R.drawable.icon_cotton_on);
                     btn_mix.setImageResource(R.drawable.icon_mix);
                     check_mode = 3;
-                }
-                else {
+                } else {
                     tx_time.setText("00 : 40");
                     btn_babycare.setImageResource(R.drawable.icon_baby_care);
                     btn_sportwear.setImageResource(R.drawable.icon_sport_wear);
@@ -151,26 +149,24 @@ public class fragment_bath_room_washing_machine extends Fragment {
         });
 
 
-
-
-
         btn_run.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (counterIsActive){
+                if (counterIsActive) {
                     reset();
-                }else {
+                } else {
                     counterIsActive = true;
                     btn_run.setImageResource(R.drawable.icon_start_wm_on);
                     tx_status.setText("Start");
                     check_onoff = false;
-                    switch (check_mode){
-                        case 1:{
+                    switch (check_mode) {
+                        case 1: {
                             countDownTimer = new CountDownTimer(60 * 1000 + 100, 1000) {
                                 @Override
                                 public void onTick(long l) {
-                                    updateTimer((int) l/1000);
+                                    updateTimer((int) l / 1000);
                                 }
+
                                 @Override
                                 public void onFinish() {
                                     MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music1);
@@ -181,12 +177,13 @@ public class fragment_bath_room_washing_machine extends Fragment {
                             }.start();
                             break;
                         }
-                        case 2:{
+                        case 2: {
                             countDownTimer = new CountDownTimer(20 * 1000 + 100, 1000) {
                                 @Override
                                 public void onTick(long l) {
-                                    updateTimer((int) l/1000);
+                                    updateTimer((int) l / 1000);
                                 }
+
                                 @Override
                                 public void onFinish() {
                                     MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music2);
@@ -197,12 +194,13 @@ public class fragment_bath_room_washing_machine extends Fragment {
                             }.start();
                             break;
                         }
-                        case 3:{
+                        case 3: {
                             countDownTimer = new CountDownTimer(30 * 1000 + 100, 1000) {
                                 @Override
                                 public void onTick(long l) {
-                                    updateTimer((int) l/1000);
+                                    updateTimer((int) l / 1000);
                                 }
+
                                 @Override
                                 public void onFinish() {
                                     MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music3);
@@ -213,12 +211,13 @@ public class fragment_bath_room_washing_machine extends Fragment {
                             }.start();
                             break;
                         }
-                        case 4:{
+                        case 4: {
                             countDownTimer = new CountDownTimer(40 * 1000 + 100, 1000) {
                                 @Override
                                 public void onTick(long l) {
-                                    updateTimer((int) l/1000);
+                                    updateTimer((int) l / 1000);
                                 }
+
                                 @Override
                                 public void onFinish() {
                                     MediaPlayer mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), R.raw.music3);
@@ -237,7 +236,7 @@ public class fragment_bath_room_washing_machine extends Fragment {
         btn_babycare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check_onoff){
+                if (check_onoff) {
                     mHome.child("HOME").child("Bath room").child("Washing machine").child("Regime").setValue("Baby care");
                 }
             }
@@ -245,7 +244,7 @@ public class fragment_bath_room_washing_machine extends Fragment {
         btn_sportwear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check_onoff){
+                if (check_onoff) {
                     mHome.child("HOME").child("Bath room").child("Washing machine").child("Regime").setValue("Sport wear");
                 }
             }
@@ -253,7 +252,7 @@ public class fragment_bath_room_washing_machine extends Fragment {
         btn_cotton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check_onoff){
+                if (check_onoff) {
                     mHome.child("HOME").child("Bath room").child("Washing machine").child("Regime").setValue("Cotton");
                 }
             }
@@ -261,7 +260,7 @@ public class fragment_bath_room_washing_machine extends Fragment {
         btn_mix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check_onoff){
+                if (check_onoff) {
                     mHome.child("HOME").child("Bath room").child("Washing machine").child("Regime").setValue("Mix");
                 }
             }
@@ -270,10 +269,9 @@ public class fragment_bath_room_washing_machine extends Fragment {
         btn_onoff_wash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check_onoff){
+                if (check_onoff) {
                     mHome.child("HOME").child("Bath room").child("Washing machine").child("Status").setValue("OFF");
-                }
-                else {
+                } else {
                     mHome.child("HOME").child("Bath room").child("Washing machine").child("Status").setValue("ON");
                 }
             }

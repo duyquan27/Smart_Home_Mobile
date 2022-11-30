@@ -73,12 +73,10 @@ public class fragment_bed_room_lamp extends Fragment {
                             } else if (snapshot.getValue().toString().equals("PURPLE")) {
                                 imageView.setImageResource(R.drawable.icon_lighting_bed);
                                 seekBar.setProgressTintList(ColorStateList.valueOf(view.getResources().getColor(R.color.tim)));
-                            }
-                            else if (snapshot.getValue().toString().equals("PINK")) {
+                            } else if (snapshot.getValue().toString().equals("PINK")) {
                                 imageView.setImageResource(R.drawable.icon_lamp_hong);
                                 seekBar.setProgressTintList(ColorStateList.valueOf(view.getResources().getColor(R.color.hong)));
-                            }
-                            else {
+                            } else {
                                 imageView.setImageResource(R.drawable.icon_lamp_do);
                                 seekBar.setProgressTintList(ColorStateList.valueOf(view.getResources().getColor(R.color.doLamp)));
                             }
@@ -89,8 +87,7 @@ public class fragment_bed_room_lamp extends Fragment {
 
                         }
                     });
-                }
-                else {
+                } else {
                     checkOn = false;
                     seekBar.setEnabled(false);
                     imgBtnOnOff.setImageResource(R.drawable.icon_btn_off);
@@ -108,7 +105,7 @@ public class fragment_bed_room_lamp extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 txIntensity.setText(snapshot.getValue().toString() + " %");
-                int i= new Integer(snapshot.getValue().toString());
+                int i = new Integer(snapshot.getValue().toString());
                 seekBar.setProgress(i);
             }
 
@@ -122,7 +119,7 @@ public class fragment_bed_room_lamp extends Fragment {
             @Override
             public void onClick(View view) {
                 if (checkOn)
-                mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("YELLOW");
+                    mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("YELLOW");
             }
         });
 
@@ -130,7 +127,7 @@ public class fragment_bed_room_lamp extends Fragment {
             @Override
             public void onClick(View view) {
                 if (checkOn)
-                mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("BLUE");
+                    mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("BLUE");
             }
         });
 
@@ -138,7 +135,7 @@ public class fragment_bed_room_lamp extends Fragment {
             @Override
             public void onClick(View view) {
                 if (checkOn)
-                mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("PURPLE");
+                    mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("PURPLE");
             }
         });
 
@@ -146,7 +143,7 @@ public class fragment_bed_room_lamp extends Fragment {
             @Override
             public void onClick(View view) {
                 if (checkOn)
-                mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("PINK");
+                    mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("PINK");
             }
         });
 
@@ -154,7 +151,7 @@ public class fragment_bed_room_lamp extends Fragment {
             @Override
             public void onClick(View view) {
                 if (checkOn)
-                mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("RED");
+                    mRoom.child("HOME").child("Bed room").child("Lamp").child("Choose color").setValue("RED");
             }
         });
 
@@ -164,8 +161,7 @@ public class fragment_bed_room_lamp extends Fragment {
                 if (checkOn) {
                     // push to firebase
                     mRoom.child("HOME").child("Bed room").child("Lamp").child("Status").setValue("OFF");
-                }
-                else {
+                } else {
                     mRoom.child("HOME").child("Bed room").child("Lamp").child("Status").setValue("ON");
                 }
             }

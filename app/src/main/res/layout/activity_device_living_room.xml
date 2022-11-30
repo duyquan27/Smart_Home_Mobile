@@ -22,21 +22,20 @@
         android:id="@+id/tab_layout_device_living_room"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/btnBack"
         android:layout_marginStart="30dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="12dp"
         android:background="@drawable/tab_rect"
         android:elevation="3dp"
+        app:tabBackground="@drawable/tab_selector"
         app:tabGravity="fill"
+        app:tabIndicatorGravity="center"
         app:tabIndicatorHeight="0dp"
         app:tabMode="fixed"
-        app:tabIndicatorGravity="center"
-        app:tabBackground="@drawable/tab_selector"
         app:tabRippleColor="@null"
-        app:tabTextAppearance="@style/tablayout"
-        android:layout_below="@+id/btnBack"
-        />
+        app:tabTextAppearance="@style/tablayout" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager_device_living_room"

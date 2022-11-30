@@ -35,7 +35,7 @@ import java.util.HashMap;
 public class SignInActivity extends AppCompatActivity {
 
     private ImageButton btnSignIn;
-    private TextView btnForgotpw,btnSignUp;
+    private TextView btnForgotpw, btnSignUp;
     private EditText txtEmail, txtPassword;
     private Button openEye;
     private CheckBox checkboxRememberMe;
@@ -63,7 +63,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_login);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Init();
 
@@ -74,8 +74,7 @@ public class SignInActivity extends AppCompatActivity {
             txtEmail.setText(rememberDetails.get(SessionManager.KEY_SESSIONPHONENUMBER));
             txtPassword.setText(rememberDetails.get(SessionManager.KEY_SESSIONPASSWORD));
             checkboxRememberMe.setChecked(true);
-        }
-        else {
+        } else {
             checkboxRememberMe.setChecked(false);
         }
 
@@ -97,13 +96,10 @@ public class SignInActivity extends AppCompatActivity {
         openEye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkEye)
-                {
+                if (checkEye) {
                     closePassword();
                     checkEye = false;
-                }
-                else
-                {
+                } else {
                     openPassword();
                     checkEye = true;
                 }
@@ -113,15 +109,14 @@ public class SignInActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progress.showProgressDialog(SignInActivity.this,getString(R.string.progress_message_check_internet),false);
+                progress.showProgressDialog(SignInActivity.this, getString(R.string.progress_message_check_internet), false);
                 if (!checkInternet.isConnected(SignInActivity.this)) {
                     progress.stopProgressDialog();
-                    Toast.makeText(SignInActivity.this,getString(R.string.noti_no_internet),Toast.LENGTH_LONG).show();
-                }
-                else {
+                    Toast.makeText(SignInActivity.this, getString(R.string.noti_no_internet), Toast.LENGTH_LONG).show();
+                } else {
                     progress.stopProgressDialog();
                     Intent intent = new Intent(SignInActivity.this, SignUp1Activity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
             }
@@ -130,23 +125,21 @@ public class SignInActivity extends AppCompatActivity {
         btnForgotpw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progress.showProgressDialog(SignInActivity.this,getString(R.string.progress_message_check_internet),false);
+                progress.showProgressDialog(SignInActivity.this, getString(R.string.progress_message_check_internet), false);
                 if (!checkInternet.isConnected(SignInActivity.this)) {
                     progress.stopProgressDialog();
-                    Toast.makeText(SignInActivity.this,getString(R.string.noti_no_internet),Toast.LENGTH_LONG).show();
-                }
-                else {
+                    Toast.makeText(SignInActivity.this, getString(R.string.noti_no_internet), Toast.LENGTH_LONG).show();
+                } else {
                     progress.stopProgressDialog();
                     Intent intent = new Intent(SignInActivity.this, forgotPassWord.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
             }
         });
     }
 
-    public void Init()
-    {
+    public void Init() {
         btnSignIn = (ImageButton) findViewById(R.id.btnLogin);
         btnForgotpw = (TextView) findViewById(R.id.btnForgotpw);
         btnSignUp = (TextView) findViewById(R.id.btnSignUp);
@@ -156,8 +149,7 @@ public class SignInActivity extends AppCompatActivity {
         checkboxRememberMe = (CheckBox) findViewById(R.id.remmberCheck);
     }
 
-    private void Login()
-    {
+    private void Login() {
 
         //reset error
         txtEmail.setError(null);
@@ -183,9 +175,8 @@ public class SignInActivity extends AppCompatActivity {
         if (checkboxRememberMe.isChecked()) {
             checkboxRememberMe.setChecked(true);
             SessionManager sessionManager = new SessionManager(SignInActivity.this, SessionManager.SESSION_REMEMBERME);
-            sessionManager.createRememberSession(email,password);
-        }
-        else {
+            sessionManager.createRememberSession(email, password);
+        } else {
             checkboxRememberMe.setChecked(false);
             SessionManager sessionManager = new SessionManager(SignInActivity.this, SessionManager.SESSION_REMEMBERME);
             sessionManager.logoutRememberMe();
@@ -194,13 +185,12 @@ public class SignInActivity extends AppCompatActivity {
         //check email and password with database
         if (cancel) {
 
-            progress.showProgressDialog(SignInActivity.this,getString(R.string.progress_message_login),false);
+            progress.showProgressDialog(SignInActivity.this, getString(R.string.progress_message_login), false);
 
             if (!checkInternet.isConnected(SignInActivity.this)) {
                 progress.stopProgressDialog();
-                Toast.makeText(SignInActivity.this,getString(R.string.noti_no_internet),Toast.LENGTH_LONG).show();
-            }
-            else {
+                Toast.makeText(SignInActivity.this, getString(R.string.noti_no_internet), Toast.LENGTH_LONG).show();
+            } else {
                 if (email.matches(PHONE_PATTERN)) {
                     mRef = mDatabase.getReference("USER/PHONE");
                     mRef.child(email).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -218,16 +208,14 @@ public class SignInActivity extends AppCompatActivity {
                                     if (password.equals(userPassword)) {
                                         progress.stopProgressDialog();
                                         sendUserToMainActivity();
-                                    }
-                                    else {
+                                    } else {
                                         progress.stopProgressDialog();
-                                        Toast.makeText(SignInActivity.this,getString(R.string.noti_incorrect_password),Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SignInActivity.this, getString(R.string.noti_incorrect_password), Toast.LENGTH_LONG).show();
                                     }
 
-                                }
-                                else {
+                                } else {
                                     progress.stopProgressDialog();
-                                    Toast.makeText(SignInActivity.this,getString(R.string.noti_incorrect_phone),Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SignInActivity.this, getString(R.string.noti_incorrect_phone), Toast.LENGTH_LONG).show();
                                 }
                             }
                         }
@@ -254,25 +242,22 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
-    private void sendUserToMainActivity()
-    {
+    private void sendUserToMainActivity() {
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-        intent.putExtra("KEY_ID",userID);
+        intent.putExtra("KEY_ID", userID);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
-    private void closePassword()
-    {
+    private void closePassword() {
         openEye.setBackgroundResource(R.drawable.eye_open);
         txtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         txtPassword.setSelection(txtPassword.getText().length());
     }
 
-    private void openPassword()
-    {
+    private void openPassword() {
         openEye.setBackgroundResource(R.drawable.eye_close);
-        txtPassword.setInputType( InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+        txtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
         txtPassword.setSelection(txtPassword.getText().length());
     }
 }

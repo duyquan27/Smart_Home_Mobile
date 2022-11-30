@@ -22,6 +22,7 @@ public class DeviceBedRoomActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ImageButton btnBack;
     private String select;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +48,7 @@ public class DeviceBedRoomActivity extends AppCompatActivity {
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch (position)
-                {
+                switch (position) {
                     case 0:
                         tab.setIcon(R.drawable.icon_lamp);
                         break;

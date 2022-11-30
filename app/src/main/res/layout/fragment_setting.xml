@@ -289,7 +289,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/round_back_logout"
                     android:padding="10dp"
-                    android:src="@drawable/icon_logout" />
+                    android:src="@drawable/icon_dangsuat" />
 
                 <com.example.afinal.custom_textView.RobotoMediumTextView
                     android:layout_width="wrap_content"
