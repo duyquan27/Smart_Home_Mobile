@@ -34,7 +34,7 @@ import java.util.Date;
 
 public class fragment_bath_room_washing_machine extends Fragment {
     DatabaseReference mHome;
-    private TextView tx_time, tx_status;
+    private TextView tx_time, tx_status, tx_temp, tx_spin;
     private ImageButton btn_onoff_wash, btn_cotton, btn_mix, btn_sportwear, btn_babycare, btn_run;
     private boolean check_onoff = true, counterIsActive = false;
     private int check_mode = 3, check = 0;
@@ -125,6 +125,8 @@ public class fragment_bath_room_washing_machine extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_bath_room_washing_machine, container, false);
+        tx_spin = view.findViewById(R.id.txt_spin);
+        tx_temp = view.findViewById(R.id.txt_temp);
         tx_time = (TextView) view.findViewById(R.id.tx_time);
         tx_status = (TextView) view.findViewById(R.id.tx_status);
         btn_onoff_wash = (ImageButton) view.findViewById(R.id.btn_onoff_wash);
@@ -195,6 +197,29 @@ public class fragment_bath_room_washing_machine extends Fragment {
             }
         });
 
+        mHome.child("HOME").child("Bath room").child("Washing machine").child("Spin").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                tx_spin.setText(snapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mHome.child("HOME").child("Bath room").child("Washing machine").child("Temp").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                tx_temp.setText(snapshot.getValue().toString() + "°C");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         btn_run.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -288,6 +313,8 @@ public class fragment_bath_room_washing_machine extends Fragment {
             @Override
             public void onClick(View view) {
                 if (check_onoff) {
+                    mHome.child("HOME").child("Bath room").child("Washing machine").child("Spin").setValue("800");
+                    mHome.child("HOME").child("Bath room").child("Washing machine").child("Temp").setValue("60");
                     mHome.child("HOME").child("Bath room").child("Washing machine").child("Regime").setValue("Baby care");
                 }
             }
@@ -296,6 +323,8 @@ public class fragment_bath_room_washing_machine extends Fragment {
             @Override
             public void onClick(View view) {
                 if (check_onoff) {
+                    mHome.child("HOME").child("Bath room").child("Washing machine").child("Spin").setValue("800");
+                    mHome.child("HOME").child("Bath room").child("Washing machine").child("Temp").setValue("20");
                     mHome.child("HOME").child("Bath room").child("Washing machine").child("Regime").setValue("Sport wear");
                 }
             }
@@ -304,6 +333,8 @@ public class fragment_bath_room_washing_machine extends Fragment {
             @Override
             public void onClick(View view) {
                 if (check_onoff) {
+                    mHome.child("HOME").child("Bath room").child("Washing machine").child("Spin").setValue("800");
+                    mHome.child("HOME").child("Bath room").child("Washing machine").child("Temp").setValue("40");
                     mHome.child("HOME").child("Bath room").child("Washing machine").child("Regime").setValue("Cotton");
                 }
             }
@@ -312,6 +343,8 @@ public class fragment_bath_room_washing_machine extends Fragment {
             @Override
             public void onClick(View view) {
                 if (check_onoff) {
+                    mHome.child("HOME").child("Bath room").child("Washing machine").child("Spin").setValue("1000");
+                    mHome.child("HOME").child("Bath room").child("Washing machine").child("Temp").setValue("60");
                     mHome.child("HOME").child("Bath room").child("Washing machine").child("Regime").setValue("Mix");
                 }
             }

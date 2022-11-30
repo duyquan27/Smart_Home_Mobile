@@ -46,7 +46,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_temp" />
 
         <TextView
             android:id="@+id/textView25"
@@ -58,10 +58,10 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/textView22"
-            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_spin" />
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/txt_temp"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginStart="30dp"
@@ -74,7 +74,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView24"
+            android:id="@+id/txt_spin"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginStart="70dp"
@@ -83,7 +83,7 @@
             android:textColor="#000000"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/textView23"
+            app:layout_constraintStart_toEndOf="@+id/txt_temp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton

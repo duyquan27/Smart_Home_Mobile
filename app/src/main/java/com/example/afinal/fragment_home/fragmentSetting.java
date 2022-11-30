@@ -48,8 +48,9 @@ public class fragmentSetting extends Fragment {
     private DatabaseReference mData;
     private String getName, getEmail, getPhone, getPassword;
 
-    static final public String PATH_PHONE = "1";
-    static final public String PATH_EMAIL = "2";
+    static final private String EMAIL_PATTERN = "[a-zA-Z0-9._]+@[a-z]+\\.+[a-z]+";
+    static final private String USERNAME_PATTERN = "^[a-z A-Z]{0,50}$";
+    static final private String PASSWORD_PATTERN = "^[a-zA-z0-9]{6,20}$";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -207,39 +208,63 @@ public class fragmentSetting extends Fragment {
 
             @Override
             public void onClick(View view) {
+
+                boolean cancel = true;
                 String valueEditText;
                 String change = "changed ";
                 int check = 0;
-                if (!(edtUsername.getText().toString().equals(getName))) {
-                    valueEditText = edtUsername.getText().toString();
-                    mHome.child("USER").child("PHONE").child(getPhone).child("userName").setValue(valueEditText);
-                    change += " username";
-                    check = 1;
+
+                if(edtUsername.getText().toString().isEmpty() || !edtUsername.getText().toString().matches(USERNAME_PATTERN))
+                {
+                    edtUsername.setError(getString(R.string.error_field_username_required));
+                    cancel = false;
                 }
-                if (!(edtPassword.getText().toString().equals(getPassword))) {
-                    valueEditText = edtPassword.getText().toString();
-                    mHome.child("USER").child("PHONE").child(getPhone).child("userPassword").setValue(valueEditText);
-                    change += " password";
-                    check = 1;
+
+                if(edtPassword.getText().toString().isEmpty() || !edtPassword.getText().toString().matches(PASSWORD_PATTERN))
+                {
+                    edtPassword.setError(getString(R.string.error_field_password_required));
+                    cancel = false;
                 }
-                if (!(edtEmail.getText().toString().equals(getEmail))) {
-                    valueEditText = edtEmail.getText().toString();
-                    mHome.child("USER").child("PHONE").child(getPhone).child("userEmail").setValue(valueEditText);
-                    change += " email";
-                    check = 1;
+
+                if(edtEmail.getText().toString().isEmpty() || !edtEmail.getText().toString().matches(EMAIL_PATTERN))
+                {
+                    edtEmail.setError(getString(R.string.error_field_email_required));
+                    cancel = false;
                 }
-                if (!(edtPhone.getText().toString().equals(getPhone))) {
-                    valueEditText = edtPhone.getText().toString();
+
+                if (cancel)
+                {
+                    if (!(edtUsername.getText().toString().equals(getName))) {
+                        valueEditText = edtUsername.getText().toString();
+                        mHome.child("USER").child("PHONE").child(getPhone).child("userName").setValue(valueEditText);
+                        change += " username";
+                        check = 1;
+                    }
+                    if (!(edtPassword.getText().toString().equals(getPassword))) {
+                        valueEditText = edtPassword.getText().toString();
+                        mHome.child("USER").child("PHONE").child(getPhone).child("userPassword").setValue(valueEditText);
+                        change += " password";
+                        check = 1;
+                    }
+                    if (!(edtEmail.getText().toString().equals(getEmail))) {
+                        valueEditText = edtEmail.getText().toString();
+                        mHome.child("USER").child("PHONE").child(getPhone).child("userEmail").setValue(valueEditText);
+                        change += " email";
+                        check = 1;
+                    }
+                    if (!(edtPhone.getText().toString().equals(getPhone))) {
+                        valueEditText = edtPhone.getText().toString();
 //                    mHome.child("USER").child("PHONE").child(getPhone).child("userPhone").setValue(valueEditText);
-                    change += " phone number";
-                    check = 1;
-                }
-                if (check == 1) {
-                    Toast.makeText(getContext(), getString(R.string.notification_data_user_changed_success), Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                } else if (check == 0) {
-                    Toast.makeText(getContext(), getString(R.string.notification_no_data_user_changed), Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
+                        change += " phone number";
+                        check = 1;
+                    }
+                    if (check == 1) {
+                        Toast.makeText(getContext(), getString(R.string.notification_data_user_changed_success), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    } else if (check == 0) {
+                        Toast.makeText(getContext(), getString(R.string.notification_no_data_user_changed), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
                 }
             }
         });
