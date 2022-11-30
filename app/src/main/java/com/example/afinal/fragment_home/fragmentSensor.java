@@ -194,9 +194,7 @@ public class fragmentSensor extends Fragment {
     private void sendTempNotification(String key, int checker) {
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         RemoteViews notificationLayout = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-            notificationLayout = new RemoteViews(getActivity().getOpPackageName(), R.layout.custom_notification_layout);
-        }
+        notificationLayout = new RemoteViews(getActivity().getPackageName(), R.layout.custom_notification_layout);
         notificationLayout.setTextViewText(R.id.title, "THRESHOLD WARNING");
 
         switch (key) {
@@ -235,7 +233,7 @@ public class fragmentSensor extends Fragment {
         String sdfDate = simpleDateFormat.format(new Date());
         notificationLayout.setTextViewText(R.id.time, sdfDate);
         Notification notification = new NotificationCompat.Builder(getContext(), CHANNEL_ID_TEMP)
-                .setSmallIcon(R.drawable.icon_smart_home)
+                .setSmallIcon(R.drawable.icon_small)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setCustomContentView(notificationLayout)
                 .setAutoCancel(true)
