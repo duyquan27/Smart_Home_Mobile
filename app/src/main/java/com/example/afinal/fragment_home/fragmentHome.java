@@ -74,9 +74,9 @@ public class fragmentHome extends Fragment {
 
         getUsersDataByPath(userID);
 
-        ViewPagerHomeAdapter adapter = new ViewPagerHomeAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+//        ViewPagerHomeAdapter adapter = new ViewPagerHomeAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+//        viewPager.setAdapter(adapter);
+//        tabLayout.setupWithViewPager(viewPager);
 
         mHome = FirebaseDatabase.getInstance().getReference();
         mHome.child("HOME").child("Weather temperature").addValueEventListener(new ValueEventListener() {
